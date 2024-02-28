@@ -8,9 +8,12 @@ import {
   DropdownSubmenu,
 } from "astro-navbar";
 
+const {page = 'hello'} = Astro.props;
+
 // TODO: Replace static menu items with looped array or object (dependent on Prismic data) and render for each item.
 // TODO: must check if item has subitem and insert code for dropdown.
 ---
+
 <!-- Single Menu Item Example -->
 <!-- 
 <li>
@@ -120,7 +123,7 @@ import {
 </li> 
 -->
 
-<header
+<header id="header" data-page={page}
   class="lg:flex justify-between pt-5 px-4 lg:px-8 gap-5 mx-auto container text-white bg-black"
 >
   <Astronav closeOnClick>
@@ -282,3 +285,10 @@ import {
     </MenuItems>
   </Astronav>
 </header>
+
+
+<script>
+  const el:any = document.querySelector("#header");
+  const page = el.dataset.page
+  console.log(page);
+</script>
