@@ -1,4 +1,6 @@
 ---
+import Screensize from '../components/Screensize.astro'
+import Navbar from '../components/Navbar.astro'
 interface Props {
 	title: string;
 }
@@ -17,7 +19,14 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<div class="navbar_container w-full mx-auto content-center flex bg-black absolute z-10">
+			<Navbar />
+		</div>
+		<div class="content_offset pt-10">
+			<Screensize />
+			<slot />
+		</div>
+		
 	</body>
 </html>
 <style is:global>
@@ -36,6 +45,12 @@ const { title } = Astro.props;
 		font-family: system-ui, sans-serif;
 		background: #13151a;
 		background-size: 224px;
+	}
+	.navbar_container {
+		height: 72px;
+	}
+	.content_offset {
+		padding-top: 72px;
 	}
 	code {
 		font-family:

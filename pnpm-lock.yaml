@@ -26,6 +26,9 @@ dependencies:
   astro:
     specifier: ^4.4.5
     version: 4.4.5(typescript@5.3.3)
+  astro-navbar:
+    specifier: ^2.3.1
+    version: 2.3.1
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1122,6 +1125,10 @@ packages:
 
   /array-iterate@2.0.1:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
+    dev: false
+
+  /astro-navbar@2.3.1:
+    resolution: {integrity: sha512-lLvhWS03Qc3heMU23adFwEnBUJFlL6gxYi0xPvIyX1atb2oCov4kOS/MaWOPGnvj2nK63szebUzlG+NdIoUZzQ==}
     dev: false
 
   /astro@4.4.5(typescript@5.3.3):

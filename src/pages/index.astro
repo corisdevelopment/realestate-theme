@@ -1,6 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+const siteMode = import.meta.env.MODE;
+const isSSR = import.meta.env.SSR;
+const testEnv = import.meta.env.CMS_REPO_NAME;
+const test = "hello";
+
+console.log(testEnv);
 ---
 
 <Layout title="Welcome to Astro.">
@@ -34,6 +41,9 @@ import Card from '../components/Card.astro';
 			</defs>
 		</svg>
 		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
+		<p class="instructions">
+			Dev:{ siteMode } | SSR:{ isSSR } | EnvVAR:{ testEnv }
+		</p>
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
