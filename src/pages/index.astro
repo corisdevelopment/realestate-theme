@@ -1,13 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { testLog } from '../lib/Test';
 
 const siteMode = import.meta.env.MODE;
 const isSSR = import.meta.env.SSR;
 const testEnv = import.meta.env.CMS_REPO_NAME;
 const test = "hello";
+let tLog = testLog();
 
-console.log(testEnv);
+// console.log(tLog);
 ---
 
 <Layout title="Welcome to Astro.">

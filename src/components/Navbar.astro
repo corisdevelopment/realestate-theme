@@ -8,6 +8,11 @@ import {
   DropdownSubmenu,
 } from "astro-navbar";
 
+import { Image } from 'astro:assets'
+import LogoImg from '../assets/Logo.png'
+const LogoImgAlt = 'Coris Development Group Logo'
+
+
 const {page = 'hello'} = Astro.props;
 
 // TODO: Replace static menu items with looped array or object (dependent on Prismic data) and render for each item.
@@ -129,7 +134,17 @@ const {page = 'hello'} = Astro.props;
   <Astronav closeOnClick>
     <!-- Logo Area -->
     <div class="flex w-full lg:w-auto justify-between">
-      <a>Your Logo</a>
+      <a href="/">
+        <Image 
+          src={LogoImg}
+          alt={LogoImgAlt}
+          width="206"
+          height="54"
+        />
+      </a>
+      <div class="phone_info">
+        <!-- <Icon name="pepicons-pencil:smartphone-notch" /> -->
+      </div>
       <div class="block lg:hidden">
         <MenuIcon class="w-8 h-8 text-white-800" />
       </div>
