@@ -3,16 +3,19 @@ import {
   Astronav,
   MenuItems,
   MenuIcon,
+  OpenIcon, 
+  CloseIcon,
   Dropdown,
   DropdownItems,
   DropdownSubmenu,
 } from "astro-navbar";
 
 import { Icon } from 'astro-icon/components'
-
 import { Image } from 'astro:assets'
 import LogoImg from '../assets/Logo.png'
 const LogoImgAlt = 'Coris Development Group Logo'
+
+
 
 
 const {page = 'hello'} = Astro.props;
@@ -153,8 +156,16 @@ const {page = 'hello'} = Astro.props;
             <Icon name="ion:phone-portrait-outline" size={36} class="mt-1"/>
           </div>
           <!-- Mobile Menu Icon -->
-          <div class="block lg:hidden pt-2">
-            <MenuIcon class="w-10 h-10 text-white-800" />
+          <div class="menu-toggle-icon block lg:hidden pt-2">
+            <MenuIcon></MenuIcon>
+            <!-- <MenuIcon>
+              <OpenIcon>
+                <Icon name="menu-icon" />
+              </OpenIcon>
+              <CloseIcon>
+                <Icon name="closed-icon" />
+              </CloseIcon>
+            </MenuIcon> -->
           </div>
         </div>
         
@@ -324,3 +335,7 @@ const {page = 'hello'} = Astro.props;
   const page = el.dataset.page
   console.log(page);
 </script>
+
+<style>
+  
+</style>

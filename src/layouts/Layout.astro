@@ -1,6 +1,7 @@
 ---
 import Screensize from '../components/Screensize.astro'
 import Navbar from '../components/Navbar.astro'
+import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
 interface Props {
 	title: string;
 }
@@ -19,9 +20,10 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<div class="navbar_container w-full mx-auto content-center flex bg-black absolute top-0 z-10">
-			<Navbar />
-		</div>
+		<!-- <VerticalBigNav class="absolute z-20 text-white" /> -->
+		
+		<VerticalBigNav class="navbar_container w-full mx-auto content-center bg-black absolute top-0 z-10"/>
+		
 		<div class="content_offset">
 			<Screensize />
 			<slot />
@@ -46,12 +48,16 @@ const { title } = Astro.props;
 		background: #13151a;
 		background-size: 224px;
 	}
+	body {
+		overflow: hidden;
+	}
 	.navbar_container {
-		min-height: 72px;
+		/* min-height: 72px; */
+		/* overflow: hidden; */
 	}
 	.content_offset {
-		margin-top: 127px;
-		position: relative;
+		/* margin-top: 127px;
+		position: relative; */
 	}
 	code {
 		font-family:

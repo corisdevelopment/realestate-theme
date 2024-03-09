@@ -1,0 +1,406 @@
+---
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import LogoImg from '../../assets/Logo.png'
+const LogoImgAlt = 'Coris Development Group Logo'
+const navItems: object[] = [
+  {title: "Home", link: '/'},
+  {title: "Work With Us", link: '/'},
+  { title: "Properties", link: '/',
+    children: [
+      {title: "Commercial", link: '/properties/commercial'},
+      {title: "Residential", link: '/properties/residential'},
+    ]},
+  {title: "Services", link: '/',
+    children: [
+      {title: "Commercial", link: '/services/commercial'},
+      {title: "Residential", link: '/services/residential'},
+      {title: "Consulting", link: '/services/consulting'},
+    ]},
+  {title: "About", link: '/'},
+  {title: "Testimonials", link: '/'},
+  {title: "Contact", link: '/'},
+]
+
+---
+<!-- Navbar -->
+<header id="header-nav" class="flex-col justify-between bg-black">
+  <div class="logo-area flex container justify-between p-2 lg:px-4 lg:mx-auto">
+    <a href="/" class="flex self-center">
+      <Image 
+        src={LogoImg}
+        alt={LogoImgAlt}
+      />
+    </a>
+    <!-- Info : Right -->
+    <div class="nav_info flex">
+      <div class="phone_info mt-2 flex justify-end max-lg:hidden text-white border-r mr-4 pr-2">
+        <div class="text-right pt-0.5">
+          <p class="phone_number">608-123-3456</p>
+          <p class="email leading-[0.5]">info@corisdevelopmentgroup.com</p>
+        </div>
+        <Icon name="ion:phone-portrait-outline" size={36} class="mt-1"/>
+      </div>
+      <!-- Mobile Menu Icon -->
+      <div id="menu-toggle" class="relative self-center lg:mt-1">
+        <button class="menu-open active" aria-label="open" aria-hidden="false" >
+          <Icon name="menu-icon" />
+        </button>
+        <button class="menu-close" aria-label="close" aria-hidden="true" >
+          <Icon name="closed-icon" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="menu-wrapper" class="menu-overflow-wrapper">
+    <div id="menu" class="z-20 bg-black">
+      <div class="container mx-auto relative px-4">
+        <nav id="menu-items" class="">
+          <ul>
+            {navItems.map((item: any) => (
+              <li class="menu-item text-white">
+                
+                {item.children ? 
+                  <button class="flex dropdown-group submenu">
+                    {item.title}
+                    <span class="self-center pt-1 dropdown-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="28" d="m184 112l144 144l-144 144"/></svg>
+                    </span>
+                  </button>
+                  <ul class="submenu-group">
+                    {item.children.map( (child: any) => (
+                      <li class="submenu-item flex">
+                        <a href={child.link} class="item-link">{child.title}</a>
+                      </li>
+                    ) )}
+                  </ul> 
+                  :
+                  <a href={item.link} class="item-link">{item.title}</a>
+                }
+              </li>
+            ))}
+          </ul>
+          
+        </nav>
+      </div>
+      <div id="menu-bgrd-pattern"></div>
+      <div id="menu-bgrd-image"></div>      
+    </div>
+  </div>
+  
+</header>
+
+
+<script>
+  const menu: HTMLElement | any = document.getElementById("menu");  
+  const menuButton: HTMLElement | any = document.getElementById("menu-toggle");
+  const menuItems: HTMLElement | any = document.getElementById("menu-items");
+  const subMenuButtons: any = document.querySelectorAll("button.submenu");
+  const bgrdPattern: any = document.getElementById("menu-bgrd-pattern");
+
+  // Nav toggle listener
+  menuButton?.addEventListener("click", toggleMenu);
+  function toggleMenu() {
+    // Slide open menu from right side
+    menu.classList.toggle("menu-open");
+    menuItems.classList.toggle("fade-in");
+    // Change toggle icon
+    changeToggleIcons();
+  }
+
+  subMenuButtons.forEach((button: any) => {
+    button.addEventListener("click", (el: any) => {
+      const removeList = document.querySelectorAll('.submenu-open');
+      const submenu = el.target.nextElementSibling;
+      el.target.children[0].classList.toggle("dropdown-active");
+      submenu.classList.toggle("submenu-open");
+      removeList.forEach((r) => {
+        r.previousElementSibling?.children[0].classList.remove('dropdown-active');
+        r.classList.remove('submenu-open');
+      });
+    });
+  });
+
+  function changeToggleIcons() {
+    const icons = menuButton?.children;
+    Array.from(menuButton.children)
+    .forEach((icon: any) => {
+      icon.classList.toggle("active");
+      const ariaHidden = icon.getAttribute("aria-hidden") === "true";
+      icon.setAttribute("aria-hidden", ariaHidden ? "false" : "true");
+    });
+  }
+
+  Array.from(document.querySelectorAll("#menu li"))
+    .forEach((item: any, index) => {
+      if(item.children.length <= 1) {
+        item.onmouseover = () => {
+          item.onmouseover = () => {
+            menu.dataset.activeIndex = index;
+            let patternPosition, imgPosition;
+            //45, 50, 55, 60, increment by 5
+            if(index != 0) {
+              patternPosition = (index + 1) * 15;
+              // imgPosition = (index * 10) + 45;
+            } else {
+              patternPosition = index + 15;
+              // imgPosition = index + 40;
+            }
+            // console.log(imgPosition);
+            bgrdPattern.style.backgroundPosition = `0% -${patternPosition}%`;
+            // bgrdImage.style.backgroundPosition = `center ${imgPosition}%`;
+            // bgrdImage.style.backgroundSize = "120%";
+          }
+        }
+      }
+      
+    })
+</script>
+<!-- <script lang="javascript">
+  const menu = document.getElementById("menu");
+  const bgrdPattern = document.getElementById("menu-bgrd-pattern");
+  const bgrdImage = document.getElementById("menu-bgrd-image");
+  const menuClose = document.getElementById("menu-close");
+
+  Array.from(document.getElementsByClassName("menu-item"))
+    .forEach((item, index) => {
+      item.onmouseover = () => {
+        menu.dataset.activeIndex = index;
+        let patternPosition, imgPosition;
+        //45, 50, 55, 60, increment by 5
+        if(index != 0) {
+          patternPosition = (index + 1) * 15;
+          imgPosition = (index * 10) + 45;
+        } else {
+          patternPosition = index + 15;
+          imgPosition = index + 40;
+        }
+        console.log(imgPosition);
+        bgrdPattern.style.backgroundPosition = `0% -${patternPosition}%`;
+        bgrdImage.style.backgroundPosition = `center ${imgPosition}%`;
+        bgrdImage.style.backgroundSize = "120%";
+      }
+      item.onmouseleave = () => {
+        // bgrdImage.style.backgroundPosition = `center 30%`;
+        bgrdImage.style.backgroundSize = "130%";
+      }
+    })
+  menuClose.addEventListener("click", (e) => {
+    menu.style.left = "-100vw"; 
+    console.log("close menu");
+  });
+  // Check viewport size for background image
+  function updateSize() {
+    const viewHeight = window.innerHeight;
+    const viewWidth = window.innerWidth;
+
+    if ( viewHeight > (viewWidth - 100) ) {
+      if (viewWidth < 768) {
+        bgrdImage.style.backgroundSize = "cover";
+      } else {
+        bgrdImage.style.backgroundSize = "180vh";
+        console.log("Taller");
+      }
+      
+    } else {
+      bgrdImage.style.backgroundSize = "130vw";
+      console.log("Wider");
+    }
+    
+  }
+
+  updateSize();
+  window.addEventListener("resize", updateSize); 
+</script> -->
+
+<style>
+/* Vars */
+  :root {
+    --header-height: 64px;
+  }
+
+/* Mobile Styles */
+  #header-nav {
+    height: var(--header-height);
+  }
+  #header-nav > .logo-area > a > img {
+    height: 42px;
+    width: auto;
+  }
+  #menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    left: 100%;
+    opacity: 0.2;
+
+    transition: opacity 500ms ease,
+      width 800ms ease,
+      left 800ms ease;
+  }
+  #menu-items {
+    position: relative;
+    z-index: 2;
+    height: max-content;
+    width: max-content;
+    opacity: 0.1;
+    transition: opacity 600ms 600ms ease;
+  }
+  #menu-items ul:hover > .menu-item {
+    opacity: 0.3;
+  }
+  #menu-items ul:hover > .menu-item:hover {
+    opacity: 1;
+  }
+
+/* Toggle Styles */
+  #menu-toggle {
+    width: clamp(48px, 2rem, 72px);
+    height: clamp(48px, 2rem, 72px);
+  }
+  #menu-toggle svg{
+    width: 100%;
+    height: 100%;
+    display: inline;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  #menu-toggle > button > svg {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0ms 800ms ,opacity 800ms ease;
+  }
+  #menu-toggle > .active > svg {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 800ms ease;
+  }
+  
+/* Menu Wrapper and Menu */
+  .menu-overflow-wrapper {
+    
+    height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+  }
+  .menu-open {
+    width: 100%;
+    left: 0% !important;
+    opacity: 1 !important;
+  }
+  .menu-item {
+    font-size: clamp(2.5rem, 3vw, 4rem);
+    font-family: 'Ibarra Real Nova', serif;
+    display: block;
+    text-decoration: none;
+    padding: clamp(0.25rem, 0.5vw, 1rem) 0rem;
+    
+    transition: opacity 400ms ease;
+  }
+  .fade-in {
+    opacity: 1 !important;
+  }
+
+/* Dropdown Styles for Submenus */
+  .submenu > .dropdown-icon {
+    transform: rotate(0deg);
+    transition: all 400ms ease;
+  }
+  .dropdown-active {
+    transform: rotate(-90deg) !important;
+  }
+  .submenu-group {
+    font-size: clamp(2.2rem, 3vw, 3.4rem);
+    padding-left: clamp(3rem, 4vw, 4.6rem);
+    max-height: 0px;
+    overflow-y: hidden;
+
+    transition: max-height 600ms 200ms ease;
+  }
+  .submenu-open {
+    max-height: 400px;
+  }
+
+/* Backgrounds */
+  #menu-bgrd-pattern {
+    height: 100%;
+    width: 100%;
+    
+    background-image: radial-gradient(
+      rgba(181,146,80, 0.1) 9%,
+      transparent 9%
+    );
+    background-position: 0% 0%;
+    background-size: 9vmin 9vmin;
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+
+    transition: opacity 800ms ease,
+    background-position 800ms ease,  
+    background-size 800ms ease;
+  }
+  #menu .container:hover ~ #menu-bgrd-pattern {
+    background-size: 7vmin 7vmin;
+    opacity: 0.5;
+  }
+  #menu-bgrd-image {
+    min-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    background-image: url(/unsplash_f9qZuKoZYoY.png);
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+    background-position: center 30%;
+    /* background-size: cover; */
+    /* background-size: 130%; */
+    background-repeat: no-repeat;
+    opacity: 0.15;
+
+    transition: opacity 800ms ease,
+      background-size 800ms ease,
+      background-position 800ms ease;
+  }
+  #menu .container:hover ~ #menu-bgrd-image {
+    /* background-size: 180% cover; */
+    /* background-position: center 30%; */
+    opacity: 0.10;
+  }
+
+/* Medium Styles */
+  @media screen and (max-width: 1023px) {
+    #menu-bgrd-image {
+      background-size: cover;
+    }
+    #menu .container:hover ~ #menu-bgrd-image {
+      /* background-size: 120vw; */
+      /* background-position: center 30%; */
+    }
+    
+  }
+
+  /* Desktop Styles */
+  @media screen and (min-width: 1024px) {
+    #header-nav {
+      min-height: 80px;
+    }
+    #menu-bgrd-image {
+      background-size: 130vw;
+    }
+    #menu .container:hover ~ #menu-bgrd-image {
+      background-size: 120vw;
+      /* background-position: center 30%; */
+    }
+  }
+</style>
