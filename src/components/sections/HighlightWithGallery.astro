@@ -37,7 +37,7 @@ const img = {
     <div id="gallery" class="r3 gallery flex mb-16 md:mx-8 rounded-3xl border-2 border-dark-gold bg-dark-gold">
       <div class="grid grid-cols-3 grid-rows-3 md:grid-rows-2 gap-2">
         <div class="gallery-item rounded-xl col-span-3 md:col-span-2">
-          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="">
+          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="w-full">
         </div>
         <div class="gallery-item rounded-xl col-span-3 md:col-span-1 md:row-span-2">
           <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="img-tall">
@@ -83,8 +83,7 @@ const img = {
   }
   adjustSize();
   window.onresize = adjustSize;
-  
-  
+  window.onload = adjustSize;
 </script>
 <style>
   .gallery {
