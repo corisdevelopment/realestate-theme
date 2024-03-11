@@ -1,0 +1,116 @@
+---
+import LinkCard from '../cards/LinkCard.astro';
+interface Props {
+  title: string,
+  headline: string,
+  body: string,
+  buttonText: string,
+  buttonLink: string,
+  featured: object[],
+  gallery?: object[],
+  class?: any,
+}
+const { title, headline, body, buttonText, buttonLink, featured, gallery, class: className } = Astro.props;
+const img = {
+	src: '/unsplash_f9qZuKoZYoY.png',
+	alt: "Alt image text"
+}
+
+---
+<section class="highlights w-full text-white">
+  <div class="container max-content mx-auto px-8 xl:px-0">
+    <div class="r1 border-b-2 border-dark-gold pt-16">
+      <h2 class="title text-center text-4xl lg:text-6xl py-16">We Take A Different Approach</h2>
+    </div>
+    <div class="r2 py-16 grid grid-cols-1 lg:grid-cols-3">
+      <div class="c1 text-xl text-center lg:text-left mb-8">
+        <h3 class="headline text-4xl pb-6">Interested?</h3>
+        <p class="content">Hello</p>
+        <a href="" class="rounded-md border border-gold bg-white text-black text-xl py-2 lg:py-4 px-16 mt-8 inline-block">Contact Us</a>
+      </div>
+      <div class="c2 grid lg:grid-cols-2 gap-4 col-span-2 md:px-16 lg:px-0">
+        <!-- Card with img * 2 -->
+        <LinkCard title='We Take Different' body="Some content" image={img} />
+        <LinkCard title='We Take Different' body="Some content" image={img} />
+      </div>
+    </div>
+    <div id="gallery" class="r3 gallery flex mb-16 md:mx-8 rounded-3xl border-2 border-dark-gold bg-dark-gold">
+      <div class="grid grid-cols-3 grid-rows-3 md:grid-rows-2 gap-2">
+        <div class="gallery-item rounded-xl col-span-3 md:col-span-2">
+          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="">
+        </div>
+        <div class="gallery-item rounded-xl col-span-3 md:col-span-1 md:row-span-2">
+          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="img-tall">
+        </div>
+        <div class="gallery-item rounded-xl col-span-3 md:col-span-1">
+          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="">
+        </div>
+        <div class="gallery-item rounded-xl col-span-3 md:col-span-1">
+          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<script>
+  const gallery = document.getElementById("gallery");
+  const galleryItems: any = gallery?.getElementsByClassName("gallery-item");
+  function adjustSize() {
+    Array.from(galleryItems).forEach((item: any) => {
+      const height = item.offsetHeight;
+      const width = item.offsetWidth - 130;
+      const img = item.children[0];
+      checkSize(img, width, height);
+    });
+  }
+  function checkSize(el: any, width: any, height: any) {
+    const windowWidth = window.innerWidth;
+    if (windowWidth < 640) {
+      el.style.maxWidth = "100%";
+      el.style.height= "auto";
+    } else {
+      if (width >= height) {
+        // set img width 100%
+        el.style.maxWidth = "100%";
+        el.style.height = "auto";
+      } else {
+        // set img height 100%
+        el.style.maxWidth = "unset";
+        el.style.height = "100%";
+      }
+    }
+  }
+  adjustSize();
+  window.onresize = adjustSize;
+  
+  
+</script>
+<style>
+  .gallery {
+    overflow: hidden;  
+  }
+  .gallery-item {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .img-wide {
+    max-width: 100%;
+    min-width: 100%;
+    height: auto;
+  }
+  .max-width-unset {
+    max-width: 100%;
+  }
+  @media screen and (min-width: 640px) {
+    .gallery {
+    height: 500px;
+  }
+    .img-tall {
+      max-width: unset;
+      height: 100%;
+    }
+  }
+  
+</style>

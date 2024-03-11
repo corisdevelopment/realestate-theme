@@ -1,0 +1,72 @@
+---
+interface Props {
+  href?: string,
+  title: string,
+  body: any,
+  image?: {
+    src: string | any,
+    alt: string,
+  },
+  class?: any,
+}
+const {href, title, body, image, class: className} =Astro.props;
+let imageD = {
+    src: "",
+    alt: ''
+  }
+
+if (typeof image != "undefined") {
+  imageD = image
+}
+---
+<li class="link-card rounded-2xl border border-gold md:max-lg:w-3/4 md:max-lg:mx-auto">
+	<a href={href} class="p-4">
+		<h2 class="text-lg md:text-3xl lg:text-3xl">
+			{title}
+		</h2>
+		<p class="text-sm md:text-xl lg:text-lg">
+			{body}
+		</p>
+    <img src={imageD.src} alt={imageD.alt} class="rounded-2xl">
+	</a>
+</li>
+<style>
+	.link-card {
+		list-style: none;
+		display: flex;
+		/* padding: 1px; */
+		/* background-color: #23262d; */
+		background-image: none;
+		background-size: 400%;
+		border-radius: 7px;
+		background-position: 100%;
+		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+	}
+	.link-card > a {
+		width: 100%;
+		text-decoration: none;
+		line-height: 1.4;
+		/* padding: calc(1.5rem - 1px); */
+		border-radius: 8px;
+		color: white;
+		background-color: #23262d;
+		opacity: 0.8;
+	}
+	h2 {
+		margin: 0;
+		/* font-size: 1.25rem; */
+		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	p {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+	.link-card:is(:hover, :focus-within) {
+		background-position: 0;
+		background-image: var(--accent-gradient);
+	}
+	.link-card:is(:hover, :focus-within) h2 {
+		color: rgb(var(--accent-light));
+	}
+</style>

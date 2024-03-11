@@ -21,10 +21,10 @@ const navItems: object[] = [
   {title: "Testimonials", link: '/'},
   {title: "Contact", link: '/'},
 ]
-
+const { class: className } = Astro.props;
 ---
 <!-- Navbar -->
-<header id="header-nav" class="flex-col justify-between bg-black">
+<header id="header-nav" class:list={['bg-black', className]}>
   <div class="logo-area flex container justify-between p-2 lg:px-4 lg:mx-auto">
     <a href="/" class="flex self-center">
       <Image 
@@ -138,80 +138,18 @@ const navItems: object[] = [
           item.onmouseover = () => {
             menu.dataset.activeIndex = index;
             let patternPosition, imgPosition;
-            //45, 50, 55, 60, increment by 5
             if(index != 0) {
               patternPosition = (index + 1) * 15;
-              // imgPosition = (index * 10) + 45;
             } else {
               patternPosition = index + 15;
-              // imgPosition = index + 40;
             }
-            // console.log(imgPosition);
             bgrdPattern.style.backgroundPosition = `0% -${patternPosition}%`;
-            // bgrdImage.style.backgroundPosition = `center ${imgPosition}%`;
-            // bgrdImage.style.backgroundSize = "120%";
           }
         }
       }
       
     })
 </script>
-<!-- <script lang="javascript">
-  const menu = document.getElementById("menu");
-  const bgrdPattern = document.getElementById("menu-bgrd-pattern");
-  const bgrdImage = document.getElementById("menu-bgrd-image");
-  const menuClose = document.getElementById("menu-close");
-
-  Array.from(document.getElementsByClassName("menu-item"))
-    .forEach((item, index) => {
-      item.onmouseover = () => {
-        menu.dataset.activeIndex = index;
-        let patternPosition, imgPosition;
-        //45, 50, 55, 60, increment by 5
-        if(index != 0) {
-          patternPosition = (index + 1) * 15;
-          imgPosition = (index * 10) + 45;
-        } else {
-          patternPosition = index + 15;
-          imgPosition = index + 40;
-        }
-        console.log(imgPosition);
-        bgrdPattern.style.backgroundPosition = `0% -${patternPosition}%`;
-        bgrdImage.style.backgroundPosition = `center ${imgPosition}%`;
-        bgrdImage.style.backgroundSize = "120%";
-      }
-      item.onmouseleave = () => {
-        // bgrdImage.style.backgroundPosition = `center 30%`;
-        bgrdImage.style.backgroundSize = "130%";
-      }
-    })
-  menuClose.addEventListener("click", (e) => {
-    menu.style.left = "-100vw"; 
-    console.log("close menu");
-  });
-  // Check viewport size for background image
-  function updateSize() {
-    const viewHeight = window.innerHeight;
-    const viewWidth = window.innerWidth;
-
-    if ( viewHeight > (viewWidth - 100) ) {
-      if (viewWidth < 768) {
-        bgrdImage.style.backgroundSize = "cover";
-      } else {
-        bgrdImage.style.backgroundSize = "180vh";
-        console.log("Taller");
-      }
-      
-    } else {
-      bgrdImage.style.backgroundSize = "130vw";
-      console.log("Wider");
-    }
-    
-  }
-
-  updateSize();
-  window.addEventListener("resize", updateSize); 
-</script> -->
 
 <style>
 /* Vars */
@@ -222,6 +160,9 @@ const navItems: object[] = [
 /* Mobile Styles */
   #header-nav {
     height: var(--header-height);
+  }
+  .logo-area {
+    max-width: var(--max-content);
   }
   #header-nav > .logo-area > a > img {
     height: 42px;
@@ -238,6 +179,9 @@ const navItems: object[] = [
     transition: opacity 500ms ease,
       width 800ms ease,
       left 800ms ease;
+  }
+  #menu > .container {
+    max-width: var(--max-content);
   }
   #menu-items {
     position: relative;

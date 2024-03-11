@@ -1,0 +1,48 @@
+---
+import HeroCard from '../components/cards/HeroCard.astro';
+// TODO make await fetch call to Prismic to get data
+
+const { imageUrl, content, class: className } = Astro.props;
+const bgrdImage = `url('${imageUrl}')`;
+---
+<section class:list={['hero flex flex-col justify-end', className]}>
+  <div class="hero-content w-full mb-20">
+    <div class="mt-[40vh] lg:mt-0 lg:container mx-auto">
+      <HeroCard 
+        headline={content.headline} 
+        content={content.content} 
+        linkText={content.linkText} 
+        linkURL={content.linkURL}
+        class="flex py-8 pr-8 bg-white shadow-xl md:w-5/6 lg:w-4/6 2xl:w-3/6 lg:container"
+      />
+    </div>
+    
+  </div>
+  <div class="hero-image"></div>
+</section>
+
+<style define:vars={{bgrdImage}}>
+  .hero {
+    min-height:100dvh;
+    height: min-content;
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+  }
+  .hero-content {
+    z-index: 1;
+    height: fit-content;
+    padding: 2rem;
+  }
+  .hero-content > div {
+    max-width: var(--max-content);
+  }
+  .hero-image {
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    height: 72%;
+    width: 100%;
+    background: center/cover no-repeat var(--bgrdImage);
+  }
+</style>
