@@ -104,6 +104,7 @@ const { class: className } = Astro.props;
     // Slide open menu from right side
     menu.classList.toggle("menu-open");
     menuItems.classList.toggle("fade-in");
+    document.body.classList.toggle("nav-open");
     // Change toggle icon
     changeToggleIcons();
   }
