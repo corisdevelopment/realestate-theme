@@ -1,3 +1,73 @@
 ---
-
+import LogoImg from '../assets/Logo.png';
+import { Icon } from 'astro-icon/components';
 ---
+<footer id="cs-footer-269" class="border-t border-dark-gold py-8 max-md:text-md">
+  <div class="container mx-auto max-content max-content-mobile grid max-md:grid-rows-3 md:grid-cols-3 gap-4 text-white">
+      <!-- Logo Group -->
+      <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="">
+              <img class="cs-logo-img light max-md:mx-auto" aria-hidden="true" loading="lazy" decoding="async" src={LogoImg.src} alt="logo" width="159">
+          </a>
+          <div class="phone_info mt-6 flex text-white">
+            <Icon name="ion:phone-portrait-outline" size={36} class="mt-1 max-md:hidden"/>
+            <div class="pt-0.5 max-md:text-center max-md:mx-auto">
+              <p class="phone_number">608-123-3456</p>
+              <p class="email leading-[1]">info@corisdevelopmentgroup.com</p>
+            </div>
+          </div>
+      </div>
+      <!-- Links -->
+      <ul class="cs-nav mx-auto w-max max-md:text-center">
+          <li class="cs-nav-li">
+              <span class="cs-header">Sitemap</span>
+          </li>
+          <li class="cs-nav-li">
+              <a class="cs-nav-link" href="">Home</a>
+          </li>
+          <li class="cs-nav-li">
+              <a class="cs-nav-link" href="">About</a>
+          </li>
+          <li class="cs-nav-li">
+              <a class="cs-nav-link" href="">Services</a>
+          </li>
+          <li class="cs-nav-li">
+              <a class="cs-nav-link" href="">Portfolio</a>
+          </li>
+          <li class="cs-nav-li">
+              <a class="cs-nav-link" href="">Contact</a>
+          </li>
+      </ul>
+      <!-- Contact Info -->
+      <ul class="cs-contact md:justify-self-end flex flex-col w-max max-md:w-full  md:text-right">
+          <!-- Social Media -->
+          <li class="cs-contact-li cs-social-group">
+            <hr class="md:hidden border border-white my-4">
+              <p class="md:pr-8 max-md:text-center">Social Media</p>
+              <div class="cs-social flex justify-between mt-0">
+                  <a class="cs-social-link p-8" aria-label="visit google profile" href="">
+                      <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Social/google.svg" alt="google" width="11" height="11">
+                  </a>
+                  <a class="cs-social-link p-8" aria-label="visit facebook profile" href="">
+                      <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Social/Facebook.svg" alt="facebook" width="6" height="11">
+                  </a>
+                  <a class="cs-social-link p-8" aria-label="visit instagram profile" href="">
+                      <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Social/instagram.svg" alt="instagram" width="11" height="11">
+                  </a>
+              </div>
+          </li>
+      </ul>
+  </div>
+</footer>
+
+<style>
+  .cs-social-img {
+    height: 1.5rem;
+        width: auto;
+        display: block;
+  }
+  .cs-social-link:hover {
+        background-color: var(--primary);
+        transform: translateY(-0.1875rem);
+    }
+</style>
