@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+const entry = await getEntry('pages','about');
+const { Content } = await entry.render();
+---
+<Layout title={entry.data.title + ' | Coris Development Group'}>
+  <article class="prose dark:prose-invert mx-auto px-4 py-8">
+    <Content />
+  </article>
+  
+</Layout>
