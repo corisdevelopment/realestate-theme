@@ -1,0 +1,25 @@
+{"nav":[
+  {"title": "Home", "link": "/"},
+  {"title": "Work With Us", "link": "/work-with-us"},
+  { "title": "Properties", "link": "/properties"},
+  {"title": "Services", "link": "#",
+    "sub": [
+      {"title": "Commercial", "link": "/services/commercial"},
+      {"title": "Residential", "link": "/services/residential"},
+      {"title": "Consulting", "link": "/services/consulting"}
+    ]},
+  {"title": "About", "link": "/about-coris-development-group"},
+  {"title": "Testimonials", "link": "/testimonials-coris-development-group"},
+  {"title": "Contact", "link": "/contact-coris-development-group"}
+],
+"footerNav":[
+  {"title": "Home", "link": "/"},
+  {"title": "Work With Us", "link": "/work-with-us"},
+  { "title": "Properties", "link": "/properties"},
+  {"title": "Services", "link": "/services"},
+  {"title": "About", "link": "/about-coris-development-group"},
+  {"title": "Testimonials", "link": "/testimonials-coris-development-group"},
+  {"title": "Contact", "link": "/contact-coris-development-group"},
+  {"title": "Privacy Policy", "link": "/privacy-policy"},
+  {"title": "Terms of Service", "link": "/terms-of-service"}
+]}

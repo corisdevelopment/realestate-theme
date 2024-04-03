@@ -2,48 +2,9 @@
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import LogoImg from '../../assets/Logo.png'
-import { getCollection } from "astro:content";
-
-const mdPages = await getCollection('pages');
-// Set array for navigation output
-let navArray: Object[] = []
-const navList = mdPages.forEach( entry => {
-  if (entry.data.inMainNav != false) {
-    navArray.push(
-      {
-        title: entry.data.title,
-        slug: entry.slug
-      }
-    )
-  }
-})
-// console.log(navArray)
-
+import { nav } from '../../lib/menus/nav-main.json'
 
 const LogoImgAlt = 'Coris Development Group Logo'
-const navItems: object[] = [
-  {title: "Home", link: '/'},
-  {title: "Work With Us", link: '/work-with-us',
-    // children: [
-    //   {title: "Investors", link: '/work-with-us/investors'},
-    //   {title: "Builders", link: '/work-with-us/builders'}
-    // ]
-  },
-  { title: "Properties", link: '/',
-    children: [
-      {title: "Commercial", link: '/properties/commercial'},
-      {title: "Residential", link: '/properties/residential'},
-    ]},
-  {title: "Services", link: '/',
-    children: [
-      {title: "Commercial", link: '/services/commercial'},
-      {title: "Residential", link: '/services/residential'},
-      {title: "Consulting", link: '/services/consulting'},
-    ]},
-  {title: "About", link: '/'},
-  {title: "Testimonials", link: '/'},
-  {title: "Contact", link: '/'},
-]
 const { class: className } = Astro.props;
 ---
 <!-- Navbar -->
@@ -80,10 +41,10 @@ const { class: className } = Astro.props;
       <div class="container mx-auto relative px-4">
         <nav id="menu-items" class="">
           <ul>
-            {navItems.map((item: any) => (
+            {nav.map((item: any) => (
               <li class="menu-item text-white">
                 
-                {item.children ? 
+                {item.sub ? 
                   <button class="flex dropdown-group submenu">
                     {item.title}
                     <span class="self-center pt-1 dropdown-icon">
@@ -91,7 +52,7 @@ const { class: className } = Astro.props;
                     </span>
                   </button>
                   <ul class="submenu-group">
-                    {item.children.map( (child: any) => (
+                    {item.sub.map( (child: any) => (
                       <li class="submenu-item flex">
                         <a href={child.link} class="item-link">{child.title}</a>
                       </li>
@@ -120,18 +81,14 @@ const { class: className } = Astro.props;
   const menuItems: HTMLElement | any = document.getElementById("menu-items");
   const subMenuButtons: any = document.querySelectorAll("button.submenu");
   const bgrdPattern: any = document.getElementById("menu-bgrd-pattern");
-  const menuWrapper: any = document.getElementById("menu-wrapper");
 
   // Nav toggle listener
   menuButton?.addEventListener("click", toggleMenu);
   function toggleMenu() {
     // Slide open menu from right side
-    
     menu.classList.toggle("menu-open");
-    
     menuItems.classList.toggle("fade-in");
     document.body.classList.toggle("nav-open");
-    // menuWrapper.classList.toggle("w-full");
     // Change toggle icon
     changeToggleIcons();
   }
@@ -180,10 +137,7 @@ const { class: className } = Astro.props;
 </script>
 
 <style>
-/* Vars */
-  :root {
-    --header-height: 64px;
-  }
+/* Global vars are in main layout css */
 
 /* Mobile Styles */
   #header-nav {

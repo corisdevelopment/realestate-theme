@@ -1,6 +1,5 @@
 ---
 title: Terms Of Service
-inMainNav: false
 ---
 # Terms of Service
 
