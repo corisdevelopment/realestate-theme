@@ -1,0 +1,17 @@
+[
+  { "title": "Google",
+    "icon": "ion:logo-google",
+    "label": "visit google profile",
+    "link": "/"
+  },
+  { "title": "Facebook",
+      "icon": "ion:logo-facebook",
+      "label": "visit facebook profile",
+      "link": "/"
+  },
+  { "title": "Youtube",
+    "icon": "ion:logo-youtube",
+    "label": "visit youtube profile",
+    "link": "/"
+    }
+]

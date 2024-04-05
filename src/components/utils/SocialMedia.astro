@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import Social from '@lib/social-media.json';
+---
+<div class="md:justify-self-end flex flex-col w-max max-md:w-full md:text-right">
+  <div class="social-group">
+    <hr class="md:hidden border border-white my-4" />
+    <p class="text-center w-full">Our Social Media</p>
+    <div class="flex justify-between mt-0">
+      {
+        Social.map( (item) => (
+        <a
+          class="social-link px-8 py-4"
+          aria-label={item.label}
+          href={item.link}
+        >
+        <Icon name={item.icon} class="social-img"/>
+        </a>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .social-img {
+    height: 1.5rem;
+    width: auto;
+    display: block;
+  }
+  .social-link:hover {
+    background-color: var(--primary);
+    transform: translateY(-0.1875rem);
+  }
+</style>

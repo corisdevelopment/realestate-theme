@@ -1,14 +1,8 @@
 ---
 import LogoImg from "../assets/Logo.png";
 import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
-
-const mdPages = await getCollection('pages');
-const navList = mdPages.map( entry => ({
-	title: entry.data.title,
-	slug: entry.slug,
-})
-)
+import FooterMenu from '@components/utils/FooterMenu.astro';
+import SocialMedia from "./utils/SocialMedia.astro";
 ---
 
 <footer
@@ -16,11 +10,11 @@ const navList = mdPages.map( entry => ({
   class="border-t border-dark-gold py-8 max-md:text-md"
 >
   <div
-    class="container mx-auto max-content max-content-mobile grid max-md:grid-rows-3 md:grid-cols-3 gap-4 text-white"
+    class="container mx-auto max-content max-content-mobile md:grid md:grid-cols-3 gap-4 text-white"
   >
     <!-- Logo Group -->
-    <div class="cs-logo-group">
-      <a aria-label="go back to home" class="cs-logo" href="">
+    <div class="max-md:pb-8 md:pl-8">
+      <a aria-label="go back to home" class="cs-logo" href="/">
         <img
           class="cs-logo-img light max-md:mx-auto"
           aria-hidden="true"
@@ -31,7 +25,7 @@ const navList = mdPages.map( entry => ({
           width="159"
         />
       </a>
-      <div class="phone_info mt-6 flex text-white">
+      <div class="phone_info mt-6 flex flex-shrink-0 text-white">
         <Icon
           name="ion:phone-portrait-outline"
           size={36}
@@ -39,91 +33,27 @@ const navList = mdPages.map( entry => ({
         />
         <div class="pt-0.5 max-md:text-center max-md:mx-auto">
           <p class="phone_number">608-123-3456</p>
-          <p class="email leading-[1]">info@corisdevelopmentgroup.com</p>
+          <p class="email leading-[1] max-lg:text-xs">info@corisdevelopmentgroup.com</p>
         </div>
       </div>
     </div>
-    <!-- Links -->
-    <ul class="cs-nav mx-auto w-max max-md:text-center">
-        {
-            navList.map( (page) => 
-            <li class="cs-nav-li">
-                <a class="cs-nav-link" href={page.slug}>{page.title}</a>
-            </li>
-            )
-        }
-    </ul>
-    <!-- Contact Info -->
-    <ul
-      class="cs-contact md:justify-self-end flex flex-col w-max max-md:w-full md:text-right"
-    >
-      <!-- Social Media -->
-      <li class="cs-contact-li cs-social-group">
-        <hr class="md:hidden border border-white my-4" />
-        <p class="md:pr-8 max-md:text-center">Social Media</p>
-        <div class="cs-social flex justify-between mt-0">
-          <a
-            class="cs-social-link p-8"
-            aria-label="visit google profile"
-            href=""
-          >
-            <img
-              class="cs-social-img"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Social/google.svg"
-              alt="google"
-              width="11"
-              height="11"
-            />
-          </a>
-          <a
-            class="cs-social-link p-8"
-            aria-label="visit facebook profile"
-            href=""
-          >
-            <img
-              class="cs-social-img"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Social/Facebook.svg"
-              alt="facebook"
-              width="6"
-              height="11"
-            />
-          </a>
-          <a
-            class="cs-social-link p-8"
-            aria-label="visit instagram profile"
-            href=""
-          >
-            <img
-              class="cs-social-img"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Social/instagram.svg"
-              alt="instagram"
-              width="11"
-              height="11"
-            />
-          </a>
-        </div>
-      </li>
-    </ul>
+    <FooterMenu />
+    <SocialMedia />
+  </div>
+  <div class="border-t border-dark-gold mt-4 lg:mt-8 py-4 max-md:text-md w-full">
+    <p id="copyright" class="text-center text-white"></p>
   </div>
 </footer>
 
+<script>
+  let copyrightElem:any = document.getElementById('copyright');
+  const year = new Date().getFullYear();
+  copyrightElem.innerHTML = 'Copyright &copy; ' + year + ' - Coris Development Group';
+</script>
+
 <style>
-  .cs-social-img {
-    height: 1.5rem;
-    width: auto;
-    display: block;
-  }
-  .cs-social-link:hover {
-    background-color: var(--primary);
-    transform: translateY(-0.1875rem);
+  .phone_info svg {
+    min-height: 28px;
+    min-width: 28px;
   }
 </style>
