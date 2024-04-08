@@ -1,0 +1,106 @@
+---
+const { 
+  class: className,
+  innerClassNames,
+  text = "Button Default", 
+  link,
+  background = "#111",
+  shadowRGB = '145, 106, 61',
+  gradientAnimated,
+  gradient,
+  outline
+} = Astro.props;
+
+let defaultState = true;
+if (gradientAnimated || gradient || outline) {
+  defaultState = false;
+} else {
+  defaultState = true;
+}
+
+function defaultFont () {
+  let classString = '';
+  classString += className?.includes('font-cg') ? '' : 'font-cg text-xl uppercase';
+  classString += className?.includes('text-white') ? '' : ' text-white';
+  return classString;
+}
+---
+{
+  defaultState &&
+  <div class:list={["flex my-4 rounded-lg", className, defaultFont()]}>
+    <a href="" class="glow text-center flex-1 rounded-lg px-6 py-3 transition duration-300 ease-in-out bg-golden-500 hover:bg-golden-400">{text}</a>
+  </div>
+}
+{
+  gradientAnimated &&
+  <div class:list={['flex p-0.5 my-4',  className ]}>
+    <a href={link} class:list={["glow-on-hover flex-1 px-6 py-3 rounded-lg after:rounded-lg before:rounded-lg text-center", innerClassNames]}>{text}</a>
+  </div>
+}
+{
+  gradient &&
+  <div class:list={["flex my-4 shadow rounded-lg", className]}>
+    <a href="" class="glow gradient-animate text-center flex-1 rounded-lg px-6 py-3 bg-gradient-to-r from-golden-500 from-30% via-golden-300 via-55% to-golden-400 to-70%">{text}</a>
+  </div>
+}
+{
+  outline &&
+  <div class:list={["flex my-4 rounded-lg", className]}>
+    <a href="" class="glow text-center flex-1 rounded-lg px-6 py-3 bg-transparent border border-golden-600">{text}</a>
+  </div>
+}
+
+<style define:vars={{ background, shadowRGB }}>
+  .glow:hover {
+    box-shadow: rgba(var(--shadowRGB), 0.65) 0px 0px 10px 0px;
+  }
+  .glow-on-hover {
+    background: var(--background);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+  }
+  .glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #B59250, #836a3b, #ffd165, #836a3b, #B59250);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(4px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+  }
+  .glow-on-hover:hover:before {
+    opacity: 1;
+  }
+  .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--background);
+      left: 0;
+      top: 0;
+  }
+  @keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+  }
+
+  .gradient-animate { 
+    background-size: 200%;
+    background-position: 0%, 0%;
+    transition: all 1s ease;
+  }
+  .gradient-animate:hover, .gradient-animate:active {
+    background-position: 100%, 0%;
+  }
+  
+</style>

@@ -2,6 +2,17 @@
 import Screensize from '../components/Screensize.astro'
 import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
 import Footer from '../components/Footer.astro';
+import '@fontsource/cormorant-garamond/300.css';
+import '@fontsource/cormorant-garamond/400.css';
+// import '@fontsource/cormorant-garamond/500.css';
+// import '@fontsource/cormorant-garamond/600.css';
+// import '@fontsource/cormorant-garamond/700.css';
+import '@fontsource/poppins/200.css';
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
 interface Props {
 	title: string;
 }
@@ -43,6 +54,12 @@ const { title } = Astro.props;
 		--max-content: 1280px !important;
 		--header-height: 64px;
 	}
+	.font-cg {
+		font-family: 'Cormorant Garamond', serif;
+	}
+	.font-poppins {
+		font-family: 'Poppins', sans-serif;
+	}
 	.max-content {
 		max-width: var(--max-content);
 	}
@@ -61,7 +78,7 @@ const { title } = Astro.props;
 		background-size: 224px;
 	}
 	body {
-		/* overflow: hidden; */
+		font-family: 'Poppins', sans-serif;
 	}
 	.nav-open {
 		overflow: hidden;

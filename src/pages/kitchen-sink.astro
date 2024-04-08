@@ -1,9 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ButtonGradient from '@components/utils/ButtonGradient.astro';
+import Button from '@components/utils/Button.astro';
 ---
 <Layout title="Coris Development Group">
   <main class="max-content container mx-auto my-8">
-    <ButtonGradient />
+    <div class="w-1/2">
+      <Button gradientAnimated class="text-light-gold font-cg font-light text-2xl uppercase" innerClassNames="border border-golden-600" background="#111" text="Working" />
+      <Button gradient text="Gradient" class="hover:shadow-golden-600 font-cg font-light text-2xl uppercase" />
+      <Button outline text="Outline" class="text-golden-400 font-cg font-light text-2xl uppercase"/>
+      <Button />
+    </div>
+    
   </main>
 </Layout>
