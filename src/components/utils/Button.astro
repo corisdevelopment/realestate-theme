@@ -27,26 +27,26 @@ function defaultFont () {
 ---
 {
   defaultState &&
-  <div class:list={["flex my-4 rounded-lg", className, defaultFont()]}>
+  <div class:list={["my-4 rounded-lg", className, defaultFont()]}>
     <a href="" class="glow text-center flex-1 rounded-lg px-6 py-3 transition duration-300 ease-in-out bg-golden-500 hover:bg-golden-400">{text}</a>
   </div>
 }
 {
   gradientAnimated &&
-  <div class:list={['flex p-0.5 my-4',  className ]}>
+  <div class:list={['p-0.5 my-4 rounded-lg',  className ]}>
     <a href={link} class:list={["glow-on-hover flex-1 px-6 py-3 rounded-lg after:rounded-lg before:rounded-lg text-center", innerClassNames]}>{text}</a>
   </div>
 }
 {
   gradient &&
-  <div class:list={["flex my-4 shadow rounded-lg", className]}>
+  <div class:list={["my-4 shadow rounded-lg", className]}>
     <a href="" class="glow gradient-animate text-center flex-1 rounded-lg px-6 py-3 bg-gradient-to-r from-golden-500 from-30% via-golden-300 via-55% to-golden-400 to-70%">{text}</a>
   </div>
 }
 {
   outline &&
-  <div class:list={["flex my-4 rounded-lg", className]}>
-    <a href="" class="glow text-center flex-1 rounded-lg px-6 py-3 bg-transparent border border-golden-600">{text}</a>
+  <div class:list={["my-4 rounded-lg", className]}>
+    <a href="" class="glow text-center flex-1 rounded-lg px-6 py-3 bg-transparent border border-golden-400">{text}</a>
   </div>
 }
 
@@ -62,7 +62,7 @@ function defaultFont () {
   }
   .glow-on-hover:before {
     content: '';
-    background: linear-gradient(45deg, #B59250, #836a3b, #ffd165, #836a3b, #B59250);
+    background: linear-gradient(45deg, #B59250, #a58549, #ffd165, #a58549, #B59250);
     position: absolute;
     top: -2px;
     left:-2px;

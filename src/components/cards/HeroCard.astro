@@ -1,5 +1,5 @@
 ---
-import Button from '../Button.astro';
+import Button from "@components/utils/Button.astro";
 const { headline, content, linkText, linkURL, class: className } = Astro.props;
 ---
 <div class:list={['hero-card rounded lg:rounded-lg', className]}>
@@ -7,8 +7,8 @@ const { headline, content, linkText, linkURL, class: className } = Astro.props;
     <h2 class="headline pl-8 xl:pl-16 pb-3 text-2xl lg:text-4xl font-bold">{headline}</h2>
     <hr class="divider my-4 border-4 border-dark-gold">
     <p class="content pl-8 xl:pl-16 py-3 lg:text-xl">{content}</p>
-    <div class="footer ml-8 xl:ml-16 mt-10 mb-[6vh] w-full">
-      <Button text={linkText} url={linkURL} class="rounded border border-gold text-gold hover:text-dark-gold uppercase p-2 lg:text-xl inline-block w-3/4 text-center" />
+    <div class="footer mx-8 xl:ml-16 mt-10 mb-[6vh] w-full">
+      <Button gradientAnimated text={linkText} url={linkURL} background="white" innerClassNames="border border-golden-400" class="text-golden-400 md:flex font-cg font-light text-2xl uppercase md:w-3/4"/>
     </div>
   </div>
 </div>
