@@ -1,5 +1,6 @@
 ---
 title: About Us
+slug: about-coris-development-group
 ---
  # **About Coris Development**
 

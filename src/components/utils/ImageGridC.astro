@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+const testImg = '/unsplash_f9qZuKoZYoY.png';
+const allImages = [ testImg, testImg, testImg];
+---
+<div class="image-grid-c">
+  <div class="grid grid-cols-2">
+    
+    <div class="col-start-2 col-span-2">
+      <div class="img-col overflow-hidden bg-white">
+        <img src={testImg} alt="" >
+      </div>
+      
+    </div>
+    <div class="col-start-1 col-span-2">
+      <div class="img-col overflow-hidden bg-white">
+        <img src={testImg} alt="">
+      </div>
+    </div>
+    <div class="col-start-2 col-span-2">
+      <div class="img-col overflow-hidden bg-white">
+        <img src={testImg} alt="" >
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .image-grid-c {
+    max-width: fit-content;
+  }
+  .img-col {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-color: #b59250;
+    border: solid 1px #b59250;
+
+  }
+  .img-col img {
+    height: 100%;
+    width: auto;
+    max-width: unset;
+  }
+  
+</style>

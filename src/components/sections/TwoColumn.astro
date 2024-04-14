@@ -1,4 +1,5 @@
 ---
+import Image from 'astro/components/Image.astro'
 interface Props {
   title: string | any,
   content: any,
@@ -8,33 +9,110 @@ interface Props {
 const { title, content, image, reverse = false } = Astro.props; 
 const layout = reverse ? 'order-last' : '';
 ---
-<section class="bg-white w-full flex justify-center py-8 lg:py-12">
-  <div class="container mx-auto p-8 mb-8 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
-    <div class:list={["flex-1 text-md lg:text-xl mb-8", layout]} aria-label="Text Content">
-      <h2 class="py-4 text-4xl lg:text-6xl">{title}</h2>
-      {content.map( (contentHTML: any) => (
-        <Fragment set:html={contentHTML} />
-      ))}
-    </div>
-  
-    <div class="image flex-1 rounded-md lg:rounded-2xl shadow-2xl" aria-label="Image Content">
-      <img src={image.src} alt={image.alt} class="rounded-md lg:rounded-2xl aspect-auto" aria-describedby="Text Content">
+<section class="bg-golden-400 w-full flex justify-center">
+  <div id="circleReveal" class="overlay py-8 lg:py-16">
+    <div class="circles">
+      <div class="container mx-auto p-8 mb-8 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
+        <div class:list={["flex-1 text-md lg:text-xl mb-8", layout]} aria-label="Text Content">
+          <h2 class="py-4 text-4xl lg:text-6xl">{title}</h2>
+          {content.map( (contentHTML: any) => (
+            <Fragment set:html={contentHTML} />
+          ))}
+        </div>
+      
+        <div class="image flex-1 rounded-md lg:rounded-2xl shadow-2xl">
+          <Image width={830} height={540} src={image.src} alt={image.alt} class="aspect-auto" aria-describedby="Image content" />
+          <!-- <img src={image.src} alt={image.alt} class="rounded-md lg:rounded-2xl aspect-auto" aria-describedby="Text Content"> -->
+        </div>
+      </div>
     </div>
   </div>
-  
 </section>
+
+<script is:inline>
+  gsap.registerPlugin(ScrollTrigger);
+  const lenis = new Lenis();
+
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time)=>{
+    lenis.raf(time * 1000)
+  });
+
+  gsap.ticker.lagSmoothing(0);
+
+  gsap.to('.overlay', {
+    duration: 10,
+    clipPath: 'circle(110%)',
+    scrollTrigger: {
+      trigger: '.overlay',
+      start: 'top bottom-=36%',
+      scrub: true,
+      // markers: true,
+    }
+  });
+</script>
 
 <style>
   section {
     min-height: 200px;
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(rgba(169, 132, 73, 0.8), rgba(169, 132, 73, 0.4)), url(/src/assets/hexa-pattern-07.png);
+  }
+  .overlay {
+    min-height: 100%;
+    min-width: 100%;
+    background-color:  #fff;
+    clip-path: circle(5%);
+    position: relative;
+    z-index: 1;
   }
   .container {
     max-width: var(--max-content);
+    position: relative;
+    z-index: 3;
+  }
+  .cirlces {
+    position: relative;
+    z-index: 2;
+  }
+  .circles::before {
+    content: '';
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    border: solid 2px #b59250 !important;
+    position: absolute;
+    top: 0px;
+    left: -8%;
+    opacity: 0.3;
+  }
+  .circles::after {
+    content: '';
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    border: solid 2px #b59250 !important;
+    background-color: #b59250 !important;
+    position: absolute;
+    top: 60%;
+    /* bottom: -60%; */
+    right: -18%;
+    opacity: 0.8;
   }
   .image {
     max-height: 540px;
     height: 100%;
+    position: relative;
+    z-index: 1;
     overflow: hidden;
+    background-image: none;
+    background-position: 100%;
+		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .image:is(:hover, :focus-within) {
+    background-position: 0;
+		background-image: var(--accent-gradient);
   }
   @media screen and (min-width: 1024px) {
     .image {

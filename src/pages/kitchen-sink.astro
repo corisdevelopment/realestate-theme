@@ -1,15 +1,21 @@
 ---
+import LinkCard from '@components/cards/LinkCard.astro';
 import Layout from '../layouts/Layout.astro';
 import Button from '@components/utils/Button.astro';
+import GalleryDiamond from '@components/utils/GalleryDiamond.astro';
 ---
 <Layout title="Coris Development Group">
   <main class="max-content container mx-auto my-8">
-    <div class="w-1/2">
-      <Button gradientAnimated class="text-light-gold font-cg font-light text-2xl uppercase" innerClassNames="border border-golden-600" background="#111" text="Working" />
-      <Button gradient text="Gradient" class="hover:shadow-golden-600 font-cg font-light text-2xl uppercase" />
-      <Button outline text="Outline" class="text-golden-400 font-cg font-light text-2xl uppercase"/>
+    <div class="lg:w-1/2">
+      <Button gradientAnimated class="flex text-light-gold font-cg font-light text-2xl uppercase" innerClassNames="border border-golden-600" background="#111" text="Working" />
+      <Button gradient text="Gradient" class="flex hover:shadow-golden-600 font-cg font-light text-2xl uppercase" />
+      <Button outline text="Outline" class="flex text-golden-400 font-cg font-light text-2xl uppercase"/>
       <Button />
     </div>
-    
+    <hr class="border-golden-400 my-8">
+    <!-- <LinkCard data={} /> -->
   </main>
+  <section>
+    <GalleryDiamond />
+  </section>
 </Layout>

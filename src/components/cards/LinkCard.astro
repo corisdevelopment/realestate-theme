@@ -1,15 +1,16 @@
 ---
 interface Props {
   href?: string,
-  title: string,
-  body: any,
+  title?: string,
+  body?: any,
   image?: {
     src: string | any,
     alt: string,
   },
   class?: any,
+	data?: any,
 }
-const {href, title, body, image, class: className} =Astro.props;
+const {href, title, body, image, class: className, data} =Astro.props;
 let imageD = {
     src: "",
     alt: ''

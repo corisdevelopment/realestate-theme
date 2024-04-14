@@ -1,0 +1,97 @@
+---
+const testImg = '/unsplash_f9qZuKoZYoY.png';
+// * 8 Images plus center logo
+
+---
+<section class="gallery-diamond">
+  <div class="gallery-wrapper p-8">
+    <div class="gallery grid grid-cols-6 gap-2">
+      <!-- Row 1 -->
+      <div class="col-start-3 col-span-2 row-start-1 row-span-2">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div class="col-start-2 col-span-2 row-span-2 row-start-2">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+      <div class="col-start-4 col-span-2 row-span-2 row-start-2">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+      <!-- Row 3 -->
+      <div class="col-start-1 col-span-2 row-span-2 row-start-3">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+      <div class="col-start-3 col-span-2 row-span-2 row-start-3">
+        <div class="rotate overflow-hidden">
+          <!-- <img src={testImg} alt="" class="rounded-lg"> -->
+          <div class="logo bg-golden-500">Logo</div>
+        </div>
+      </div>
+      <div class="col-start-5 col-span-2 row-span-2 row-start-3">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+      <!-- Row 4 -->
+      <div class="col-start-2 col-span-2 row-span-2 row-start-4">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+      <div class="col-start-4 col-span-2 row-span-2 row-start-4">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+      <!-- Row 5 -->
+      <div class="col-start-3 col-span-2 row-span-2 row-start-5">
+        <div class="rotate overflow-hidden">
+          <img src={testImg} alt="" class="rounded-lg">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-diamond {
+    background-image: linear-gradient(rgba(169, 132, 73, 0.9), rgba(49, 30, 23, 0.1)), url('/src/assets/hexa-pattern-07.png');
+    background-size: auto, cover;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+  .gallery {
+    
+  }
+  img, .logo {
+    aspect-ratio: 1;
+    object-fit: cover;
+    /* box-shadow: inset 0 0 60px 10px rgba(255, 255, 255, 0.9); */
+    transform: rotate(-45deg) scale(1.4);
+    
+  }
+  .rotate {
+    transform: rotate(45deg) scale(0.7);
+    box-shadow: 0 0 60px 10px rgb(0 0 0 / 20%) ;
+  }
+  /* .rotate::after {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 0.5rem;
+    box-shadow: 
+      inset 5px 5px 10px 2px rgba(255, 255, 255, 0.4),
+      inset -5px -5px 20px 1px rgba(0,0,0, 0.2);
+  } */
+</style>

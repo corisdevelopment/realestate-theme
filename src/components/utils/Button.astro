@@ -18,17 +18,17 @@ if (gradientAnimated || gradient || outline) {
   defaultState = true;
 }
 
-function defaultFont () {
+function defaultSettings () {
   let classString = '';
-  classString += className?.includes('font-cg') ? '' : 'font-cg text-xl uppercase';
+  classString += className?.includes('font-cg') ? '' : 'flex font-cg text-xl uppercase';
   classString += className?.includes('text-white') ? '' : ' text-white';
   return classString;
 }
 ---
 {
   defaultState &&
-  <div class:list={["my-4 rounded-lg", className, defaultFont()]}>
-    <a href="" class="glow text-center flex-1 rounded-lg px-6 py-3 transition duration-300 ease-in-out bg-golden-500 hover:bg-golden-400">{text}</a>
+  <div class:list={["my-4 rounded-lg", className, defaultSettings()]}>
+    <a href={link} class="glow text-center w-full rounded-lg px-6 py-3 transition duration-300 ease-in-out bg-golden-500 hover:bg-golden-400">{text}</a>
   </div>
 }
 {
@@ -40,13 +40,13 @@ function defaultFont () {
 {
   gradient &&
   <div class:list={["my-4 shadow rounded-lg", className]}>
-    <a href="" class="glow gradient-animate text-center flex-1 rounded-lg px-6 py-3 bg-gradient-to-r from-golden-500 from-30% via-golden-300 via-55% to-golden-400 to-70%">{text}</a>
+    <a href={link} class="glow gradient-animate w-full text-center rounded-lg px-6 py-3 bg-gradient-to-r from-golden-500 from-30% via-golden-300 via-55% to-golden-400 to-70%">{text}</a>
   </div>
 }
 {
   outline &&
   <div class:list={["my-4 rounded-lg", className]}>
-    <a href="" class="glow text-center flex-1 rounded-lg px-6 py-3 bg-transparent border border-golden-400">{text}</a>
+    <a href={link} class="glow text-center w-full rounded-lg px-6 py-3 bg-transparent border border-golden-400">{text}</a>
   </div>
 }
 
