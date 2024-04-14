@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 import storyblok from '@storyblok/astro';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import { loadEnv } from 'vite';
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
@@ -14,14 +15,14 @@ export default defineConfig({
   integrations: [
     
     storyblok({
-      accessToken: "dpqGY8PFmM9rMW46GK7WjAtt",
+      accessToken: env.STORYBLOK_TOKEN,
       bridge: true,
-      // components: {
-      //   // TODO Add Storyblok Components
-      //   page: 'storyblok/Page',
-      //   blogPost: 'storyblok/BlogPost',
-      //   blogList: 'storyblok/BlogPostList',
-      // },
+      components: {
+        // TODO Add Storyblok Components
+        // page: 'storyblok/Page',
+        // blogPost: 'storyblok/BlogPost',
+        // blogList: 'storyblok/BlogPostList',
+      },
       apiOptions: {
         region: "us",
       }
@@ -30,5 +31,11 @@ export default defineConfig({
     sitemap(), 
     icon(),
   ],
-  output: 'server'
+  vite: {
+    plugins: [basicSsl()],
+    server: {
+      https: true,
+    },
+  },
+  output: 'static'
 });
