@@ -42,6 +42,6 @@ export default defineConfig({
       https: true,
     },
   },
-  output: 'static',
+  output: 'server',
   adapter: netlify(),
 });
