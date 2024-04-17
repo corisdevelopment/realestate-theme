@@ -8,7 +8,7 @@ const LogoImgAlt = 'Coris Development Group Logo'
 const { class: className } = Astro.props;
 ---
 <!-- Navbar -->
-<header id="header-nav" class:list={['bg-black', className]}>
+<header id="header-nav" class:list={['fixed z-10 w-full backdrop-blur-md', className]}>
   <div class="logo-area flex container justify-between p-2 lg:px-4 lg:mx-auto">
     <a href="/" class="flex self-center">
       <Image 
@@ -71,9 +71,7 @@ const { class: className } = Astro.props;
       <div id="menu-bgrd-image"></div>      
     </div>
   </div>
-  
 </header>
-
 
 <script>
   const menu: HTMLElement | any = document.getElementById("menu");  
@@ -138,10 +136,10 @@ const { class: className } = Astro.props;
 
 <style>
 /* Global vars are in main layout css */
-
 /* Mobile Styles */
   #header-nav {
     height: var(--header-height);
+    background-color: rgba(0, 0, 0, 0.7);
   }
   .logo-area {
     max-width: var(--max-content);

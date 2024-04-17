@@ -1,8 +1,8 @@
 ---
 title: About Us
-slug: about-coris-development-group
+# slug: about-coris-development-group
 ---
- # **About Coris Development**
+ # **About Coris Development Group**
 
 Welcome to Coris Development, where innovation meets excellence in real estate development. At Coris, we believe in shaping communities and building futures through visionary projects that stand the test of time.
 

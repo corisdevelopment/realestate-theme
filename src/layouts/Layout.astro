@@ -2,7 +2,7 @@
 import '@fontsource/cormorant-garamond/300.css';
 import '@fontsource/cormorant-garamond/400.css';
 // import '@fontsource/cormorant-garamond/500.css';
-// import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/600.css';
 // import '@fontsource/cormorant-garamond/700.css';
 import '@fontsource/poppins/200.css';
 import '@fontsource/poppins/300.css';
@@ -14,10 +14,14 @@ import Screensize from '../components/Screensize.astro'
 import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
 import Footer from '../components/Footer.astro';
 interface Props {
-	title: string;
+	title?: string,
+	metaTags?: {
+		title?: string,
+		description?: string
+	} | any,
 }
 
-const { title } = Astro.props;
+const { title, metaTags } = Astro.props;
 ---
 
 <!doctype html>
@@ -25,9 +29,8 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{title}</title>
-		<meta name="description" content="description">
-		<meta name="author" content="author">
+		<title>{metaTags?.title}</title>
+		<meta name="description" content={metaTags?.description}>
 		<meta name="robots" content="index, follow">
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -43,6 +46,16 @@ const { title } = Astro.props;
 		</div>
 		<!-- Footer -->
 		<Footer />
+		<script is:inline>
+			gsap.registerPlugin(ScrollTrigger);
+			const lenis = new Lenis();
+			
+			lenis.on('scroll', ScrollTrigger.update);
+			gsap.ticker.add((time)=>{
+				lenis.raf(time * 1000)
+			});
+			gsap.ticker.lagSmoothing(0);
+		</script>
 	</body>
 </html>
 <style is:global>
@@ -70,6 +83,9 @@ const { title } = Astro.props;
 	}
 	.prose {
 		max-width: 85ch !important;
+	}
+	.content_offset {
+		padding-top: var(--header-height);
 	}
 	@media screen and (max-width: 768px) {
 		.max-content-mobile {

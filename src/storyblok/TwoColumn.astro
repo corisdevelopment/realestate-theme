@@ -1,0 +1,35 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro'
+import Image from 'astro/components/Image.astro'
+
+
+interface Props {
+  blok: any,
+  title: string | any,
+  content: any,
+  image: any,
+  reverse?: boolean
+}
+const { 
+  // title, 
+  blok,
+  content = renderRichText(blok.content), 
+  image = blok.image, 
+  reverse = blok.layout, 
+} = Astro.props; 
+
+const layout = reverse != 'false' ? 'order-last' : '';
+image.alt = image.alt != null ? image.alt : ''
+image.alt = image.name != null ? image.name : image.alt
+---
+<section {...storyblokEditable(blok)} id="twoColumn" class="w-full flex justify-center">
+  <div class="container mx-auto p-8 mb-8 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
+    <div class:list={["flex-1 text-md lg:text-xl mb-8", layout]} aria-label="Text Content">
+      <h2 class="py-4 text-4xl lg:text-6xl">{blok.title}</h2>
+        <Fragment set:html={content} />
+    </div>
+    <div class="image flex-1 rounded-md lg:rounded-2xl shadow-2xl">
+      <Image width={830} height={540} src={image?.filename} alt={image?.alt} class="aspect-auto inset-0 rounded-md" aria-describedby="Image content" />
+    </div>
+  </div>
+</section>

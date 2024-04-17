@@ -1,0 +1,133 @@
+---
+import { Image } from 'astro:assets'
+import Button from '@components/utils/Button.astro'
+import testImage from '@assets/77-Aerial-1458-Greenleaf-Court-6.jpg'
+const testText = [
+  { type: 'paragraph',
+    content: [ {text: 'Holistic.'} ]
+  },
+  { type: 'paragraph',
+    content: [ {text: 'Timelessly modern.'} ]
+  },
+  { type: 'paragraph',
+    content: [ {text: 'Stunning, brilliant, beautiful.'} ]
+  }
+]
+let wordArray: any = []
+const textArray = testText.forEach( (p) => {
+  const words = p.content[0]?.text.split(' ')
+  const word = words.map( w => {
+    return w + '\xa0'
+  })
+  // console.log(word)
+  wordArray.push(word)
+})
+const imgArray = new Array(8).fill({i: "1"})
+
+---
+<section class="about-cta bg-golden-300 py-12">
+  <div class="container mx-auto max-content">
+    <h2 class="scrollFadeIn font-cg font-semibold text-golden-950" data-text="Timelessly Moderm">
+      {
+        wordArray.map( (p: any[]) => (
+          <span class="flex">
+            {
+              p.map( (w: string) => (
+              <div class="word">
+                {w}
+              </div> 
+              ))
+            }
+          </span>
+          
+        ))
+      }
+    </h2>
+  </div>
+  <div class="horizontal-gallery overflow-hidden my-12 py-4 w-full">
+    <div id="line1" class="line-container flex items-end gap-8 my-8">
+      {
+        imgArray.map( () => (
+          <div class="image-container ">
+            <Image 
+              src={testImage}
+              widths={[540, 720, 1024]}
+              sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px, (max-width: 1600) 1024px`}
+              alt="image alt"
+              class="flex"
+            />
+          </div>
+          ))
+      }
+    </div>
+    <div id="line2" class="line-container flex items-end gap-8 my-8">
+      {
+        imgArray.map( () => (
+          <div class="image-container ">
+            <Image 
+              src={testImage}
+              widths={[540, 720, 1024]}
+              sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px, (max-width: 1600) 1024px`}
+              alt="image alt"
+              class="flex"
+            />
+          </div>
+          ))
+      }
+    </div>
+  </div>
+  <div class="container mx-auto max-content">
+    <h2 class="scrollFadeIn font-cg font-semibold text-golden-950" data-text="Timelessly Moderm">
+      {
+        wordArray.map( (p: any[]) => (
+          <span class="flex">
+            {
+              p.map( (w: string) => (
+              <div class="word">
+                {w}
+              </div> 
+              ))
+            }
+          </span>
+          
+        ))
+      }
+    </h2>
+    <div class="cta my-8">
+      <p class="text-golden-950">Text Goes Here</p>
+      <Button outline text="Link" link="/about-us" class="mt-8 md:w-1/2 flex font-cg font-light text-2xl uppercase text-golden-400 bg-golden-950"/>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.about-cta',
+      start: 'top center+=200',
+      end: 'bottom center+=200',
+      scrub: 1,
+      markers: true
+    }
+  });
+  gsap.set('#line2', {xPercent: -30});
+  let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
+  let scrollLeft = gsap.to('#line1', {xPercent: -40, duration: 10});
+  let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
+  tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
+</script>
+
+<style>
+  .word {
+    opacity: 0.2;
+    font-size: 4.4vw;
+    line-height: 1.2em;
+  }
+  .line-container {
+    position: relative;
+    width: 160%;
+  }
+  .cta > p {
+    font-size: 1.9vw;
+  }
+</style>

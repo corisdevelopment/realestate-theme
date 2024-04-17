@@ -1,0 +1,138 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import { getOutputFileNames } from 'typescript'
+
+const { blok } = Astro.props
+// const settings = { 
+//   class: className,
+//   innerClassNames,
+//   text = "Button Default", 
+//   link,
+//   background = "#111",
+//   shadowRGB = '145, 106, 61',
+//   gradientAnimated,
+//   gradient,
+//   outline
+// }
+let defaultState, 
+    outline, 
+    gradient, 
+    gradientAnimated,
+    className: string = '',
+    innerClassNames: string = ''
+
+function defaultSettings () {
+  let classString = '';
+  classString += className?.includes('font-cg') ? '' : 'flex font-cg text-xl uppercase';
+  classString += className?.includes('text-white') ? '' : ' text-white';
+  return classString;
+}
+
+switch (blok.button_type) {
+  case 'outline':
+    outline = true
+    break;
+  case 'gradient':
+    gradient = true
+    break;
+  case 'animated':
+    gradientAnimated = true
+    break;
+  default:
+    defaultState = true
+}
+
+// Background color
+const bgColor = blok.backgroundColor != '' ? blok.backgroundColor : 'bg-golden-400 hover:bg-golden-300'
+const background = blok.animatedColor != '' ? blok.animatedColor : '#111'
+const shadowRGB = '145, 106, 61'
+
+console.log('BLOK: ' , background)
+---
+{
+  defaultState &&
+  <div {...storyblokEditable(blok)} class:list={["my-4 rounded-lg", className, defaultSettings()]}>
+    <a href={blok.url} 
+      class:list={["glow text-center w-full rounded-lg px-6 py-3 transition duration-300 ease-in-out", bgColor]}
+    >{blok.text}</a>
+  </div>
+}
+{
+  gradientAnimated &&
+  <div class:list={['p-0.5 my-4 rounded-lg text-light-gold',  className ]}>
+    <a href={blok.url} 
+    class:list={["glow-on-hover flex-1 px-6 py-3 rounded-lg after:rounded-lg before:rounded-lg text-center border border-golden-500", innerClassNames]}
+    >{blok.text}</a>
+  </div>
+}
+{
+  gradient &&
+  <div class:list={["my-4 shadow rounded-lg", className]}>
+    <a href={blok.url} 
+    class="glow gradient-animate w-full text-center rounded-lg px-6 py-3 bg-gradient-to-r from-golden-500 from-30% via-golden-300 via-55% to-golden-400 to-70%"
+    >{blok.text}</a>
+  </div>
+}
+{
+  outline &&
+  <div class:list={["my-4 rounded-lg", className]}>
+    <a href={blok.url} 
+    class="glow text-center w-full rounded-lg px-6 py-3 bg-transparent border border-golden-400"
+    >{blok.text}</a>
+  </div>
+}
+
+<style define:vars={{ background, shadowRGB }}>
+  .glow:hover {
+    box-shadow: rgba(var(--shadowRGB), 0.65) 0px 0px 10px 0px;
+  }
+  .glow-on-hover {
+    background: var(--background);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+  }
+  .glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #B59250, #a58549, #ffd165, #a58549, #B59250);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(4px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+  }
+  .glow-on-hover:hover:before {
+    opacity: 1;
+  }
+  .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--background);
+      left: 0;
+      top: 0;
+  }
+  @keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+  }
+
+  .gradient-animate { 
+    background-size: 200%;
+    background-position: 0%, 0%;
+    transition: all 1s ease;
+  }
+  .gradient-animate:hover, .gradient-animate:active {
+    background-position: 100%, 0%;
+  }
+  
+</style>

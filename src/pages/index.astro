@@ -1,13 +1,17 @@
 ---
+import { useStoryblokApi, renderRichText } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 import Layout from '../layouts/Layout.astro';
+
 // Components
 import HeroLG from '../components/HeroLG.astro';
-import TwoColumn from '../components/sections/TwoColumn.astro';
 import HighlightWithGallery from '../components/sections/HighlightWithGallery.astro';
+import TwoColumnScroll from '../components/sections/TwoColumnScroll.astro';
 
 import ImgImport from '../../public/unsplash_f9qZuKoZYoY.png';
 
 import { testLog } from '../lib/Test';
+
 
 const siteMode = import.meta.env.MODE;
 const isSSR = import.meta.env.SSR;
@@ -24,29 +28,57 @@ const testImg2 = {
 	src: testImg,
 	alt: "Alt text"
 }
+
+//////////////////
+// Storyblok Content
+const storyblokApi = useStoryblokApi()
+const { data } = await storyblokApi.get('cdn/stories/home', {
+	version: import.meta.env.DEV ? "draft" : "published",
+	resolve_links: 'url'
+})
+const content = data.story.content;
 // Hero Section
-const cardData = {
-  headline: "Find Extravagant Living at It’s Finest",
-  content: "Madison is our hometown and we believe we can help make a great place even better. We understand the unique needs, wants, trends and problems that arise developing something special in the Madison and surrounding areas. See why developing with us is an easy solution.",
-  linkText: "Develop With Us",
-  linkURL: "/work-with-us"
-}
 const hero = {
-	imageUrl: testImg,
-	content: cardData,
+	image: {
+		src: content.hero_image.filename,
+		alt: content.hero_image.alt,
+	},
+	content: {
+		headline: content.hero_title,
+		content: content.hero_description,
+		linkText: content.hero_buttonText,
+		linkURL: content.hero_buttonLink.url
+	}
 }
-// 2 col section
-const sect2col = {
-	title: 'About Us',
-	content: ['<p>Your first paragraph of text.</p>', '<p>Your second paragraph of text.</p>'],
-	image: testImg2,
+// About Us Section
+
+// Change to Services Section
+const section2col = {
+	title: content.about_title,
+	content: renderRichText(content.about_description),
+	image: content.about_image,
 }
+const services = [
+	{
+		content: renderRichText(content.service_1),
+		link: {
+			name: content.service_1_link.story.name,
+			url: content.service_1_link.story.url
+		},
+	}
+]
+// console.log(data)
 ---
 
-<Layout title="Coris Development Group">
+<Layout metaTags={content.metatags}>
 	<main>
-		<HeroLG imageUrl={hero.imageUrl} content={hero.content} />
-		<TwoColumn title={sect2col.title} content={sect2col.content} image={sect2col.image} />
+		<HeroLG image={hero.image} content={hero.content} />
+		<!-- <TwoColumnScroll title={section2col.title} content={section2col.content} image={section2col.image} /> -->
+		{
+			content.services?.map((blok: any) => {
+				return <StoryblokComponent blok={blok} />
+			})
+		}
 		<HighlightWithGallery />
 	</main>
 </Layout>

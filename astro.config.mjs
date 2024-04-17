@@ -19,8 +19,13 @@ export default defineConfig({
       bridge: true,
       components: {
         // TODO Add Storyblok Components
-        // page: 'storyblok/Page',
-        // blogPost: 'storyblok/BlogPost',
+        page: 'storyblok/Page',
+        homePage: 'storyblok/Homepage',
+        blogPost: 'storyblok/BlogPost',
+        button: 'storyblok/Button',
+        twoColumn: 'storyblok/TwoColumn',
+        servicesCTA: 'storyblok/ServicesCTA',
+        serviceBlok: 'storyblok/utils/Service',
         // blogList: 'storyblok/BlogPostList',
       },
       apiOptions: {
