@@ -42,5 +42,5 @@ export default defineConfig({
       https: true,
     },
   },
-  output: 'static'
+  output: 'hybrid'
 });
