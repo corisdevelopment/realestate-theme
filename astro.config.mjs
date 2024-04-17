@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-
+import netlify from '@astrojs/netlify';
 import storyblok from '@storyblok/astro';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import { loadEnv } from 'vite';
@@ -42,5 +42,6 @@ export default defineConfig({
       https: true,
     },
   },
-  output: 'hybrid'
+  output: 'server',
+  adapter: netlify(),
 });
