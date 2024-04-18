@@ -7,7 +7,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
-const env = loadEnv("", process.cwd(), 'STORYBLOK');
+const env = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
 
 // https://astro.build/config
 export default defineConfig({
