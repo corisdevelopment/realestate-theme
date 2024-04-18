@@ -7,15 +7,13 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
-const { STORYBLOK_TOKEN } = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://corisdevelopmentgroup.com',
   integrations: [
     
     storyblok({
-      accessToken: STORYBLOK_TOKEN,
+      accessToken: "dpqGY8PFmM9rMW46GK7WjAtt",
       bridge: true,
       components: {
         // TODO Add Storyblok Components
