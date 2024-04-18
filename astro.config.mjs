@@ -8,7 +8,7 @@ import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
 let sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
-if (process.env.STORYBLOK_TOKEN != undefined) {
+if (process.env.NETLIFY === true) {
   // use Netlify process.env var
   sbToken.STORYBLOK_TOKEN = process.env.STORYBLOK_TOKEN;
 } else {
