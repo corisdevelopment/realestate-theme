@@ -10,7 +10,7 @@ import icon from "astro-icon";
 let sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
 if (process.env.NETLIFY === true) {
   // use Netlify process.env var
-  sbToken.STORYBLOK_TOKEN = process.env.STORYBLOK_TOKEN;
+  sbToken = process.env.STORYBLOK_TOKEN;
 } else {
   sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
 }
