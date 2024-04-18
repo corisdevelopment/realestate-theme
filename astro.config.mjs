@@ -7,12 +7,12 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
-let sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
+let env
 if (process.env.NETLIFY === true) {
   // use Netlify process.env var
-  sbToken = process.env.STORYBLOK_TOKEN;
+  env = process.env.STORYBLOK_TOKEN;
 } else {
-  sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
+  env = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
 }
 
 // console.log(sbToken);
@@ -22,7 +22,7 @@ export default defineConfig({
   integrations: [
     
     storyblok({
-      accessToken: sbToken.STORYBLOK_TOKEN,
+      accessToken: env.STORYBLOK_TOKEN,
       bridge: true,
       components: {
         // TODO Add Storyblok Components
