@@ -7,10 +7,11 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
-let env
+let env;
 if (process.env.NETLIFY === true) {
   // use Netlify process.env var
   env = process.env.STORYBLOK_TOKEN;
+  console.error(env);
 } else {
   env = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
 }
