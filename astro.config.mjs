@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [
     
     storyblok({
-      accessToken: "dpqGY8PFmM9rMW46GK7WjAtt",
+      accessToken: process.env.STORYBLOK_TOKEN,
       bridge: true,
       components: {
         // TODO Add Storyblok Components
