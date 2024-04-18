@@ -17,15 +17,15 @@ export async function getStaticPaths() {
 // 2. For your template, you can get the entry directly from the prop
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
-let path = '../content/pages/' + entry.id
-let entryHMTL = await import( /* @vite-ignore */ path)
-  .then((data) => {
-    return data.compiledContent()
-  })
-  .catch((err) => {
-    console.error(err)
-  })
-const splitArray = entryHMTL.split('\n')
+// let path = '../content/pages/' + entry.id
+// let entryHMTL = await import( /* @vite-ignore */ path)
+//   .then((data) => {
+//     return data.compiledContent()
+//   })
+//   .catch((err) => {
+//     console.error(err)
+//   })
+// const splitArray = entryHMTL.split('\n')
 // console.log(splitArray[0])
 ---
 <Layout title={entry.data.title + ' | Coris Development Group'}>

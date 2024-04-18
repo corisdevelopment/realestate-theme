@@ -7,9 +7,9 @@
 //     readonly CMS_REPO_NAME: string;
 // }
 
-interface ImportMeta {
-    readonly env: ImportMetaEnv;
-}
+// interface ImportMeta {
+//     readonly env: ImportMetaEnv;
+// }
 
 // AnimeJS Config
 declare module 'animejs/lib/anime.es.js';

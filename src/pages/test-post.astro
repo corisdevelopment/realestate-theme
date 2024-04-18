@@ -2,7 +2,7 @@
 import { useStoryblokApi } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 
-import Button from '@components/utils/Button.astro';
+// import Button from '@components/utils/Button.astro';
 
 const storyblokApi = useStoryblokApi()
 
@@ -12,7 +12,7 @@ const { data } = await storyblokApi.get("cdn/stories/test-post", {
 });
 
 const content = data.story.content;
-console.log(content)
+// console.log(content)
 ---
 <StoryblokComponent blok={content} />
 <!-- <StoryblokComponent blok={content.button} /> -->
