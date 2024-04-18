@@ -8,7 +8,8 @@ import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
 const env = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
-
+const env2 = loadEnv("", process.cwd(), '');
+// console.log(env2)
 // https://astro.build/config
 export default defineConfig({
   site: 'https://corisdevelopmentgroup.com',
