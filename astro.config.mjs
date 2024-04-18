@@ -7,16 +7,22 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
-const env = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
-const env2 = loadEnv("", process.cwd(), '');
-// console.log(env2)
+let sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
+if (process.env.STORYBLOK_TOKEN != undefined) {
+  // use Netlify process.env var
+  sbToken.STORYBLOK_TOKEN = process.env.STORYBLOK_TOKEN;
+} else {
+  sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
+}
+
+// console.log(sbToken);
 // https://astro.build/config
 export default defineConfig({
   site: 'https://corisdevelopmentgroup.com',
   integrations: [
     
     storyblok({
-      accessToken: "dpqGY8PFmM9rMW46GK7WjAtt",
+      accessToken: sbToken.STORYBLOK_TOKEN,
       bridge: true,
       components: {
         // TODO Add Storyblok Components
@@ -42,6 +48,9 @@ export default defineConfig({
     server: {
       https: true,
     },
+    preview: {
+      https: true,
+    }
   },
   output: 'static',
   // adapter: netlify(),
