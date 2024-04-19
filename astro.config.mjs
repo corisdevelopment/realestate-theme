@@ -6,9 +6,14 @@ import { loadEnv } from 'vite';
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
-
-console.log('hello', process.env.STORYBLOK_TOKEN)
-const sbToken = process.env.STORYBLOK_TOKEN;
+let sbToken;
+sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
+sbToken = sbToken.STORYBLOK_TOKEN;
+if (process.env.NETLIFY === true) {
+  sbToken = process.env.STORYBLOK_TOKEN;
+}
+console.log(sbToken)
+// const sbToken = process.env.STORYBLOK_TOKEN;
 // https://astro.build/config
 export default defineConfig({
   site: 'https://corisdevelopmentgroup.com',
