@@ -24,7 +24,7 @@ export default defineConfig({
         page: 'storyblok/Page',
         homePage: 'storyblok/Homepage',
         blogPost: 'storyblok/BlogPost',
-        // button: 'storyblok/Button',
+        button: 'storyblok/Button',
         twoColumn: 'storyblok/TwoColumn',
         servicesCTA: 'storyblok/ServicesCTA',
         serviceBlok: 'storyblok/utils/Service',

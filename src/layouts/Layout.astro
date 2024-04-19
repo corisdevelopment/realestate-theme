@@ -55,6 +55,34 @@ const { title, metaTags } = Astro.props;
 				lenis.raf(time * 1000)
 			});
 			gsap.ticker.lagSmoothing(0);
+
+			//About Scroll
+			let tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.about-cta',
+					start: 'top center+=200',
+					end: 'bottom center+=200',
+					scrub: 1,
+					// markers: true
+				}
+			});
+			gsap.set('#line2', {xPercent: -30});
+			let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
+			let scrollLeft = gsap.to('#line1', {xPercent: -40, duration: 10});
+			let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
+			tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
+
+			// Services Scroll
+			gsap.to('.overlay', {
+				duration: 10,
+				clipPath: 'circle(110%)',
+				scrollTrigger: {
+					trigger: '.overlay',
+					start: 'top bottom-=8%',
+					scrub: true,
+					// markers: true,
+				}
+			});
 		</script>
 	</body>
 </html>
