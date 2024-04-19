@@ -8,13 +8,14 @@ import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
 console.log('hello', process.env.STORYBLOK_TOKEN)
+const sbToken = process.env.STORYBLOK_TOKEN;
 // https://astro.build/config
 export default defineConfig({
   site: 'https://corisdevelopmentgroup.com',
   integrations: [
     
     storyblok({
-      accessToken: "dpqGY8PFmM9rMW46GK7WjAtt",
+      accessToken: sbToken,
       bridge: true,
       components: {
         // TODO Add Storyblok Components
