@@ -7,7 +7,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
-console.log('hello', process.env)
+console.log('hello', process.env.STORYBLOK_TOKEN)
 // https://astro.build/config
 export default defineConfig({
   site: 'https://corisdevelopmentgroup.com',
