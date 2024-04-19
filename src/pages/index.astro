@@ -1,27 +1,13 @@
 ---
-import { useStoryblokApi, renderRichText } from '@storyblok/astro'
+import { useStoryblokApi } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 import Layout from '../layouts/Layout.astro';
 
 // Components
-import HeroLG from '../components/HeroLG.astro';
 import HighlightWithGallery from '../components/sections/HighlightWithGallery.astro';
-import TwoColumnScroll from '../components/sections/TwoColumnScroll.astro';
 
-import ImgImport from '../../public/unsplash_f9qZuKoZYoY.png';
 
-import { testLog } from '../lib/Test';
 import AboutCTA from '@components/sections/AboutCTA.astro';
-
-/////////////////////////////////
-// Content
-// Testing image
-const testImg = '/unsplash_f9qZuKoZYoY.png';
-
-const testImg2 = {
-	src: testImg,
-	alt: "Alt text"
-}
 
 //////////////////
 // Storyblok Content
@@ -31,41 +17,16 @@ const { data } = await storyblokApi.get('cdn/stories/home', {
 	resolve_links: 'url'
 })
 const content = data.story.content;
-// Hero Section
-const hero = {
-	image: {
-		src: content.hero_image.filename,
-		alt: content.hero_image.alt,
-	},
-	content: {
-		headline: content.hero_title,
-		content: content.hero_description,
-		linkText: content.hero_buttonText,
-		linkURL: content.hero_buttonLink.url
-	}
-}
-// About Us Section
 
-// Change to Services Section
-const section2col = {
-	title: content.about_title,
-	content: renderRichText(content.about_description),
-	image: content.about_image,
-}
-const services = [
-	{
-		content: renderRichText(content.service_1),
-		link: {
-			name: content.service_1_link.story.name,
-			url: content.service_1_link.story.url
-		},
-	}
-]
 // console.log(data)
 ---
 <Layout metaTags={content.metatags}>
 	<main>
-		<HeroLG image={hero.image} content={hero.content} />
+		{
+			content.hero?.map((blok: any) => {
+				return <StoryblokComponent blok={blok} />
+			})
+		}
 		<AboutCTA />
 		{
 			content.services?.map((blok: any) => {

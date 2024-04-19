@@ -29,13 +29,6 @@ let {
     fontColor = blok.font_color
   } = Astro.props
 
-function defaultSettings () {
-  let classString = '';
-  classString += className?.includes('font-cg') ? '' : 'flex uppercase';
-  classString += className?.includes('text-white') ? '' : ' text-white';
-  return classString;
-}
-
 switch (blok.button_type) {
   case 'outline':
     outline = true

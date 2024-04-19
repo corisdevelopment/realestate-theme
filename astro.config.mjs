@@ -24,10 +24,12 @@ export default defineConfig({
         page: 'storyblok/Page',
         homePage: 'storyblok/Homepage',
         blogPost: 'storyblok/BlogPost',
-        button: 'storyblok/Button',
+        heroCTA: 'storyblok/HeroCTA',
         twoColumn: 'storyblok/TwoColumn',
         servicesCTA: 'storyblok/ServicesCTA',
+        button: 'storyblok/utils/Button',
         serviceBlok: 'storyblok/utils/Service',
+        heroCard: 'storyblok/utils/HeroCard'
         // blogList: 'storyblok/BlogPostList',
       },
       apiOptions: {
