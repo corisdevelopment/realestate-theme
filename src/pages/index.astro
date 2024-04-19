@@ -12,13 +12,6 @@ import ImgImport from '../../public/unsplash_f9qZuKoZYoY.png';
 
 import { testLog } from '../lib/Test';
 
-
-// const siteMode = import.meta.env.MODE;
-// const isSSR = import.meta.env.SSR;
-const testEnv = process.env.CMS_REPO_NAME;
-// let tLog = testLog();
-// console.log(isSSR);
-
 /////////////////////////////////
 // Content
 // Testing image
@@ -69,9 +62,8 @@ const services = [
 ]
 // console.log(data)
 ---
-
 <Layout metaTags={content.metatags}>
-	<main data-test={testEnv}>
+	<main>
 		<HeroLG image={hero.image} content={hero.content} />
 		<!-- <TwoColumnScroll title={section2col.title} content={section2col.content} image={section2col.image} /> -->
 		{
