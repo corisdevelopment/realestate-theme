@@ -2,18 +2,13 @@
 import { storyblokEditable } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 
-// import Button from '@components/utils/Button.astro';
+import Button from '@components/utils/Button.astro';
 
 const { blok } = Astro.props
-// console.log(blok)
+const url = blok.button[0].url.story.url
 ---
 <div  {...storyblokEditable(blok)} class="mb-8">
   <h2 class="py-2 text-2xl lg:text-4xl font-light">{blok.title}</h2>
   <p class="text-lg font-light">{blok.content}</p>
-  {
-    blok.button?.map((blok: any) => {
-      return <StoryblokComponent blok={blok} />
-    })
-  }
-  <!-- <Button outline text={blok.button.text} link={blok.button.url} class="mt-4 md:w-3/4 flex font-cg font-light text-xl uppercase text-golden-400"/> -->
+  <Button outline text={blok.button[0].text} link={url} class="mt-4 md:w-3/4 flex font-cg font-light text-xl uppercase text-golden-400"/>
 </div>

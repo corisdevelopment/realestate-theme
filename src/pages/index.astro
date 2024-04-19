@@ -11,6 +11,7 @@ import TwoColumnScroll from '../components/sections/TwoColumnScroll.astro';
 import ImgImport from '../../public/unsplash_f9qZuKoZYoY.png';
 
 import { testLog } from '../lib/Test';
+import AboutCTA from '@components/sections/AboutCTA.astro';
 
 /////////////////////////////////
 // Content
@@ -65,7 +66,7 @@ const services = [
 <Layout metaTags={content.metatags}>
 	<main>
 		<HeroLG image={hero.image} content={hero.content} />
-		<!-- <TwoColumnScroll title={section2col.title} content={section2col.content} image={section2col.image} /> -->
+		<AboutCTA />
 		{
 			content.services?.map((blok: any) => {
 				return <StoryblokComponent blok={blok} />

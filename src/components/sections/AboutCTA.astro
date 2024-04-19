@@ -25,12 +25,12 @@ const textArray = testText.forEach( (p) => {
 const imgArray = new Array(8).fill({i: "1"})
 
 ---
-<section class="about-cta bg-golden-300 py-12">
-  <div class="container mx-auto max-content">
-    <h2 class="scrollFadeIn font-cg font-semibold text-golden-950" data-text="Timelessly Moderm">
+<section class="about-cta bg-golden-300">
+  <div class="container mx-auto max-content max-content-mobile lg:my-12">
+    <h2 class="scrollFadeIn font-cg font-semibold text-golden-950">
       {
         wordArray.map( (p: any[]) => (
-          <span class="flex">
+          <span class="flex flex-wrap">
             {
               p.map( (w: string) => (
               <div class="word">
@@ -44,11 +44,11 @@ const imgArray = new Array(8).fill({i: "1"})
       }
     </h2>
   </div>
-  <div class="horizontal-gallery overflow-hidden my-12 py-4 w-full">
-    <div id="line1" class="line-container flex items-end gap-8 my-8">
+  <div class="horizontal-gallery overflow-hidden my-4 lg:my-12 py-4 w-full">
+    <div id="line1" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
       {
         imgArray.map( () => (
-          <div class="image-container ">
+          <div class="image-container min-w-[120px]">
             <Image 
               src={testImage}
               widths={[540, 720, 1024]}
@@ -60,10 +60,10 @@ const imgArray = new Array(8).fill({i: "1"})
           ))
       }
     </div>
-    <div id="line2" class="line-container flex items-end gap-8 my-8">
+    <div id="line2" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
       {
         imgArray.map( () => (
-          <div class="image-container ">
+          <div class="image-container min-w-[120px]">
             <Image 
               src={testImage}
               widths={[540, 720, 1024]}
@@ -76,11 +76,11 @@ const imgArray = new Array(8).fill({i: "1"})
       }
     </div>
   </div>
-  <div class="container mx-auto max-content">
+  <div class="container mx-auto max-content max-content-mobile">
     <h2 class="scrollFadeIn font-cg font-semibold text-golden-950" data-text="Timelessly Moderm">
       {
         wordArray.map( (p: any[]) => (
-          <span class="flex">
+          <span class="flex flex-wrap">
             {
               p.map( (w: string) => (
               <div class="word">
@@ -93,21 +93,21 @@ const imgArray = new Array(8).fill({i: "1"})
         ))
       }
     </h2>
-    <div class="cta my-8">
-      <p class="text-golden-950">Text Goes Here</p>
+    <div class="cta my-6 lg:my-16 lg:w-3/4">
+      <p class="text-golden-950 text-lg lg:text-3xl">Text Goes Here</p>
       <Button outline text="Link" link="/about-us" class="mt-8 md:w-1/2 flex font-cg font-light text-2xl uppercase text-golden-400 bg-golden-950"/>
     </div>
   </div>
 </section>
 
-<script is:inline>
+<script>
   let tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.about-cta',
       start: 'top center+=200',
       end: 'bottom center+=200',
       scrub: 1,
-      markers: true
+      // markers: true
     }
   });
   gsap.set('#line2', {xPercent: -30});
@@ -118,16 +118,16 @@ const imgArray = new Array(8).fill({i: "1"})
 </script>
 
 <style>
+  .about-cta {
+    padding: 4rem 0;
+  }
   .word {
     opacity: 0.2;
-    font-size: 4.4vw;
+    font-size: clamp(2.4em, 4.4vw, 5em);
     line-height: 1.2em;
   }
   .line-container {
     position: relative;
     width: 160%;
-  }
-  .cta > p {
-    font-size: 1.9vw;
   }
 </style>

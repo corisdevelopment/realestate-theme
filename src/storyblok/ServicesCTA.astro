@@ -6,10 +6,10 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 const { blok, image = blok.image } = Astro.props; 
 // console.log(blok)
 ---
-<section class="bg-golden-400 w-full flex justify-center">
-  <div id="circleReveal" class="overlay py-8 lg:py-16">
+<section class="bg-golden-300 w-full flex justify-center text-golden-950">
+  <div id="circleReveal" class="overlay py-16 lg:py-20">
     <div class="circles">
-      <div class="container mx-auto p-8 mb-8 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
+      <div {...storyblokEditable(blok)} class="container mx-auto p-8 mb-8 mt-8 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
         <div class="flex-1 text-md lg:text-xl mb-8" aria-label="Text Content">
           {
             blok.services?.map((blok: any) => {
@@ -17,7 +17,7 @@ const { blok, image = blok.image } = Astro.props;
             })
           }
         </div>
-        <div {...storyblokEditable(blok)} class="image flex-1 rounded-md lg:rounded-2xl shadow-2xl">
+        <div class="image flex-1 rounded-md lg:rounded-2xl shadow-2xl">
           <Image width={1080} height={600} src={image.filename} alt={image.alt} class="aspect-auto" aria-describedby="Image content" />
         </div>
       </div>
@@ -25,15 +25,14 @@ const { blok, image = blok.image } = Astro.props;
   </div>
 </section>
 
-<script is:inline>
+<script>
   // Registered in layout
-
   gsap.to('.overlay', {
     duration: 10,
     clipPath: 'circle(110%)',
     scrollTrigger: {
       trigger: '.overlay',
-      start: 'top bottom-=26%',
+      start: 'top bottom-=8%',
       scrub: true,
       // markers: true,
     }
@@ -45,7 +44,7 @@ const { blok, image = blok.image } = Astro.props;
     min-height: 200px;
     position: relative;
     overflow: hidden;
-    background-image: linear-gradient(rgba(169, 132, 73, 0.8), rgba(169, 132, 73, 0.4)), url(/src/assets/hexa-pattern-07.png);
+    background-image: linear-gradient(rgba(201, 177, 123, 1), rgba(169, 132, 73, 0.6) 50%), url(/src/assets/hexa-pattern-07.png);
   }
   .overlay {
     min-height: 100%;

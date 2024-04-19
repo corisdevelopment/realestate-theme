@@ -2,7 +2,7 @@
 import { storyblokEditable } from '@storyblok/astro'
 import { getOutputFileNames } from 'typescript'
 
-const { blok } = Astro.props
+// const { blok } = Astro.props
 // const settings = { 
 //   class: className,
 //   innerClassNames,
@@ -14,16 +14,24 @@ const { blok } = Astro.props
 //   gradient,
 //   outline
 // }
-let defaultState, 
-    outline, 
-    gradient, 
-    gradientAnimated,
-    className: string = '',
-    innerClassNames: string = ''
+let {
+  blok,
+  defaultState, 
+    outline = false, 
+    gradient = false, 
+    gradientAnimated = false,
+    className = '',
+    innerClassNames = '',
+    width = blok.width,
+    addedClass = blok.tailwindCSS,
+    font = blok.font,
+    fontSize = blok.font_size,
+    fontColor = blok.font_color
+  } = Astro.props
 
 function defaultSettings () {
   let classString = '';
-  classString += className?.includes('font-cg') ? '' : 'flex font-cg text-xl uppercase';
+  classString += className?.includes('font-cg') ? '' : 'flex uppercase';
   classString += className?.includes('text-white') ? '' : ' text-white';
   return classString;
 }
@@ -45,13 +53,15 @@ switch (blok.button_type) {
 // Background color
 const bgColor = blok.backgroundColor != '' ? blok.backgroundColor : 'bg-golden-400 hover:bg-golden-300'
 const background = blok.animatedColor != '' ? blok.animatedColor : '#111'
+innerClassNames = blok.animatedColor === 'transparent' ? 'hover:text-golden-900' : ''
 const shadowRGB = '145, 106, 61'
 
-// console.log('BLOK: ' , background)
+
+// console.log('BLOK: ' , blok)
 ---
 {
   defaultState &&
-  <div {...storyblokEditable(blok)} class:list={["my-4 rounded-lg", className, defaultSettings()]}>
+  <div {...storyblokEditable(blok)} class:list={["my-4 rounded-lg flex uppercase golden-950 golden-600 golden-500 golden-400", className, width, addedClass, font, fontSize, fontColor]}>
     <a href={blok.url} 
       class:list={["glow text-center w-full rounded-lg px-6 py-3 transition duration-300 ease-in-out", bgColor]}
     >{blok.text}</a>
@@ -59,15 +69,15 @@ const shadowRGB = '145, 106, 61'
 }
 {
   gradientAnimated &&
-  <div class:list={['p-0.5 my-4 rounded-lg text-light-gold',  className ]}>
+  <div {...storyblokEditable(blok)} class:list={['p-0.5 my-4 rounded-lg text-dark-gold flex uppercase', className, width, addedClass, font, fontSize, fontColor ]}>
     <a href={blok.url} 
-    class:list={["glow-on-hover flex-1 px-6 py-3 rounded-lg after:rounded-lg before:rounded-lg text-center border border-golden-500", innerClassNames]}
+    class:list={["glow-on-hover w-full px-6 py-3 rounded-lg after:rounded-lg before:rounded-lg text-center border border-golden-500", innerClassNames]}
     >{blok.text}</a>
   </div>
 }
 {
   gradient &&
-  <div class:list={["my-4 shadow rounded-lg", className]}>
+  <div {...storyblokEditable(blok)} class:list={["my-4 shadow rounded-lg", className]}>
     <a href={blok.url} 
     class="glow gradient-animate w-full text-center rounded-lg px-6 py-3 bg-gradient-to-r from-golden-500 from-30% via-golden-300 via-55% to-golden-400 to-70%"
     >{blok.text}</a>
@@ -75,7 +85,7 @@ const shadowRGB = '145, 106, 61'
 }
 {
   outline &&
-  <div class:list={["my-4 rounded-lg", className]}>
+  <div {...storyblokEditable(blok)} class:list={["my-4 rounded-lg", className]}>
     <a href={blok.url} 
     class="glow text-center w-full rounded-lg px-6 py-3 bg-transparent border border-golden-400"
     >{blok.text}</a>
@@ -94,7 +104,7 @@ const shadowRGB = '145, 106, 61'
   }
   .glow-on-hover:before {
     content: '';
-    background: linear-gradient(45deg, #B59250, #a58549, #ffd165, #a58549, #B59250);
+    background: linear-gradient(45deg, #B59250, #be9a55, #ffd165, #be9a55, #B59250);
     position: absolute;
     top: -2px;
     left:-2px;
