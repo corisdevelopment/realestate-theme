@@ -7,6 +7,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 
+console.log('hello')
 // https://astro.build/config
 export default defineConfig({
   site: 'https://corisdevelopmentgroup.com',
