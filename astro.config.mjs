@@ -27,6 +27,7 @@ export default defineConfig({
         heroCTA: 'storyblok/HeroCTA',
         twoColumn: 'storyblok/TwoColumn',
         servicesCTA: 'storyblok/ServicesCTA',
+        aboutCTA: 'storyblok/AboutCTA',
         button: 'storyblok/utils/Button',
         image: 'storyblok/utils/ImageBlok',
         splitText: 'storyblok/utils/SplitText',

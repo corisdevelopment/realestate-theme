@@ -1,0 +1,66 @@
+---
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
+import { storyblokEditable } from '@storyblok/astro'
+
+const { blok } = Astro.props
+---
+<section {...storyblokEditable(blok)} class="about-cta bg-golden-300">
+  <div class="container mx-auto max-content max-content-mobile lg:mt-36">
+    <h2 class="scrollFadeIn font-cg font-semibold text-golden-950">
+      {
+        blok.textTop?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />
+        })
+      }
+    </h2>
+  </div>
+  <div class="horizontal-gallery overflow-hidden my-4 lg:my-12 py-4 w-full">
+    <div id="line1" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
+      {
+        blok.imageLine1?.map((blok: any) => (
+          <div class="image-container min-w-[120px]">
+            <StoryblokComponent blok={blok} />
+          </div>
+        ))
+      }
+    </div>
+    <div id="line2" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
+      {
+        blok.imageLine2?.map((blok: any) => (
+          <div class="image-container min-w-[120px]">
+            <StoryblokComponent blok={blok} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="container mx-auto max-content max-content-mobile lg:mb-36">
+    <h2 class="scrollFadeIn font-cg font-semibold text-golden-950" data-text="Timelessly Moderm">
+      {
+        blok.textBottom?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />
+        })
+      }
+    </h2>
+    {
+      blok.description?.map((blok: any) => {
+        return <StoryblokComponent blok={blok} />
+      })
+    }
+  </div>
+</section>
+
+<style>
+  .about-cta {
+    padding: 4rem 0;
+  }
+  .word {
+    opacity: 0.2;
+    font-size: clamp(2.4em, 5.4vw, 6em);
+    line-height: 1.2em;
+  }
+  .line-container {
+    position: relative;
+    width: 160%;
+  }
+</style>

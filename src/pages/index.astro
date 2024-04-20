@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro';
 import HighlightWithGallery from '../components/sections/HighlightWithGallery.astro';
 
 
-import AboutCTA from '@components/sections/AboutCTA.astro';
+// import AboutCTA from '@components/sections/AboutCTA.astro';
 
 //////////////////
 // Storyblok Content
@@ -18,7 +18,7 @@ const { data } = await storyblokApi.get('cdn/stories/home', {
 })
 const content = data.story.content;
 
-console.log(content)
+// console.log(content)
 ---
 <Layout metaTags={content.metatags}>
 	<main>
@@ -27,7 +27,12 @@ console.log(content)
 				return <StoryblokComponent blok={blok} />
 			})
 		}
-		<AboutCTA data={content.about[0]} />
+		{
+			content.about?.map((blok: any) => {
+				return <StoryblokComponent blok={blok} />
+			})
+		}
+		<!-- <AboutCTA data={content?.about[0]} /> -->
 		{
 			content.services?.map((blok: any) => {
 				return <StoryblokComponent blok={blok} />
