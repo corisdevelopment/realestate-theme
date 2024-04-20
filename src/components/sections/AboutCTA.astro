@@ -1,31 +1,7 @@
 ---
-import { Image } from 'astro:assets'
-import Button from '@components/utils/Button.astro'
-import testImage from '@assets/77-Aerial-1458-Greenleaf-Court-6.jpg'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
-// const testText = [
-//   { type: 'paragraph',
-//     content: [ {text: 'Holistic.'} ]
-//   },
-//   { type: 'paragraph',
-//     content: [ {text: 'Timelessly modern.'} ]
-//   },
-//   { type: 'paragraph',
-//     content: [ {text: 'Stunning, brilliant, beautiful.'} ]
-//   }
-// ]
-// let wordArray: any = []
-// const textArray = testText.forEach( (p) => {
-//   const words = p.content[0]?.text.split(' ')
-//   const word = words.map( w => {
-//     return w + '\xa0'
-//   })
-//   // console.log(word)
-//   wordArray.push(word)
-// })
-const imgArray = new Array(8).fill({i: "1"})
-const { blok, data } = Astro.props
-console.log("About: ", data)
+
+const { data } = Astro.props
 ---
 <section class="about-cta bg-golden-300">
   <div class="container mx-auto max-content max-content-mobile lg:mt-36">
@@ -72,23 +48,6 @@ console.log("About: ", data)
     }
   </div>
 </section>
-
-<script>
-  // let tl = gsap.timeline({
-  //   scrollTrigger: {
-  //     trigger: '.about-cta',
-  //     start: 'top center+=200',
-  //     end: 'bottom center+=200',
-  //     scrub: 1,
-  //     // markers: true
-  //   }
-  // });
-  // gsap.set('#line2', {xPercent: -30});
-  // let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
-  // let scrollLeft = gsap.to('#line1', {xPercent: -40, duration: 10});
-  // let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
-  // tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
-</script>
 
 <style>
   .about-cta {
