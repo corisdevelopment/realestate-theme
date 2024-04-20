@@ -18,7 +18,7 @@ const { data } = await storyblokApi.get('cdn/stories/home', {
 })
 const content = data.story.content;
 
-// console.log(data)
+console.log(content)
 ---
 <Layout metaTags={content.metatags}>
 	<main>
@@ -27,7 +27,7 @@ const content = data.story.content;
 				return <StoryblokComponent blok={blok} />
 			})
 		}
-		<AboutCTA />
+		<AboutCTA data={content.about[0]} />
 		{
 			content.services?.map((blok: any) => {
 				return <StoryblokComponent blok={blok} />

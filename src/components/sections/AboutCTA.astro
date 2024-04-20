@@ -2,101 +2,74 @@
 import { Image } from 'astro:assets'
 import Button from '@components/utils/Button.astro'
 import testImage from '@assets/77-Aerial-1458-Greenleaf-Court-6.jpg'
-const testText = [
-  { type: 'paragraph',
-    content: [ {text: 'Holistic.'} ]
-  },
-  { type: 'paragraph',
-    content: [ {text: 'Timelessly modern.'} ]
-  },
-  { type: 'paragraph',
-    content: [ {text: 'Stunning, brilliant, beautiful.'} ]
-  }
-]
-let wordArray: any = []
-const textArray = testText.forEach( (p) => {
-  const words = p.content[0]?.text.split(' ')
-  const word = words.map( w => {
-    return w + '\xa0'
-  })
-  // console.log(word)
-  wordArray.push(word)
-})
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
+// const testText = [
+//   { type: 'paragraph',
+//     content: [ {text: 'Holistic.'} ]
+//   },
+//   { type: 'paragraph',
+//     content: [ {text: 'Timelessly modern.'} ]
+//   },
+//   { type: 'paragraph',
+//     content: [ {text: 'Stunning, brilliant, beautiful.'} ]
+//   }
+// ]
+// let wordArray: any = []
+// const textArray = testText.forEach( (p) => {
+//   const words = p.content[0]?.text.split(' ')
+//   const word = words.map( w => {
+//     return w + '\xa0'
+//   })
+//   // console.log(word)
+//   wordArray.push(word)
+// })
 const imgArray = new Array(8).fill({i: "1"})
-
+const { blok, data } = Astro.props
+console.log("About: ", data)
 ---
 <section class="about-cta bg-golden-300">
   <div class="container mx-auto max-content max-content-mobile lg:mt-36">
     <h2 class="scrollFadeIn font-cg font-semibold text-golden-950">
       {
-        wordArray.map( (p: any[]) => (
-          <span class="flex flex-wrap">
-            {
-              p.map( (w: string) => (
-              <div class="word">
-                {w}
-              </div> 
-              ))
-            }
-          </span>
-          
-        ))
+        data.textTop?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />
+        })
       }
     </h2>
   </div>
   <div class="horizontal-gallery overflow-hidden my-4 lg:my-12 py-4 w-full">
     <div id="line1" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
       {
-        imgArray.map( () => (
+        data.imageLine1?.map((blok: any) => (
           <div class="image-container min-w-[120px]">
-            <Image 
-              src={testImage}
-              widths={[540, 720, 1024]}
-              sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px, (max-width: 1600) 1024px`}
-              alt="image alt"
-              class="flex"
-            />
+            <StoryblokComponent blok={blok} />
           </div>
-          ))
+        ))
       }
     </div>
     <div id="line2" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
       {
-        imgArray.map( () => (
+        data.imageLine2?.map((blok: any) => (
           <div class="image-container min-w-[120px]">
-            <Image 
-              src={testImage}
-              widths={[540, 720, 1024]}
-              sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px, (max-width: 1600) 1024px`}
-              alt="image alt"
-              class="flex"
-            />
+            <StoryblokComponent blok={blok} />
           </div>
-          ))
+        ))
       }
     </div>
   </div>
   <div class="container mx-auto max-content max-content-mobile lg:mb-36">
     <h2 class="scrollFadeIn font-cg font-semibold text-golden-950" data-text="Timelessly Moderm">
       {
-        wordArray.map( (p: any[]) => (
-          <span class="flex flex-wrap">
-            {
-              p.map( (w: string) => (
-              <div class="word">
-                {w}
-              </div> 
-              ))
-            }
-          </span>
-          
-        ))
+        data.textBottom?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />
+        })
       }
     </h2>
-    <div class="cta my-6 lg:my-16 lg:w-3/4">
-      <p class="text-golden-950 text-lg lg:text-3xl">Text Goes Here</p>
-      <Button outline text="Link" link="/about-us" class="mt-8 md:w-1/2 flex font-cg font-light text-2xl uppercase text-golden-400 bg-golden-950"/>
-    </div>
+    {
+      data.description?.map((blok: any) => {
+        return <StoryblokComponent blok={blok} />
+      })
+    }
   </div>
 </section>
 

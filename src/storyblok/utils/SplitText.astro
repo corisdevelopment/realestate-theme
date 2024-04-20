@@ -1,0 +1,15 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+const { blok } = Astro.props
+---
+<span {...storyblokEditable(blok)} class="flex flex-wrap">
+  <div class="word">{blok.text}</div>
+</span>
+
+<style>
+  .word {
+    opacity: 0.2;
+    font-size: clamp(2.4em, 5.4vw, 6em);
+    line-height: 1.2em;
+  }
+</style>

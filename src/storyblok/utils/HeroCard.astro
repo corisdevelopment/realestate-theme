@@ -2,7 +2,6 @@
 import Button from "@components/utils/Button.astro";
 import { storyblokEditable } from '@storyblok/astro'
 const { blok } = Astro.props;
-console.log(blok.button)
 ---
 <div {...storyblokEditable(blok)} class='hero-card rounded lg:rounded-lg flex py-8 lg:py-16 lg:mt-16 pr-8 bg-white shadow-xl md:w-5/6 lg:w-4/6 2xl:w-3/6 lg:container'>
   <div class="card-inner lg:w-5/6">

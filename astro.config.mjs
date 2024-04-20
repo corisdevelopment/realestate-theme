@@ -28,6 +28,9 @@ export default defineConfig({
         twoColumn: 'storyblok/TwoColumn',
         servicesCTA: 'storyblok/ServicesCTA',
         button: 'storyblok/utils/Button',
+        image: 'storyblok/utils/ImageBlok',
+        splitText: 'storyblok/utils/SplitText',
+        snippetWithButton: 'storyblok/utils/SnippetCTA',
         serviceBlok: 'storyblok/utils/Service',
         heroCard: 'storyblok/utils/HeroCard'
         // blogList: 'storyblok/BlogPostList',
