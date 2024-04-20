@@ -6,7 +6,7 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 const { blok, image = blok.image } = Astro.props; 
 // console.log(blok)
 ---
-<section class="bg-golden-300 w-full flex justify-center text-golden-950">
+<section id="servicesCTA" class="bg-golden-300 w-full flex justify-center text-golden-950">
   <div id="circleReveal" class="overlay py-16 lg:py-20">
     <div class="circles">
       <div {...storyblokEditable(blok)} class="container mx-auto p-8 mb-8 mt-8 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
@@ -36,7 +36,7 @@ const { blok, image = blok.image } = Astro.props;
     min-height: 100%;
     min-width: 100%;
     background-color:  #fff;
-    clip-path: circle(5%);
+    clip-path: circle(0%);
     position: relative;
     z-index: 1;
   }

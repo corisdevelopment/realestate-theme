@@ -5,9 +5,9 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 const { blok, class: className } = Astro.props;
 const bgrdImage = `url('${blok.image?.filename}')`;
 ---
-<section {...storyblokEditable(blok)} class:list={['hero flex flex-col justify-center', className]}>
+<section {...storyblokEditable(blok)} class:list={['hero flex flex-col justify-center bg-gradient-to-t from-golden-300 to-30%', className]}>
   <div class="hero-content w-full">
-    <div class="mt-[40vh] lg:mt-0 lg:container mx-auto">
+    <div class="mt-[20vh] lg:mt-0 lg:container mx-auto">
       {
         blok.content?.map((blok: any) => {
           return <StoryblokComponent blok={blok} />

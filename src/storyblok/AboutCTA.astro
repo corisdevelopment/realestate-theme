@@ -3,8 +3,6 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 import { storyblokEditable } from '@storyblok/astro'
 
 const { blok } = Astro.props
-const divStart = '<div class="image-container min-w-[120px]">'
-const divEnd = '</div>'
 ---
 <section {...storyblokEditable(blok)} class="about-cta bg-golden-300">
   <div class="container mx-auto max-content max-content-mobile lg:mt-36">
@@ -30,9 +28,6 @@ const divEnd = '</div>'
           return <StoryblokComponent blok={blok} />
         })
       }
-      <!-- {blok.imageline2?.map( () => (
-        <Fragment set:html={divEnd} />
-      ))} -->
     </div>
   </div>
   <div class="container mx-auto max-content max-content-mobile lg:mb-36">
