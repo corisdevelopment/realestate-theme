@@ -3,6 +3,8 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 import { storyblokEditable } from '@storyblok/astro'
 
 const { blok } = Astro.props
+const divStart = '<div class="image-container min-w-[120px]">'
+const divEnd = '</div>'
 ---
 <section {...storyblokEditable(blok)} class="about-cta bg-golden-300">
   <div class="container mx-auto max-content max-content-mobile lg:mt-36">
@@ -17,21 +19,20 @@ const { blok } = Astro.props
   <div class="horizontal-gallery overflow-hidden my-4 lg:my-12 py-4 w-full">
     <div id="line1" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
       {
-        blok.imageLine1?.map((blok: any) => (
-          <div class="image-container min-w-[120px]">
-            <StoryblokComponent blok={blok} />
-          </div>
-        ))
+        blok.imageLine1?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />
+        })
       }
     </div>
     <div id="line2" class="line-container flex items-end gap-2 my-2 lg:gap-8 lg:my-8">
       {
-        blok.imageLine2?.map((blok: any) => (
-          <div class="image-container min-w-[120px]">
-            <StoryblokComponent blok={blok} />
-          </div>
-        ))
+        blok.imageLine2?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />
+        })
       }
+      <!-- {blok.imageline2?.map( () => (
+        <Fragment set:html={divEnd} />
+      ))} -->
     </div>
   </div>
   <div class="container mx-auto max-content max-content-mobile lg:mb-36">
@@ -54,11 +55,11 @@ const { blok } = Astro.props
   .about-cta {
     padding: 4rem 0;
   }
-  .word {
+  /* .word {
     opacity: 0.2;
     font-size: clamp(2.4em, 5.4vw, 6em);
     line-height: 1.2em;
-  }
+  } */
   .line-container {
     position: relative;
     width: 160%;

@@ -46,7 +46,8 @@ const { metaTags } = Astro.props;
 		</div>
 		<!-- Footer -->
 		<Footer />
-		<script is:inline>
+		<script>
+			// @ts-nocheck 
 			gsap.registerPlugin(ScrollTrigger);
 			const lenis = new Lenis();
 			
@@ -60,16 +61,16 @@ const { metaTags } = Astro.props;
 			let tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: '.about-cta',
-					start: 'top center+=200',
-					end: 'bottom center+=200',
+					start: 'top center',
+					end: 'bottom top',
 					scrub: 1,
 					// markers: true
 				}
 			});
 			gsap.set('#line2', {xPercent: -30});
 			let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
-			let scrollLeft = gsap.to('#line1', {xPercent: -40, duration: 10});
-			let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
+			let scrollLeft = gsap.to('#line1', {xPercent: -40, duration: 8});
+			let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 8});
 			tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
 
 			// Services Scroll
