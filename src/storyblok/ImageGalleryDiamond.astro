@@ -1,0 +1,92 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
+const { blok } = Astro.props
+function setClass(index: number) {
+  let cssString = ''
+  switch (index) {
+    case 0:
+      cssString = 'col-start-3 col-span-2 row-start-1 row-span-2'
+      break;
+    case 1:
+      cssString = 'col-start-2 col-span-2 row-span-2 row-start-2'
+      break;
+    case 2:
+      cssString = 'col-start-4 col-span-2 row-span-2 row-start-2'
+      break;
+    case 3:
+      cssString = 'col-start-1 col-span-2 row-span-2 row-start-3'
+      break;
+    // case 4:
+    //   cssString = 'col-start-3 col-span-2 row-span-2 row-start-3'
+    //   break;
+    case 4:
+      cssString = 'col-start-5 col-span-2 row-span-2 row-start-3'
+      break;
+    case 5:
+      cssString = 'col-start-2 col-span-2 row-span-2 row-start-4'
+      break;
+    case 6:
+      cssString = 'col-start-4 col-span-2 row-span-2 row-start-4'
+      break;
+    case 7:
+      cssString = 'col-start-3 col-span-2 row-span-2 row-start-5'
+      break;
+    default:
+      cssString = 'col-start-3 col-span-2 row-span-2 row-start-3'
+  }
+  return cssString
+}
+---
+<section class="gallery-diamond">
+  <div {...storyblokEditable(blok)} class="gallery-wrapper p-8">
+    <div class="gallery grid grid-cols-6 gap-2 text-white">
+      {
+        blok.images.slice(0,4).map( (blok: any, index: number) => (
+          <div class={setClass(index)}>
+            <div class="rotate overflow-hidden"> 
+              <StoryblokComponent blok={blok} /> 
+            </div>
+          </div>
+        ))
+      }
+      <div class="col-start-3 col-span-2 row-span-2 row-start-3">
+        <div class="rotate overflow-hidden">
+          <div class="logo bg-golden-500">Logo</div>
+        </div>
+      </div>
+      {
+        blok.images.slice(4,8).map( (blok: any, index: number) => (
+          <div class={setClass(index + 4)}>
+            <div class="rotate overflow-hidden"> 
+              <StoryblokComponent blok={blok} /> 
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-diamond {
+    background-image: linear-gradient(rgba(169, 132, 73, 0.9), rgba(49, 30, 23, 0.1)), url('/src/assets/hexa-pattern-07.png');
+    background-size: auto, cover;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+  .gallery {
+    
+  }
+  img, .logo {
+    aspect-ratio: 1;
+    object-fit: cover;
+    /* box-shadow: inset 0 0 60px 10px rgba(255, 255, 255, 0.9); */
+    transform: rotate(-45deg) scale(1.4);
+    
+  }
+  .rotate {
+    transform: rotate(45deg) scale(0.7);
+    box-shadow: 0 0 60px 10px rgb(0 0 0 / 20%) ;
+  }
+</style>

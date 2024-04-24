@@ -6,8 +6,16 @@ const { blok } = Astro.props
 <Image {...storyblokEditable(blok)}
   src={blok.image.filename}
   inferSize={true}
-  widths={[540, 720]}
-  sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
   alt={blok.image.alt}
-  class="flex"
+  class="rounded-lg"
 />
+
+<style>
+  img {
+    aspect-ratio: 1;
+    object-fit: cover;
+    /* box-shadow: inset 0 0 60px 10px rgba(255, 255, 255, 0.9); */
+    transform: rotate(-45deg) scale(1.4);
+    
+  }
+</style>

@@ -42,7 +42,11 @@ const content = data.story.content;
 				return <StoryblokComponent blok={blok} />
 			})
 		}
-		<HighlightWithGallery />
+		{
+			content.imageGallery?.map((blok: any) => {
+				return <StoryblokComponent blok={blok} />
+			})
+		}
 	</main>
 </Layout>
 
