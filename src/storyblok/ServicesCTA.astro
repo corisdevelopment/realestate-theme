@@ -23,6 +23,9 @@ const { blok, image = blok.image } = Astro.props;
       </div>
     </div>
   </div>
+  <div class="absolute top-[24%] left-0 w-full -z-10 max-lg:px-8">
+    <h2 id="serviceHeadline" class="text-center text-6xl lg:text-8xl font-cg">{blok.headline}</h2>
+  </div>
 </section>
 
 <style>
@@ -30,7 +33,10 @@ const { blok, image = blok.image } = Astro.props;
     min-height: 200px;
     position: relative;
     overflow: hidden;
-    background-image: linear-gradient(rgba(201, 177, 123, 1), rgba(169, 132, 73, 0.6) 50%), url(/src/assets/hexa-pattern-07.png);
+    background-image: linear-gradient(rgba(201, 177, 123, 0.8), rgba(169, 132, 73, 0.6) 50%), url(/src/assets/stone_texture.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .overlay {
     min-height: 100%;
@@ -39,6 +45,9 @@ const { blok, image = blok.image } = Astro.props;
     clip-path: circle(0%);
     position: relative;
     z-index: 1;
+  }
+  #serviceHeadline {
+    opacity: 0.2;
   }
   .container {
     max-width: var(--max-content);

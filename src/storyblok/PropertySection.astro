@@ -1,0 +1,38 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
+const { blok } = Astro.props
+---
+<section class="property-highlight">
+  <div class="max-content container mx-auto text-white">
+    <div {...storyblokEditable(blok)} class="row flex justify-center">
+      <div class="flex items-center">
+        <h2 class="subtle-fade text-center text-3xl lg:text-5xl capitalize font-thin">{blok.title}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="props flex items-center max-md:flex-col lg:flex-row gap-4 lg:gap-8">
+      {
+        blok.property?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />
+        })
+      }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .property-highlight {
+    padding: max(29.6px, calc(29.6px + 5.08vw)) 0;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url(/src/assets/slate-bgrd.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .row {
+    padding: max(26.4px, calc(26.4px + 3.28vw)) 0;
+    opacity: 1;
+  }
+  
+</style>

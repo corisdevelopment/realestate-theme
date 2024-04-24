@@ -3,7 +3,6 @@ import { storyblokEditable } from '@storyblok/astro'
 import { Image } from 'astro:assets'
 const { blok } = Astro.props
 ---
-<div class="image-container min-w-[120px] max-w-[340px]">
 <Image {...storyblokEditable(blok)}
   src={blok.image.filename}
   inferSize={true}
@@ -12,11 +11,3 @@ const { blok } = Astro.props
   alt={blok.image.alt}
   class="flex"
 />
-</div>
-
-<style>
-  .image-container {
-    height: auto;
-    width: 100%;
-  }
-</style>

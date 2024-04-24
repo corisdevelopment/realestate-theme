@@ -28,12 +28,16 @@ export default defineConfig({
         twoColumn: 'storyblok/TwoColumn',
         servicesCTA: 'storyblok/ServicesCTA',
         aboutCTA: 'storyblok/AboutCTA',
+        propertySection: 'storyblok/PropertySection',
+        imageGalleryDiamond: 'storyblok/ImageGalleryDiamond',
         button: 'storyblok/utils/Button',
         image: 'storyblok/utils/ImageBlok',
         splitText: 'storyblok/utils/SplitText',
         snippetWithButton: 'storyblok/utils/SnippetCTA',
         serviceBlok: 'storyblok/utils/Service',
-        heroCard: 'storyblok/utils/HeroCard'
+        heroCard: 'storyblok/utils/HeroCard',
+        propertyCard: 'storyblok/utils/PropertyCard',
+        imageBlokGallery: 'storyblok/utils/ImageBlokGallery'
         // blogList: 'storyblok/BlogPostList',
       },
       apiOptions: {

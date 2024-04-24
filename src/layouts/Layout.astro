@@ -75,18 +75,25 @@ const { metaTags } = Astro.props;
 			tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
 
 			// Services Scroll
-			gsap.to('.overlay', {
-				duration: 10,
-				clipPath: 'circle(110%)',
+			let ss = gsap.timeline({
 				scrollTrigger: {
 					trigger: '#servicesCTA',
 					start: 'top top',
 					end: 'bottom center',
-					scrub: 2,
+					scrub: 1,
 					pin: true,
 					// markers: true,
 				}
 			});
+			let textIn = gsap.to('#serviceHeadline', {
+				duration: 2,
+				opacity: 1,
+			});
+			let overlayClip = gsap.to('.overlay', {
+				duration: 10,
+				clipPath: 'circle(110%)',
+			});
+			ss.add(textIn).add(overlayClip)
 		</script>
 	</body>
 </html>
@@ -122,6 +129,11 @@ const { metaTags } = Astro.props;
 	@media screen and (max-width: 768px) {
 		.max-content-mobile {
 			max-width: 82vw;
+		}
+	}
+	@media screen and (max-width: 1025px) {
+		.max-content-mobile {
+			max-width: 88vw;
 		}
 	}
 	

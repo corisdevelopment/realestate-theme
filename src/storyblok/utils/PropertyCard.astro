@@ -1,0 +1,65 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import { Image } from 'astro:assets'
+import Button from '@components/utils/Button.astro';
+const { blok } = Astro.props
+const url = blok?.button[0].url.story.url
+---
+
+  <div  {...storyblokEditable(blok)} class="col flex flex-1 max-md:mx-4 relative glow border border-golden-400">
+    <div class="media-container w-full h-full overflow-hidden">
+      <Image {...storyblokEditable(blok)}
+        src={blok.image.filename}
+        inferSize={true}
+        alt={blok.image.alt}
+        class="object-cover w-full h-full"
+      />
+    </div>
+    <div class="content-container py-2 px-4 flex flex-col content-end w-full h-full absolute top-0 left-0 z-10">
+      <div class="top-container flex flex-1">
+        <h3 class="pt-4 font-thin text-xl">{blok.tagline}</h3>
+      </div>
+      <div class="bottom-container flex justify-between items-center">
+        <div class="title flex-1 uppercase text-4xl">
+          <p>{blok.title}</p>
+        </div>
+        <div class="button flex flex-1 w-full justify-end">
+          <Button 
+            gradient 
+            text={blok?.button[0].text} 
+            link={url} 
+            class="flex flex-shrink-0 font-cg font-light text-xl uppercase text-golden-900"
+          />
+        </div>
+      </div>
+    </div>
+    <a href={url} class="absolute top-0 left-0 w-full h-full z-20"></a>
+  </div>
+
+
+
+<style>
+  .glow {
+    box-shadow: rgba(145, 106, 61, 0.35) 0px 0px 30px 0px;
+  }
+  .content-container {
+    background-color: rgba(0,0,0, 0.3);
+  }
+  .col {
+    flex: 1 1 0px;
+    /* opacity: 1; */
+    height: max(280px, calc(187px + 23.66vw));
+    transition: flex .75s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: flex;
+  }
+  .col:hover {
+    flex: 0 0 55%;
+  }
+  .button {
+    opacity: 0;
+    transition: opacity .75s;
+  }
+  .col:hover .button {
+    opacity: 1;
+  }
+</style>

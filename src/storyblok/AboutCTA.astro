@@ -5,7 +5,7 @@ import { storyblokEditable } from '@storyblok/astro'
 const { blok } = Astro.props
 ---
 <section {...storyblokEditable(blok)} class="about-cta bg-golden-300">
-  <div class="container mx-auto max-content max-content-mobile lg:mt-36">
+  <div class="container mx-auto max-content max-content-mobile lg:mt-36 md:max-xl:px-8">
     <h2 class="scrollFadeIn font-cg font-semibold text-golden-950">
       {
         blok.textTop?.map((blok: any) => {
@@ -30,7 +30,7 @@ const { blok } = Astro.props
       }
     </div>
   </div>
-  <div class="container mx-auto max-content max-content-mobile lg:mb-36">
+  <div class="container mx-auto max-content max-content-mobile lg:mb-36 md:max-xl:px-8">
     <h2 class="scrollFadeIn font-cg font-semibold text-golden-950" data-text="Timelessly Moderm">
       {
         blok.textBottom?.map((blok: any) => {
