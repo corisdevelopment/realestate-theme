@@ -37,7 +37,8 @@ export default defineConfig({
         serviceBlok: 'storyblok/utils/Service',
         heroCard: 'storyblok/utils/HeroCard',
         propertyCard: 'storyblok/utils/PropertyCard',
-        imageBlokGallery: 'storyblok/utils/ImageBlokGallery'
+        imageBlokGallery: 'storyblok/utils/ImageBlokGallery',
+        heroBlok: 'storyblok/utils/HeroBlok',
         // blogList: 'storyblok/BlogPostList',
       },
       apiOptions: {

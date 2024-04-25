@@ -1,0 +1,42 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import { Image } from 'astro:assets'
+
+const { blok } = Astro.props
+---
+<section class="hero-blok border-b-8 border-golden-600">
+  <div {...storyblokEditable(blok)} class="relative flex flex-col items-center mx-auto lg:flex-row-reverse lg:max-w-5xl xl:max-w-6xl">
+    <div class="w-full h-64 lg:w-1/2 lg:h-auto">
+      <Image {...storyblokEditable(blok)}
+        src={blok.image.filename}
+        inferSize={true}
+        widths={[540, 720]}
+        sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
+        alt={blok.image.alt}
+        class="h-full w-full object-cover"
+      />
+        <!-- <img class="h-full w-full object-cover" src="https://picsum.photos/id/1018/2000" alt="Winding mountain road"> -->
+    </div>
+    <!-- Text Column -->
+    <div
+        class="hero-text max-w-lg md:max-w-2xl md:z-10 md:shadow-lg md:absolute md:top-0 md:mt-48 lg:w-3/5 lg:left-0 lg:mt-20 xl:mt-24 backdrop-blur-sm">
+        <!-- Text Wrapper -->
+        <div class="flex flex-col p-4 md:px-16">
+            <h2 class="text-4xl font-light capitalize text-golden-950 lg:text-8xl">{blok.headline}</h2>
+            <!-- <p class="mt-4 text-2xl">{blok.headline}</p> -->
+        </div>
+        <!-- Close Text Wrapper -->
+    </div>
+    <!-- Close Text Column -->
+  </div>
+</section>
+
+<style>
+  .hero-blok {
+    background: rgb(17,17,17);
+    background: radial-gradient(circle, rgba(201,177,123,0.20) 0%, rgba(17,17,17,1) 80%);
+  }
+  .hero-text {
+    background: linear-gradient(to right, rgba(201, 177, 123, 1), rgba(201, 177, 123, 0.4)) ;
+  }
+</style>
