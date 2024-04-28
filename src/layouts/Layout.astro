@@ -82,6 +82,7 @@ const { metaTags } = Astro.props;
 					end: 'bottom center',
 					scrub: 1,
 					pin: true,
+					// pinSpacing: false,
 					// markers: true,
 				}
 			});
@@ -90,7 +91,7 @@ const { metaTags } = Astro.props;
 				opacity: 1,
 			});
 			let overlayClip = gsap.to('.overlay', {
-				duration: 10,
+				duration: 2,
 				clipPath: 'circle(110%)',
 			});
 			ss.add(textIn).add(overlayClip)

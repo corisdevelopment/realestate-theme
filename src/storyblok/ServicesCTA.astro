@@ -6,30 +6,33 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 const { blok, image = blok.image } = Astro.props; 
 // console.log(blok)
 ---
-<section id="servicesCTA" class="bg-golden-300 w-full flex justify-center text-golden-950">
-  <div id="circleReveal" class="overlay py-16 lg:py-20">
-    <div class="circles">
-      <div {...storyblokEditable(blok)} class="container mx-auto p-8 mb-8 mt-8 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
-        <div class="flex-1 text-md lg:text-xl mb-8" aria-label="Text Content">
-          {
-            blok.services?.map((blok: any) => {
-              return <StoryblokComponent blok={blok} />
-            })
-          }
-        </div>
-        <div class="image flex-1 rounded-md lg:rounded-2xl shadow-2xl">
-          <Image width={1080} height={600} src={image.filename} alt={image.alt} class="aspect-auto" aria-describedby="Image content" />
+<section>
+  <div id="servicesCTA" class="bg-golden-300 w-full flex justify-center text-golden-950">
+    <div id="circleReveal" class="overlay py-16 lg:py-20">
+      <div class="circles">
+        <div {...storyblokEditable(blok)} class="container mx-auto p-8 mb-8 mt-8 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-x-6">
+          <div class="flex-1 text-md lg:text-xl mb-8" aria-label="Text Content">
+            {
+              blok.services?.map((blok: any) => {
+                return <StoryblokComponent blok={blok} />
+              })
+            }
+          </div>
+          <div class="image flex-1 rounded-md lg:rounded-2xl shadow-2xl">
+            <Image width={1080} height={600} src={image.filename} alt={image.alt} class="aspect-auto" aria-describedby="Image content" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="absolute top-[24%] left-0 w-full -z-10 max-lg:px-8">
-    <h2 id="serviceHeadline" class="text-center text-6xl lg:text-8xl font-cg">{blok.headline}</h2>
+    <div class="absolute top-[24%] left-0 w-full -z-10 max-lg:px-8">
+      <h2 id="serviceHeadline" class="text-center text-6xl lg:text-8xl font-cg">{blok.headline}</h2>
+    </div>
   </div>
 </section>
 
+
 <style>
-  section {
+  #servicesCTA {
     min-height: min-content;
     position: relative;
     /* overflow: hidden; */
