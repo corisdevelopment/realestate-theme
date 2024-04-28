@@ -24,7 +24,7 @@ const { blok, image = blok.image } = Astro.props;
         </div>
       </div>
     </div>
-    <div class="absolute top-[24%] left-0 w-full -z-10 max-lg:px-8">
+    <div class="absolute top-[14%] left-0 w-full -z-10 max-lg:px-8">
       <h2 id="serviceHeadline" class="text-center text-6xl lg:text-8xl font-cg">{blok.headline}</h2>
     </div>
   </div>
@@ -35,7 +35,7 @@ const { blok, image = blok.image } = Astro.props;
   #servicesCTA {
     min-height: min-content;
     position: relative;
-    /* overflow: hidden; */
+    overflow: hidden;
     background-image: linear-gradient(rgba(201, 177, 123, 0.8), rgba(169, 132, 73, 0.6) 50%), url(/src/assets/stone_texture.webp);
     background-position: center;
     background-repeat: no-repeat;
@@ -48,7 +48,7 @@ const { blok, image = blok.image } = Astro.props;
     clip-path: circle(0%);
     position: relative;
     z-index: 1;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   #serviceHeadline {
     opacity: 0.2;
