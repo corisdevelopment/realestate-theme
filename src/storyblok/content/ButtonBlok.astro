@@ -1,0 +1,35 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import Button from "@components/utils/Button.astro";
+
+const {blok} = Astro.props
+
+
+
+// Text Size: xl, 2xl, 3xl
+// Border: true | false
+
+const type = {
+  gradAnim: blok.type === 'gradientAnimated' ? true : false,
+  gradient: blok.type === 'gradient' ? true : false,
+  outline: blok.type === 'outline' ? true : false,
+}
+const noPadding = blok.noPadding ? '' : 'p-4'
+blok.backgroundColor = blok.backgroundColor != '' ? blok.backgroundColor : '#111'
+const border = !blok.borderColor || blok.borderColor === '' || undefined ? '' : `border ${blok.borderColor}`
+// console.log("BUTTON", blok)
+// "border border-golden-400"
+// "text-golden-400 mx-auto md:flex font-cg font-light text-lg md:text-2xl uppercase md:w-3/4"
+---
+<div {...storyblokEditable(blok)} class:list={["mx-auto flex container max-content", blok.align, noPadding]}>
+<Button
+gradientAnimated={type.gradAnim}
+gradient={type.gradient}
+outline={type.outline}
+text={blok.text}
+link={blok.url.story.url}
+background={blok.backgroundColor}
+innerClassNames={[blok.innerCss, border]}
+class={["font-light flex w-full", blok.css, blok.size, blok.font]}
+/>
+</div>

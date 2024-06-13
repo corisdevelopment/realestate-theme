@@ -14,6 +14,7 @@ const { class: className } = Astro.props;
       <Image 
         src={LogoImg}
         alt={LogoImgAlt}
+        loading="eager"
       />
     </a>
     <!-- Info : Right -->
@@ -105,7 +106,6 @@ const { class: className } = Astro.props;
   });
 
   function changeToggleIcons() {
-    const icons = menuButton?.children;
     Array.from(menuButton.children)
     .forEach((icon: any) => {
       icon.classList.toggle("active");
@@ -120,7 +120,7 @@ const { class: className } = Astro.props;
         item.onmouseover = () => {
           item.onmouseover = () => {
             menu.dataset.activeIndex = index;
-            let patternPosition, imgPosition;
+            let patternPosition;
             if(index != 0) {
               patternPosition = (index + 1) * 15;
             } else {

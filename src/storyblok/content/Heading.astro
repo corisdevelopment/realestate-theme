@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+const {blok} = Astro.props
+const Element = blok.type
+---
+<div {...storyblokEditable(blok)} class:list={["font-extrabold text-center mb-4 capitalize", blok.css]}>
+  <Element class={blok.text_size}>{blok.title}</Element>
+</div>

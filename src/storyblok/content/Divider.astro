@@ -1,0 +1,6 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+const {blok} = Astro.props
+const size = `border-${blok.size}`
+---
+<hr {...storyblokEditable(blok)} class:list={["w-full border-golden-600", size, blok.css]} />

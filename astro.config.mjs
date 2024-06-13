@@ -40,6 +40,22 @@ export default defineConfig({
         imageBlokGallery: 'storyblok/utils/ImageBlokGallery',
         heroBlok: 'storyblok/utils/HeroBlok',
         // blogList: 'storyblok/BlogPostList',
+        // Layouts
+        textWithHeading: 'storyblok/layout/TextWithHeading',
+        textWithImage: 'storyblok/layout/TextWithImage',
+        container: 'storyblok/layout/Container',
+        columnsSection: 'storyblok/layout/Columns',
+        column: 'storyblok/layout/Column',
+
+        // Content
+        composableText: 'storyblok/content/ComposableText',
+        singleImage: 'storyblok/content/SingleImage',
+        heading: 'storyblok/content/Heading',
+        divider: 'storyblok/content/Divider',
+        card: 'storyblok/content/Card',
+        buttonBlok: 'storyblok/content/ButtonBlok',
+        testimonial: 'storyblok/content/Testimonial'
+        
       },
       apiOptions: {
         region: "us",

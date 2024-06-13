@@ -1,0 +1,17 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const {blok} = Astro.props
+const sizeClass = blok.fullWidth ? 'w-full' : 'max-content'
+const classNames = blok.css
+---
+<div {...storyblokEditable(blok)} class:list={["w-full", classNames]}>
+  <div class:list={["mx-auto", classNames, sizeClass]}>
+  {
+    blok.container_bloks?.map((blok: any) => {
+      return <StoryblokComponent blok={blok} />
+    })
+  }
+  </div>
+</div>

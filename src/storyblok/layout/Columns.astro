@@ -1,0 +1,22 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const {blok} = Astro.props
+let columnNum 
+if (blok.column_number > 0) {
+  columnNum = `md:grid-cols-${blok.column_number}`
+} else {
+  columnNum = `md:grid-cols-${blok.columns.length}`
+}
+const fullWidth = blok.full_width ? "w-full" : 'max-w-screen-xl'
+---
+<section {...storyblokEditable(blok)} class:list={blok.css}>
+  <div class:list={["gap-8 py-8 px-4 mx-auto xl:gap-16 md:grid sm:py-16 lg:px-6", columnNum, blok.item_align, fullWidth]}>
+    {
+      blok.columns?.map((blok: any) => {
+        return <StoryblokComponent blok={blok} />
+      })
+    }
+  </div>
+</section>

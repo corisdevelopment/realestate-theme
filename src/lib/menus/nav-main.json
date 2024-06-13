@@ -9,17 +9,17 @@
       {"title": "Consulting", "link": "/services/consulting"}
     ]},
   {"title": "About", "link": "/about-us"},
-  {"title": "Testimonials", "link": "/testimonials-coris-development-group"},
-  {"title": "Contact", "link": "/contact-coris-development-group"}
+  {"title": "Testimonials", "link": "/testimonials"},
+  {"title": "Contact", "link": "/contact-us"}
 ],
 "footerNav":[
   {"title": "Home", "link": "/"},
   {"title": "Work With Us", "link": "/work-with-us"},
   { "title": "Properties", "link": "/properties"},
   {"title": "Services", "link": "/services"},
-  {"title": "About", "link": "/about-coris-development-group"},
-  {"title": "Testimonials", "link": "/testimonials-coris-development-group"},
-  {"title": "Contact", "link": "/contact-coris-development-group"},
+  {"title": "About", "link": "/about-us"},
+  {"title": "Testimonials", "link": "/testimonials"},
+  {"title": "Contact", "link": "/contact-us"},
   {"title": "Privacy Policy", "link": "/privacy-policy"},
   {"title": "Terms of Service", "link": "/terms-of-service"}
 ]}

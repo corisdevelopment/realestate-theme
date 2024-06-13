@@ -1,0 +1,14 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+
+const {blok} = Astro.props
+---
+<section {...storyblokEditable(blok)} class:list={blok.css}>
+  <div class:list={["gap-8 py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6", blok.item_align]}>
+    <img class:list={["w-full", blok.layout]} src={blok.image?.filename} alt={blok.image?.alt}>
+      <div class="mt-4 md:mt-0">
+          <h2 class:list={["mb-4 text-4xl tracking-tight font-extrabold", blok.title_css]}>{blok.title}</h2>
+          <p class:list={["mb-6 font-light md:text-lg", blok.text_css]}>{blok.text}</p>
+      </div>
+  </div>
+</section>

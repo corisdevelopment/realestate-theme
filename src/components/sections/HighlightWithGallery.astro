@@ -11,7 +11,7 @@ interface Props {
   gallery?: object[],
   class?: any,
 }
-const { title, headline, body, buttonText, buttonLink, featured, gallery, class: className } = Astro.props;
+// const { title, headline, body, buttonText, buttonLink, featured, gallery, class: className } = Astro.props;
 const img = {
 	src: '/unsplash_f9qZuKoZYoY.png',
 	alt: "Alt image text"
@@ -36,57 +36,9 @@ const img = {
       </div>
     </div>
     
-    <!-- <div id="gallery" class="r3 gallery flex mb-16 md:mx-8 rounded-3xl border-2 border-dark-gold bg-dark-gold">
-      <div class="grid grid-cols-2 md:grid-cols-3 grid-rows-2 md:grid-rows-2 gap-2">
-        <div class="gallery-item rounded-xl md:col-span-2">
-          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="w-full">
-        </div>
-        <div class="gallery-item rounded-xl md:col-span-1 md:row-span-2">
-          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="img-tall">
-        </div>
-        <div class="gallery-item rounded-xl md:col-span-1">
-          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="">
-        </div>
-        <div class="gallery-item rounded-xl md:col-span-1">
-          <img src="/unsplash_f9qZuKoZYoY.png" alt="" class="">
-        </div>
-      </div>
-    </div> -->
   </div>
   <GalleryDiamond />
 </section>
-<script>
-  // const gallery = document.getElementById("gallery");
-  // const galleryItems: any = gallery?.getElementsByClassName("gallery-item");
-  // function adjustSize() {
-  //   Array.from(galleryItems).forEach((item: any) => {
-  //     const height = item.offsetHeight;
-  //     const width = item.offsetWidth - 130;
-  //     const img = item.children[0];
-  //     checkSize(img, width, height);
-  //   });
-  // }
-  // function checkSize(el: any, width: any, height: any) {
-  //   const windowWidth = window.innerWidth;
-  //   if (windowWidth < 640) {
-  //     el.style.maxWidth = "100%";
-  //     el.style.height= "auto";
-  //   } else {
-  //     if (width >= height) {
-  //       // set img width 100%
-  //       el.style.maxWidth = "100%";
-  //       el.style.height = "auto";
-  //     } else {
-  //       // set img height 100%
-  //       el.style.maxWidth = "unset";
-  //       el.style.height = "100%";
-  //     }
-  //   }
-  // }
-  // adjustSize();
-  // window.onresize = adjustSize;
-  // window.onload = adjustSize;
-</script>
 <style>
   /* .gallery {
     overflow: hidden;  

@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+const { blok } = Astro.props
+---
+<section {...storyblokEditable(blok)} class="mx-auto text-center">
+  <div class:list={["mx-auto max-w-screen-lg py-12 px-8", blok.css]}>
+    <h2 class:list={["mb-4 text-4xl tracking-tight font-extrabold", blok.heading_css]}>{blok?.heading}</h2>
+    <p class:list={["mb-8 font-light lg:mb-16 sm:text-xl", blok.text_css]}>{blok?.text}</p>
+  </div> 
+</section>

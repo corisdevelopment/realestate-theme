@@ -1,0 +1,18 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+
+const {blok} = Astro.props
+---
+<figure
+{...storyblokEditable(blok)}
+  class:list={["flex flex-col justify-center items-center rounded-lg p-8 text-center bg-gray-50 border border-golden-300 md:p-12", blok.css]}>
+  <blockquote class="mx-auto mb-8 max-w-2xl text-gray-500">
+      <h3 class:list={["text-lg font-semibold text-gray-900", blok.headline_css]}>{blok.headline}</h3>
+      <p class="my-4">{blok.text}</p>
+  </blockquote>
+  <figcaption class="flex justify-center items-center">
+      <div class="space-y-0.5 font-medium text-left">
+          <div>{blok.author}</div>
+      </div>
+  </figcaption>    
+</figure>

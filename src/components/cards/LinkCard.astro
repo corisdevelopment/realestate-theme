@@ -10,7 +10,7 @@ interface Props {
   class?: any,
 	data?: any,
 }
-const {href, title, body, image, class: className, data} =Astro.props;
+const {href, title, body, image, class: className} =Astro.props;
 let imageD = {
     src: "",
     alt: ''
@@ -20,7 +20,7 @@ if (typeof image != "undefined") {
   imageD = image
 }
 ---
-<li class="link-card rounded-2xl border border-gold md:max-lg:w-3/4 md:max-lg:mx-auto">
+<li class:list={["link-card rounded-2xl border border-gold md:max-lg:w-3/4 md:max-lg:mx-auto", className]}>
 	<a href={href} class="p-4">
 		<h2 class="text-lg md:text-3xl lg:text-3xl">
 			{title}

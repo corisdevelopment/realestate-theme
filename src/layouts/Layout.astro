@@ -14,7 +14,6 @@ import Screensize from '../components/Screensize.astro'
 import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
 import Footer from '../components/Footer.astro';
 interface Props {
-	title?: string,
 	metaTags?: {
 		title?: string,
 		description?: string
@@ -22,6 +21,7 @@ interface Props {
 }
 
 const { metaTags } = Astro.props;
+
 ---
 
 <!doctype html>
@@ -33,7 +33,6 @@ const { metaTags } = Astro.props;
 		<meta name="description" content={metaTags?.description}>
 		<meta name="robots" content="index, follow">
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
 		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 		<script is:inline src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
@@ -57,44 +56,52 @@ const { metaTags } = Astro.props;
 				lenis.raf(time * 1000)
 			});
 			gsap.ticker.lagSmoothing(0);
-			
-			//About Scroll
-			let tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: '.about-cta',
-					start: 'top center+=200',
-					end: 'bottom center+=200',
-					scrub: 1,
-					// markers: true
-				}
-			});
-			gsap.set('#line2', {xPercent: -30});
-			let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
-			let scrollLeft = gsap.to('#line1', {xPercent: -30, duration: 10});
-			let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
-			tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
 
-			// Services Scroll
-			let ss = gsap.timeline({
-				scrollTrigger: {
-					trigger: '#servicesCTA',
-					start: 'top bottom-=20%',
-					end: 'bottom bottom+=20%',
-					scrub: 1,
-					// pin: true,
-					// pinSpacing: false,
-					// markers: true,
-				}
-			});
-			let textIn = gsap.to('#serviceHeadline', {
-				duration: 2,
-				opacity: 1,
-			});
-			let overlayClip = gsap.to('.overlay', {
-				duration: 2,
-				clipPath: 'circle(110%)',
-			});
-			ss.add(textIn).add(overlayClip)
+			// Check if animated element exists
+			const aboutCTA = document.getElementsByClassName('about-cta')
+			const servicesCTA = document.getElementById('servicesCTA')
+
+			if (aboutCTA.length > 0) {
+				//About Scroll
+				let tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: '.about-cta',
+						start: 'top center+=200',
+						end: 'bottom center+=200',
+						scrub: 1,
+						// markers: true
+					}
+				});
+				gsap.set('#line2', {xPercent: -30});
+				let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
+				let scrollLeft = gsap.to('#line1', {xPercent: -30, duration: 10});
+				let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
+				tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
+			}
+
+			if (servicesCTA) {
+				// Services Scroll
+				let ss = gsap.timeline({
+					scrollTrigger: {
+						trigger: '#servicesCTA',
+						start: 'top bottom-=20%',
+						end: 'bottom bottom+=20%',
+						scrub: 1,
+						// pin: true,
+						// pinSpacing: false,
+						// markers: true,
+					}
+				});
+				let textIn = gsap.to('#serviceHeadline', {
+					duration: 2,
+					opacity: 1,
+				});
+				let overlayClip = gsap.to('.overlay', {
+					duration: 2,
+					clipPath: 'circle(110%)',
+				});
+				ss.add(textIn).add(overlayClip)
+			}
 		</script>
 	</body>
 </html>
@@ -110,7 +117,7 @@ const { metaTags } = Astro.props;
 			white 60%
 		);
 		--max-content: 1280px !important;
-		--header-height: 64px;
+		--header-height: 78px;
 	}
 	.font-cg {
 		font-family: 'Cormorant Garamond', serif;
