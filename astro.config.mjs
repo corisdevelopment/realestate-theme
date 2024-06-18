@@ -54,7 +54,9 @@ export default defineConfig({
         divider: 'storyblok/content/Divider',
         card: 'storyblok/content/Card',
         buttonBlok: 'storyblok/content/ButtonBlok',
-        testimonial: 'storyblok/content/Testimonial'
+        testimonial: 'storyblok/content/Testimonial',
+        heroSection: 'storyblok/content/HeroSection',
+        embededHTML: 'storyblok/content/EmbededHTML',
         
       },
       apiOptions: {

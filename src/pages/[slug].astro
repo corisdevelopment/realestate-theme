@@ -9,12 +9,11 @@ export async function getStaticPaths() {
     version: import.meta.env.DEV ? "draft" : "published",
     resolve_links: 'url'
   }) 
-  const pages = data.stories
+  const pages = (data.stories)
   return pages.map((page: any) => ({
-    params: { pages: page.slug }, props: { page },
+    params: { slug: page.slug }, props: { page },
   }));
 }
-
 interface Props {
   page: any
 }

@@ -60,6 +60,7 @@ const { metaTags } = Astro.props;
 			// Check if animated element exists
 			const aboutCTA = document.getElementsByClassName('about-cta')
 			const servicesCTA = document.getElementById('servicesCTA')
+			const splitText = document.getElementsByClassName('split-text')
 
 			if (aboutCTA.length > 0) {
 				//About Scroll
@@ -68,6 +69,24 @@ const { metaTags } = Astro.props;
 						trigger: '.about-cta',
 						start: 'top center+=200',
 						end: 'bottom center+=200',
+						scrub: 1,
+						// markers: true
+					}
+				});
+				gsap.set('#line2', {xPercent: -30});
+				let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
+				let scrollLeft = gsap.to('#line1', {xPercent: -30, duration: 10});
+				let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
+				tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
+			}
+
+			if (splitText.length > 0) {
+				//About Scroll
+				let tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: '.split-text',
+						start: 'top top+=20%',
+						end: 'bottom top',
 						scrub: 1,
 						// markers: true
 					}
