@@ -13,6 +13,7 @@ const noPadding = blok.noPadding ? '' : 'p-4'
 blok.backgroundColor = blok.backgroundColor != '' ? blok.backgroundColor : '#111'
 const border = !blok.borderColor || blok.borderColor === '' || undefined ? '' : `border ${blok.borderColor}`
 const url = blok.url.url != '' ? blok.url.url : blok.url.story.url
+console.log(blok.url)
 ---
 <div {...storyblokEditable(blok)} class:list={["mx-auto flex container max-content", blok.align, noPadding]}>
 <Button
@@ -20,7 +21,7 @@ gradientAnimated={type.gradAnim}
 gradient={type.gradient}
 outline={type.outline}
 text={blok.text}
-link={url}
+link={"/" + url}
 background={blok.backgroundColor}
 innerClassNames={[blok.innerCss, border]}
 class={["font-light flex w-full", blok.css, blok.size, blok.font]}
