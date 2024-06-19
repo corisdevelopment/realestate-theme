@@ -5,12 +5,14 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 export async function getStaticPaths() {
   const storyblokApi = useStoryblokApi()
+
   const { data } = await storyblokApi.get('cdn/stories', {
     content_type: 'property',
     version: import.meta.env.DEV ? "draft" : "published",
     resolve_links: 'url'
   }) 
   const pages = data.stories
+
   return pages.map((page: any) => ({
     params: { property: page.slug}, props: { page },
   }));

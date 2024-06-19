@@ -2,15 +2,12 @@
 import { storyblokEditable } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 const { blok } = Astro.props
-// title
-// text
-// button
-// image
-const imageUrl = `url('${blok.image.filename}')`
-// console.log(blok)
+
+let imageUrl = ''
+if (blok.image) {
+  imageUrl = `url('${blok.image.filename}')`
+}
 ---
-
-
 <section
 {...storyblokEditable(blok)}
 class:list={["bg-center bg-no-repeat bg-zinc-700 bg-blend-multiply", blok.css]}>

@@ -5,20 +5,41 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 export async function getStaticPaths() {
   const storyblokApi = useStoryblokApi()
+
   const { data } = await storyblokApi.get('cdn/stories', {
+    level: 1,
+    excluding_slugs: 'home',
     version: import.meta.env.DEV ? "draft" : "published",
     resolve_links: 'url'
   }) 
-  const pages = (data.stories)
-  return pages.map((page: any) => ({
-    params: { slug: page.slug }, props: { page },
-  }));
+  const pages = Object.values(data.stories)
+
+  const paths = pages.map((page: any) => {
+    if (page.slug) {
+      return {
+        params: { slug: page.slug }, 
+        props: { page },
+      }
+    }
+  }).filter(Boolean)
+
+  return paths
 }
+
 interface Props {
   page: any
 }
 
 const {page} = Astro.props
+
+// const sbApi = useStoryblokApi();
+// const { slug } = Astro.params;
+// console.log(Astro.props)
+// const { data } = await sbApi.get(`cdn/stories/${slug}`, {
+//   version: import.meta.env.DEV ? "draft" : "published",
+// });
+
+// console.log(data)
 
 // Meta Title and Description
 let title = page.name + ' | Coris Development Group'
