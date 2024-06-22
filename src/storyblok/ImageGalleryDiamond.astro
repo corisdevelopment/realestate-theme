@@ -1,6 +1,8 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
+import LogoImg from "../assets/coris_development_group-logo.svg";
+
 const { blok } = Astro.props
 function setClass(index: number) {
   let cssString = ''
@@ -51,8 +53,10 @@ function setClass(index: number) {
         ))
       }
       <div class="col-start-3 col-span-2 row-span-2 row-start-3">
-        <div class="rotate overflow-hidden">
-          <div class="logo bg-golden-500">Logo</div>
+        <div class="rotate overflow-hidden rounded-lg">
+          <div class="logo bg-golden-600">
+            <img src={LogoImg.src} alt="logo">
+          </div>
         </div>
       </div>
       {
@@ -73,17 +77,22 @@ function setClass(index: number) {
     background-image: linear-gradient(rgba(169, 132, 73, 0.9), rgba(49, 30, 23, 0.1)), url('/src/assets/hexa-pattern-07.png');
     background-size: auto cover;
     background-position: center center;
-    /* background-attachment: fixed; */
   }
-  .gallery {
-    
-  }
-  img, .logo {
+  img {
     aspect-ratio: 1;
     object-fit: cover;
-    /* box-shadow: inset 0 0 60px 10px rgba(255, 255, 255, 0.9); */
     transform: rotate(-45deg) scale(1.4);
     
+  }
+  .logo > img {
+    aspect-ratio: 1;
+    object-fit: contain;
+    max-width: unset;
+    transform: scale(0.8) rotate(-45deg);
+  }
+  .logo {
+    background: rgb(17,17,17);
+    background: radial-gradient(circle, rgba(201,177,123,0.10) 0%, rgba(17,17,17,1) 80%);
   }
   .rotate {
     transform: rotate(45deg) scale(0.7);

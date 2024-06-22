@@ -30,6 +30,9 @@ export default defineConfig({
         aboutCTA: 'storyblok/AboutCTA',
         propertySection: 'storyblok/PropertySection',
         imageGalleryDiamond: 'storyblok/ImageGalleryDiamond',
+        config: 'storyblok/Config',
+
+        // Utils
         button: 'storyblok/utils/Button',
         image: 'storyblok/utils/ImageBlok',
         splitText: 'storyblok/utils/SplitText',
@@ -39,7 +42,7 @@ export default defineConfig({
         propertyCard: 'storyblok/utils/PropertyCard',
         imageBlokGallery: 'storyblok/utils/ImageBlokGallery',
         heroBlok: 'storyblok/utils/HeroBlok',
-        // blogList: 'storyblok/BlogPostList',
+        
         // Layouts
         textWithHeading: 'storyblok/layout/TextWithHeading',
         textWithImage: 'storyblok/layout/TextWithImage',
@@ -57,6 +60,7 @@ export default defineConfig({
         testimonial: 'storyblok/content/Testimonial',
         heroSection: 'storyblok/content/HeroSection',
         embededHTML: 'storyblok/content/EmbededHTML',
+        imageCarousel: 'storyblok/content/ImageCarousel',
         
       },
       apiOptions: {

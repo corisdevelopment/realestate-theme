@@ -1,0 +1,29 @@
+---
+import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
+import Footer from '../components/Footer.astro';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Settings</title>
+</head>
+<body>
+  <VerticalBigNav />
+		<div class="content_offset">
+			<slot />
+		</div>
+		<!-- Footer -->
+		<Footer />
+</body>
+</html>
+
+<style>
+  body {
+    background-color: #111111;
+  }
+  .content_offset {
+    height: 60vh;
+  }
+</style>

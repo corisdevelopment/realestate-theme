@@ -3,7 +3,7 @@ import { storyblokEditable } from '@storyblok/astro'
 import Button from '@components/utils/Button.astro';
 
 const { blok } = Astro.props
-const url = blok.button[0].url.story.url
+const url = blok.button[0].url.cached_url
 ---
 <div {...storyblokEditable(blok)} class="mb-8">
   <h2 class="py-2 text-2xl lg:text-4xl font-light">{blok.title}</h2>

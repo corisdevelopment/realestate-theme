@@ -1,11 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
-import LogoImg from '../../assets/Logo.png'
-import { nav } from '../../lib/menus/nav-main.json'
+import LogoImg from '../../assets/coris_development_group-logo.svg'
+import CompanyInfo from '@components/utils/CompanyInfo.astro'
+import { mainNav } from '@lib/api/settings'
 
 const LogoImgAlt = 'Coris Development Group Logo'
 const { class: className } = Astro.props;
+
+// console.log(mainNav)
 ---
 <!-- Navbar -->
 <header id="header-nav" class:list={['fixed z-40 w-full backdrop-blur-md', className]}>
@@ -21,8 +24,7 @@ const { class: className } = Astro.props;
     <div class="nav_info flex">
       <div class="phone_info mt-2 flex justify-end max-lg:hidden text-white border-r mr-4 pr-2">
         <div class="text-right pt-0.5">
-          <p class="phone_number">608-123-3456</p>
-          <p class="email leading-[0.5]">info@corisdevelopmentgroup.com</p>
+          <CompanyInfo />
         </div>
         <Icon name="ion:phone-portrait-outline" size={36} class="mt-1"/>
       </div>
@@ -42,7 +44,7 @@ const { class: className } = Astro.props;
       <div class="container mx-auto relative px-4">
         <nav id="menu-items" class="">
           <ul>
-            {nav.map((item: any) => (
+            {mainNav.map((item: any) => (
               <li class="menu-item text-white">
                 
                 {item.sub ? 
@@ -142,7 +144,7 @@ const { class: className } = Astro.props;
     background-color: rgba(0, 0, 0, 0.7);
   }
   .logo-area {
-    max-width: var(--max-content);
+    max-width: 1280px !important;
   }
   #header-nav > .logo-area > a > img {
     height: 42px;

@@ -1,8 +1,9 @@
 ---
-import LogoImg from "../assets/Logo.png";
+import LogoImg from "../assets/coris_development_group-logo.svg";
 import { Icon } from "astro-icon/components";
 import FooterMenu from '@components/utils/FooterMenu.astro';
 import SocialMedia from "./utils/SocialMedia.astro";
+import CompanyInfo from "./utils/CompanyInfo.astro";
 ---
 
 <footer
@@ -32,8 +33,7 @@ import SocialMedia from "./utils/SocialMedia.astro";
           class="mt-1 max-md:hidden"
         />
         <div class="pt-0.5 max-md:text-center max-md:mx-auto">
-          <p class="phone_number">608-123-3456</p>
-          <p class="email leading-[1] max-lg:text-xs">info@corisdevelopmentgroup.com</p>
+          <CompanyInfo />
         </div>
       </div>
     </div>

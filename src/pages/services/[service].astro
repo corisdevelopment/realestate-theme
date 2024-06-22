@@ -2,32 +2,31 @@
 import Layout from "src/layouts/Layout.astro";
 import { useStoryblokApi } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-import ContactForm from "@components/utils/ContactForm.astro";
 
 export async function getStaticPaths() {
-  const storyblokApi = useStoryblokApi()
+  const sbApi = useStoryblokApi()
 
-  const { data } = await storyblokApi.get('cdn/stories', {
-    level: 1,
-    excluding_slugs: 'home,config',
-    version: import.meta.env.DEV ? "draft" : "published",
-    resolve_links: 'url'
-  }) 
+  const { data } = await sbApi.get("cdn/stories", {
+    starts_with: "services",
+    version: import.meta.env.DEV ? "draft" : "published"
+  })
+
   const stories = Object.values(data.stories)
 
   const paths = stories.map((story: any) => {
     return {
-      params: { slug: story.slug }, 
+      params: { service: story.slug }
     }
   })
   return paths
 }
 
 const sbApi = useStoryblokApi();
-const { slug } = Astro.params;
-const { data } = await sbApi.get(`cdn/stories/${slug}`, {
+const { service } = Astro.params
+const { data } = await sbApi.get(`cdn/stories/services/${service}`, {
   version: import.meta.env.DEV ? "draft" : "published",
-});
+})
+
 const page = data.story
 
 // Meta Title and Description
@@ -43,23 +42,15 @@ const meta = {
   description: page.content.metatags?.description
 }
 
-// console.log("PAGE:", getStaticPaths)
 ---
 <Layout metaTags={meta}>
   {
     page.content.body?.map((blok: any) => {
-      if (blok.component === 'heroBlok') {
+      if (blok.component === 'heroBlok' || blok.component === 'heroSection') {
         return <StoryblokComponent blok={blok} />
       }
       return <StoryblokComponent blok={blok} />
       
     })
-  }
-  {
-    // May need boolen or component to handle show form in Storyblok
-    page.slug === 'contact-us' &&
-    <div class="mx-auto max-w-2xl pb-16">
-      <ContactForm />
-    </div>
   }
 </Layout>

@@ -3,10 +3,10 @@ import { storyblokEditable } from '@storyblok/astro'
 import { Image } from 'astro:assets'
 import Button from '@components/utils/Button.astro';
 const { blok } = Astro.props
-const url = blok?.button[0].url.story.url
+const url = "/" + blok?.button[0].url.cached_url
 ---
 
-  <div  {...storyblokEditable(blok)} class="col flex flex-1 max-md:mx-4 relative glow border border-golden-400">
+  <div {...storyblokEditable(blok)} class="col flex flex-1 max-md:mx-4 relative glow border border-golden-400 max-h-[580px]">
     <div class="media-container w-full h-full overflow-hidden">
       <Image {...storyblokEditable(blok)}
         src={blok.image.filename}

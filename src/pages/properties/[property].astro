@@ -13,16 +13,21 @@ export async function getStaticPaths() {
   }) 
   const pages = data.stories
 
-  return pages.map((page: any) => ({
-    params: { property: page.slug}, props: { page },
-  }));
+  const paths =  pages.map((page: any) => {
+    return {
+      params: { property: page.slug},
+      props: { page }
+    }
+  });
+  return paths
 }
 
-interface Props {
-  page: any
-}
-
-const {page} = Astro.props
+const sbApi = useStoryblokApi();
+const { property } = Astro.params;
+const { data } = await sbApi.get(`cdn/stories/properties/${property}`, {
+  version: import.meta.env.DEV ? "draft" : "published",
+});
+const page = data.story
 
 // Meta Title and Description
 let title = page.name + ' | Coris Development Group'
@@ -48,10 +53,5 @@ const meta = {
       return <StoryblokComponent blok={blok} />
       
     })
-  }
-  {
-    // May need boolen or component to handle show form in Storyblok
-    page.slug === 'contact-us' &&
-    <p class="text-white">SHOW FORM</p>
   }
 </Layout>

@@ -4,8 +4,8 @@
   { "title": "Properties", "link": "/properties"},
   {"title": "Services", "link": "#",
     "sub": [
-      {"title": "Commercial", "link": "/services/commercial"},
-      {"title": "Residential", "link": "/services/residential"},
+      {"title": "Development", "link": "/services/property-development"},
+      {"title": "Management", "link": "/services/property-management"},
       {"title": "Consulting", "link": "/services/consulting"}
     ]},
   {"title": "About", "link": "/about-us"},

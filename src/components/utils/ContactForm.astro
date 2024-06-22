@@ -1,0 +1,135 @@
+---
+
+---
+<form
+  data-netlify=true
+  action=""
+  method="POST"
+  id="form"
+  class="needs-validation"
+  data-astro-reload
+  novalidate>
+  
+  <input type="checkbox" class="hidden" style="display:none" name="bot-field" />
+  <div class="mb-5">
+    <input
+      type="text"
+      placeholder="First Name"
+      required
+      class="w-full px-4 py-3 border placeholder:text-slate-400 rounded-md outline-none focus:ring-4 border-slate-300 focus:border-slate-600 ring-slate-100"
+      name="first-name"
+    />
+    <div class="empty-feedback invalid-feedback text-red-400 text-sm mt-1">
+      Please provide your first name.
+    </div>
+  </div>
+  <div class="mb-5">
+    <input
+      type="text"
+      placeholder="Last Name"
+      required
+      class="w-full px-4 py-3 border placeholder:text-slate-400 rounded-md outline-none focus:ring-4 border-slate-300 focus:border-slate-600 ring-slate-100"
+      name="last-name"
+    />
+    <div class="empty-feedback invalid-feedback text-red-400 text-sm mt-1">
+      Please provide your last name.
+    </div>
+  </div>
+  <div class="mb-5">
+    <label for="email_address" class="sr-only">Email Address</label><input
+      id="email_address"
+      type="email"
+      placeholder="Email Address"
+      name="email"
+      required
+      class="w-full px-4 py-3 border placeholder:text-slate-400 rounded-md outline-none focus:ring-4 border-slate-300 focus:border-slate-600 ring-slate-100"
+    />
+    <div class="empty-feedback text-red-400 text-sm mt-1">
+      Please provide your email address.
+    </div>
+    <div class="invalid-feedback text-red-400 text-sm mt-1">
+      Please provide a valid email address.
+    </div>
+  </div>
+  <div class="mb-5">
+    <label for="phone_number" class="sr-only">Phone Number</label><input
+      id="phone_number"
+      type="text"
+      placeholder="Phone Number"
+      name="phone"
+      required
+      class="w-full px-4 py-3 border placeholder:text-slate-400 rounded-md outline-none focus:ring-4 border-slate-300 focus:border-slate-600 ring-slate-100"
+    />
+    <div class="empty-feedback text-red-400 text-sm mt-1">
+      Please provide your phone number.
+    </div>
+    <div class="invalid-feedback text-red-400 text-sm mt-1">
+      Please provide a valid phone number.
+    </div>
+  </div>
+  <div class="mb-3">
+    <textarea
+      name="message"
+      required
+      placeholder="Your Message"
+      class="w-full px-4 py-3 border placeholder:text-slate-400 rounded-md outline-none h-36 focus:ring-4 border-slate-300 focus:border-slate-600 ring-slate-100"
+    ></textarea>
+    <div class="empty-feedback invalid-feedback text-red-400 text-sm mt-1">
+      Please enter your message.
+    </div>
+  </div>
+  <div class="flex justify-center mx-auto">
+    <button type="submit" class="text-golden-400 font-cg font-light text-lg md:text-2xl uppercase md:w-3/4 bg-white border border-golden-400 rounded-lg px-4 py-2 text-center">Contact Us</button>
+  </div>
+  
+</form>
+
+<style>
+  .invalid-feedback,
+  .empty-feedback {
+    display: none;
+  }
+
+  .was-validated :placeholder-shown:invalid ~ .empty-feedback {
+    display: block;
+  }
+
+  .was-validated :not(:placeholder-shown):invalid ~ .invalid-feedback {
+    display: block;
+  }
+
+  .is-invalid,
+  .was-validated :invalid {
+    border-color: #dc3545;
+  }
+</style>
+
+<script is:inline>
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+  
+      const form = document.getElementById("form");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        form.classList.add("was-validated");
+        if (!form.checkValidity()) {
+          form.querySelectorAll(":invalid")[0].focus();
+          return;
+        }
+        
+        const formData = new FormData(form)
+
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type:" : "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString(),
+        })
+        .then(() => alert("Thank you for your submission"))
+        .catch((error) => alert(error))
+      });
+    },
+    { once: true },
+  );
+</script>
