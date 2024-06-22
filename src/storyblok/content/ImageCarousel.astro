@@ -3,7 +3,7 @@ import { storyblokEditable } from '@storyblok/astro'
 const { blok } = Astro.props
 ---
 <div {...storyblokEditable(blok)} class:list={["carousel relative w-full", blok.css]}>
-  <div class="relative max-h-[312] lg:max-h-fit overflow-hidden">
+  <div class="relative max-h-[312px] lg:max-h-fit overflow-hidden">
     <div class="carousel-size flex py-12 pl-4">
       {
         blok.images.map((image: any) => (
