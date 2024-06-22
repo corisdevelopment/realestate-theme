@@ -10,7 +10,6 @@ import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
-import Screensize from '../components/Screensize.astro'
 import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
 import Footer from '../components/Footer.astro';
 interface Props {
@@ -40,7 +39,6 @@ const { metaTags } = Astro.props;
 	<body>		
 		<VerticalBigNav />
 		<div class="content_offset">
-			<Screensize />
 			<slot />
 		</div>
 		<!-- Footer -->
