@@ -19,14 +19,14 @@ mainNavItems.map((data: any) => {
     if (item.sub_items.length === 0) {
       mainNav.push({
         title: item.title,
-        link: item.link.cached_url != 'home' ? item.link.cached_url : '/',
+        link: item.link.cached_url != 'home' ? "/"+item.link.cached_url : '/',
       })
     } else {
       let subItems: any = []
       item.sub_items.map((subItem: any) => {
         subItems.push({
           title: subItem.title,
-          link: subItem.link.cached_url,
+          link: "/" + subItem.link.cached_url,
         })
       })
       mainNav.push({
@@ -38,7 +38,6 @@ mainNavItems.map((data: any) => {
     
   })
 })
-
 const footerNavItems = footer.map((item: any) => {
   if (item.menu_items) {
     return {
@@ -54,13 +53,13 @@ footerNavItems.map((data: any) => {
     if (item.sub_items.length === 0) {
       footerNav.push({
         title: item.title,
-        link: item.link.cached_url != 'home' ? item.link.cached_url : '/',
+        link: item.link.cached_url != 'home' ? "/"+item.link.cached_url : '/',
       })
     } else {
       item.sub_items.map((subItem: any) => {
         footerNav.push({
           title: subItem.title,
-          link: subItem.link.cached_url,
+          link: "/"+subItem.link.cached_url,
         })
       })
     }
