@@ -3,7 +3,6 @@
 ---
 <form
   data-netlify=true
-  action=""
   method="POST"
   id="form"
   class="needs-validation"
@@ -107,29 +106,54 @@
 <script is:inline>
 
 
-  document.addEventListener("DOMContentLoaded", () => {
+  // document.addEventListener("DOMContentLoaded", () => {
   
-      const form = document.getElementById("form");
+  //     const form = document.getElementById("form");
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        form.classList.add("was-validated");
-        if (!form.checkValidity()) {
-          form.querySelectorAll(":invalid")[0].focus();
-          return;
-        }
+  //     form.addEventListener("submit", function (e) {
+  //       e.preventDefault();
+  //       form.classList.add("was-validated");
+  //       if (!form.checkValidity()) {
+  //         form.querySelectorAll(":invalid")[0].focus();
+  //         return;
+  //       }
         
-        const formData = new FormData(form)
+  //       const formData = new FormData(form)
 
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type:" : "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(formData).toString(),
-        })
-        .then(() => alert("Thank you for your submission"))
-        .catch((error) => alert(error))
-      });
-    },
-    { once: true },
-  );
+  //       fetch("/", {
+  //         method: "POST",
+  //         headers: { "Content-Type:" : "application/x-www-form-urlencoded" },
+  //         body: new URLSearchParams(formData).toString(),
+  //       })
+  //       .then(() => alert("Thank you for your submission"))
+  //       .catch((error) => alert(error))
+  //     });
+  //   },
+  //   { once: true },
+  // );
+  const handleSubmit = (event) => {
+  event.preventDefault();
+
+  const myForm = event.target;
+  const formData = new FormData(myForm);
+
+  myForm.classList.add("was-validated");
+  if (!form.checkValidity()) {
+    form.querySelectorAll(":invalid")[0].focus();
+    return;
+  }
+  
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString(),
+  })
+    .then(() => alert("Thank you for your submission"))
+    .catch((error) => alert(error));
+};
+
+document
+  .querySelector("form")
+  .addEventListener("submit", handleSubmit);
+
 </script>
