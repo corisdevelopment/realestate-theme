@@ -3,7 +3,7 @@ import { storyblokEditable } from '@storyblok/astro'
 const { blok } = Astro.props
 const textArray = blok.text.split(' ')
 ---
-<span {...storyblokEditable(blok)} class="flex flex-wrap text-golden-950 font-semibold">
+<span {...storyblokEditable(blok)} class="flex flex-wrap text-golden-950 font-semibold pl-4">
   {
     textArray.map( (text: any) => (
     <div class="word">{text}&nbsp</div>
