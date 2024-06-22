@@ -8,7 +8,7 @@ const { blok } = Astro.props
       {
         blok.images.map((image: any) => (
         <div class="carousel-item rounded-lg">
-            <img src={image.filename} alt={image.alt} class="px-4 max-w-[320px] md:max-w-[720px] h-full object-cover" />
+            <img src={image.filename} alt={image.alt} class="px-4 max-h-[240px] md:max-h-[320px] lg:max-h-full max-w-[320px] md:max-w-[720px] h-full object-cover" />
         </div>
         ))
       }
