@@ -12,7 +12,7 @@ const type = {
 const noPadding = blok.noPadding ? '' : 'p-4'
 blok.backgroundColor = blok.backgroundColor != '' ? blok.backgroundColor : '#111'
 const border = !blok.borderColor || blok.borderColor === '' || undefined ? '' : `border ${blok.borderColor}`
-const url = blok.url.url != '' ? blok.url.url : `/${blok.url.story.url}`
+const url = blok.url.url != '' ? blok.url.url : `/${blok.url.cached_url}`
 ---
 <div {...storyblokEditable(blok)} class:list={["mx-auto flex container max-content", blok.align, noPadding]}>
 <Button
