@@ -2,8 +2,9 @@
 
 ---
 <form
-  data-netlify=true
   method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
   id="form"
   class="needs-validation"
   data-astro-reload
@@ -104,33 +105,6 @@
 </style>
 
 <script is:inline>
-
-
-  // document.addEventListener("DOMContentLoaded", () => {
-  
-  //     const form = document.getElementById("form");
-
-  //     form.addEventListener("submit", function (e) {
-  //       e.preventDefault();
-  //       form.classList.add("was-validated");
-  //       if (!form.checkValidity()) {
-  //         form.querySelectorAll(":invalid")[0].focus();
-  //         return;
-  //       }
-        
-  //       const formData = new FormData(form)
-
-  //       fetch("/", {
-  //         method: "POST",
-  //         headers: { "Content-Type:" : "application/x-www-form-urlencoded" },
-  //         body: new URLSearchParams(formData).toString(),
-  //       })
-  //       .then(() => alert("Thank you for your submission"))
-  //       .catch((error) => alert(error))
-  //     });
-  //   },
-  //   { once: true },
-  // );
   const handleSubmit = (event) => {
   event.preventDefault();
 
