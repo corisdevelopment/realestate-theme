@@ -2,6 +2,7 @@
 import { storyblokEditable } from '@storyblok/astro'
 import { Image } from 'astro:assets'
 const { blok } = Astro.props
+console.log(blok.image.filename)
 ---
 <Image {...storyblokEditable(blok)}
   src={blok.image.filename}
