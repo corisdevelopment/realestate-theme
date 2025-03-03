@@ -1,8 +1,18 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-import { useStoryblokApi } from '@storyblok/astro'
+import { useStoryblokApi, getLiveStory } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import ContactForm from "@components/utils/ContactForm.astro";
+
+// Replace useStoryblok with getLiveStory
+// let story = null;
+
+// const liveStory = await getLiveStory(Astro);
+// if (liveStory) {
+//   story = liveStory;
+// } else {
+//   const sbApi = useStoryblokApi();
+// }
 
 export async function getStaticPaths() {
   const storyblokApi = useStoryblokApi()

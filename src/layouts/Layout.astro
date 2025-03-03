@@ -46,6 +46,11 @@ const { metaTags } = Astro.props;
 		<Footer />
 		<script is:inline>
 			// @ts-nocheck 
+			// Storyblok Live Preview
+			document.addEventListener("storyblok-live-preview-updated", () => {
+				console.log("Live preview: body updated");
+			});
+
 			gsap.registerPlugin(ScrollTrigger);
 			// ScrollTrigger.normalizeScroll(true);
 			const lenis = new Lenis();
