@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import netlify from '@astrojs/netlify';
-import storyblok from '@storyblok/astro';
+import { storyblok } from '@storyblok/astro';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import { loadEnv } from 'vite';
 import tailwind from "@astrojs/tailwind";
@@ -20,6 +20,7 @@ export default defineConfig({
     storyblok({
       accessToken: sbToken,
       bridge: true,
+      livePreview: true,
       components: {
         // TODO Add Storyblok Components
         page: 'storyblok/Page',
