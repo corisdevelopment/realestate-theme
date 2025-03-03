@@ -19,7 +19,10 @@ export default defineConfig({
   integrations: [
     storyblok({
       accessToken: sbToken,
-      bridge: true,
+      bridge: {
+        preventClicks: true,
+        resolveLinks: 'url',
+      },
       livePreview: true,
       components: {
         // TODO Add Storyblok Components
