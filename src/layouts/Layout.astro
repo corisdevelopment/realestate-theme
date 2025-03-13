@@ -1,42 +1,50 @@
 ---
-import '@fontsource/cormorant-garamond/300.css';
-import '@fontsource/cormorant-garamond/400.css';
+import "@fontsource/cormorant-garamond/300.css";
+import "@fontsource/cormorant-garamond/400.css";
 // import '@fontsource/cormorant-garamond/500.css';
-import '@fontsource/cormorant-garamond/600.css';
+import "@fontsource/cormorant-garamond/600.css";
 // import '@fontsource/cormorant-garamond/700.css';
-import '@fontsource/poppins/200.css';
-import '@fontsource/poppins/300.css';
-import '@fontsource/poppins/400.css';
-import '@fontsource/poppins/500.css';
-import '@fontsource/poppins/600.css';
-import '@fontsource/poppins/700.css';
-import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
-import Footer from '../components/Footer.astro';
+import "@fontsource/poppins/200.css";
+import "@fontsource/poppins/300.css";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import VerticalBigNav from "../components/navs/VerticalBigNav.astro";
+import Footer from "../components/Footer.astro";
 interface Props {
 	metaTags?: {
-		title?: string,
-		description?: string
-	} | any,
+		title?: string;
+		description?: string;
+	};
 }
 
 const { metaTags } = Astro.props;
-
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{metaTags?.title}</title>
-		<meta name="description" content={metaTags?.description}>
-		<meta name="robots" content="index, follow">
+		<meta name="description" content={metaTags?.description} />
+		<meta name="robots" content="index, follow" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-		<script is:inline src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+		<script
+			is:inline
+			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+		></script>
+		<script
+			is:inline
+			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+		></script>
+		<script
+			is:inline
+			src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"
+		></script>
 	</head>
-	<body>		
+	<body>
 		<!-- Coming From stagging site Netlify Deploy staggin-- -->
 		<VerticalBigNav />
 		<div class="content_offset">
@@ -45,42 +53,42 @@ const { metaTags } = Astro.props;
 		<!-- Footer -->
 		<Footer />
 		<script is:inline>
-			// @ts-nocheck 
+			// @ts-nocheck
 			// Storyblok Live Preview
 			document.addEventListener("storyblok-live-preview-updated", () => {
-				console.log("Live preview: body updated");
+				// console.log("Live preview: body updated");
 			});
 
 			gsap.registerPlugin(ScrollTrigger);
 			// ScrollTrigger.normalizeScroll(true);
 			const lenis = new Lenis();
-			
-			lenis.on('scroll', ScrollTrigger.update);
-			gsap.ticker.add((time)=>{
-				lenis.raf(time * 1000)
+
+			lenis.on("scroll", ScrollTrigger.update);
+			gsap.ticker.add((time) => {
+				lenis.raf(time * 1000);
 			});
 			gsap.ticker.lagSmoothing(0);
 
 			// Check if animated element exists
-			const aboutCTA = document.getElementsByClassName('about-cta')
-			const servicesCTA = document.getElementById('servicesCTA')
-			const splitText = document.getElementsByClassName('split-text')
+			const aboutCTA = document.getElementsByClassName("about-cta");
+			const servicesCTA = document.getElementById("servicesCTA");
+			const splitText = document.getElementsByClassName("split-text");
 
 			if (aboutCTA.length > 0) {
 				//About Scroll
 				let tl = gsap.timeline({
 					scrollTrigger: {
-						trigger: '.about-cta',
-						start: 'top center+=200',
-						end: 'bottom center+=200',
+						trigger: ".about-cta",
+						start: "top center+=200",
+						end: "bottom center+=200",
 						scrub: 1,
 						// markers: true
-					}
+					},
 				});
-				gsap.set('#line2', {xPercent: -30});
-				let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
-				let scrollLeft = gsap.to('#line1', {xPercent: -30, duration: 10});
-				let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
+				gsap.set("#line2", { xPercent: -30 });
+				let tween = gsap.to(".word", { duration: 1, opacity: 1, stagger: 1 });
+				let scrollLeft = gsap.to("#line1", { xPercent: -30, duration: 10 });
+				let scrollRight = gsap.to("#line2", { xPercent: 0, duration: 10 });
 				tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
 			}
 
@@ -88,17 +96,17 @@ const { metaTags } = Astro.props;
 				//About Scroll
 				let tl = gsap.timeline({
 					scrollTrigger: {
-						trigger: '.split-text',
-						start: 'top top+=20%',
-						end: 'bottom-=10% top+=10%',
+						trigger: ".split-text",
+						start: "top top+=20%",
+						end: "bottom-=10% top+=10%",
 						scrub: 1,
 						// markers: true
-					}
+					},
 				});
-				gsap.set('#line2', {xPercent: -30});
-				let tween = gsap.to('.word', {duration: 1, opacity: 1, stagger: 1});
-				let scrollLeft = gsap.to('#line1', {xPercent: -30, duration: 10});
-				let scrollRight = gsap.to('#line2', {xPercent: 0, duration: 10});
+				gsap.set("#line2", { xPercent: -30 });
+				let tween = gsap.to(".word", { duration: 1, opacity: 1, stagger: 1 });
+				let scrollLeft = gsap.to("#line1", { xPercent: -30, duration: 10 });
+				let scrollRight = gsap.to("#line2", { xPercent: 0, duration: 10 });
 				tl.add(tween).add(scrollLeft, "<2").add(scrollRight, "<");
 			}
 
@@ -106,24 +114,24 @@ const { metaTags } = Astro.props;
 				// Services Scroll
 				let ss = gsap.timeline({
 					scrollTrigger: {
-						trigger: '#servicesCTA',
-						start: 'top bottom-=20%',
-						end: 'center bottom',
+						trigger: "#servicesCTA",
+						start: "top bottom-=20%",
+						end: "center bottom",
 						scrub: 1,
 						// pin: true,
 						// pinSpacing: false,
 						// markers: true,
-					}
+					},
 				});
-				let textIn = gsap.to('#serviceHeadline', {
+				let textIn = gsap.to("#serviceHeadline", {
 					duration: 2,
 					opacity: 1,
 				});
-				let overlayClip = gsap.to('.overlay', {
+				let overlayClip = gsap.to(".overlay", {
 					duration: 2,
-					clipPath: 'circle(110%)',
+					clipPath: "circle(110%)",
 				});
-				ss.add(textIn).add(overlayClip)
+				ss.add(textIn).add(overlayClip);
 			}
 		</script>
 	</body>
@@ -143,10 +151,10 @@ const { metaTags } = Astro.props;
 		--header-height: 78px;
 	}
 	.font-cg {
-		font-family: 'Cormorant Garamond', serif;
+		font-family: "Cormorant Garamond", serif;
 	}
 	.font-poppins {
-		font-family: 'Poppins', sans-serif;
+		font-family: "Poppins", sans-serif;
 	}
 	.max-content {
 		max-width: var(--max-content);
@@ -167,35 +175,36 @@ const { metaTags } = Astro.props;
 			max-width: 88vw;
 		}
 	}
-	
+
 	html {
 		font-family: system-ui, sans-serif;
 		background: #111111;
 		background-size: 224px;
 	}
 	body {
-		font-family: 'Poppins', sans-serif;
+		font-family: "Poppins", sans-serif;
 	}
 	.nav-open {
 		overflow: hidden;
 	}
-	html.lenis, html.lenis body {
-  height: auto;
-}
+	html.lenis,
+	html.lenis body {
+		height: auto;
+	}
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
+	.lenis.lenis-smooth {
+		scroll-behavior: auto !important;
+	}
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
+	.lenis.lenis-smooth [data-lenis-prevent] {
+		overscroll-behavior: contain;
+	}
 
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
+	.lenis.lenis-stopped {
+		overflow: hidden;
+	}
 
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
-}
+	.lenis.lenis-scrolling iframe {
+		pointer-events: none;
+	}
 </style>
