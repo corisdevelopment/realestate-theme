@@ -1,57 +1,59 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-import { useStoryblokApi } from '@storyblok/astro'
+import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 export async function getStaticPaths() {
-  const storyblokApi = useStoryblokApi()
+  const storyblokApi = useStoryblokApi();
 
-  const { data } = await storyblokApi.get('cdn/stories', {
-    content_type: 'property',
+  const { data } = await storyblokApi.get("cdn/stories", {
+    content_type: "property",
     version: import.meta.env.DEV ? "draft" : "published",
-    resolve_links: 'url'
-  }) 
-  const pages = data.stories
-
-  const paths =  pages.map((page: any) => {
-    return {
-      params: { property: page.slug},
-      props: { page }
-    }
+    resolve_links: "url",
   });
-  return paths
+  const pages = data.stories;
+
+  const paths = pages.map((page: { [key: string]: string }) => {
+    return {
+      params: { property: page.slug },
+      props: { page },
+    };
+  });
+  return paths;
 }
 
 const sbApi = useStoryblokApi();
 const { property } = Astro.params;
-const { data } = await sbApi.get(`cdn/stories/properties/${property}`, {
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+const { data }: any = await sbApi.get(`cdn/stories/properties/${property}`, {
   version: import.meta.env.DEV ? "draft" : "published",
 });
-const page = data.story
+console.log("🚀 ~ data:", data);
+const page = data.story;
 
 // Meta Title and Description
-let title = page.name + ' | Coris Development Group'
-if (page.content.metatags != '') {
-  const metaTitle = page.content.metatags.title
-  title = metaTitle != '' ? metaTitle : page.name
-  page.content.metatags.title = title + ' | Coris Development Group'
+let title = `${page.name} | Coris Development Group`;
+if (page.content.metatags !== "") {
+  const metaTitle = page.content.metatags.title;
+  title = metaTitle !== "" ? metaTitle : page.name;
+  page.content.metatags.title = `${title} | Coris Development Group`;
 }
 
 const meta = {
   title,
-  description: page.content.metatags?.description
-}
+  description: page.content.metatags?.description,
+};
 
 // console.log("PAGE:", getStaticPaths)
 ---
+
 <Layout metaTags={meta}>
   {
     page.content.body?.map((blok: any) => {
-      if (blok.component === 'heroBlok') {
-        return <StoryblokComponent blok={blok} />
+      if (blok.component === "heroBlok") {
+        return <StoryblokComponent blok={blok} />;
       }
-      return <StoryblokComponent blok={blok} />
-      
+      return <StoryblokComponent blok={blok} />;
     })
   }
 </Layout>
