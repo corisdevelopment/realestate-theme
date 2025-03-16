@@ -4,44 +4,60 @@ import Button from "@components/utils/Button.astro";
 const { imageUrl } = Astro.props;
 ---
 
-<div class="hero-two p-4 md:my-10 min-h-[80vh] h-[100%] max-h-min">
-  <!-- Image Card -->
-  <div class="relative container mx-auto flex justify-center min-h-[50vh] lg:min-h-[68vh]">
-    <div class="animated-border-box-glow rounded-md"></div>
-    <div class="animated-border-box rounded-md">
-      <!-- Masonary Layout -->
-      <div class="masonry h-full rounded-md">
-        <div class="grid grid-flow-col grid-rows-2 gap-1 h-full">
-          <div class="row-span-1 md:row-span-2 col-span-2 bgrd-image rounded-sm">01</div>
-          <div class="bg-slate-500 bgrd-image rounded-sm">02</div>
-          <div class="bg-white bgrd-image rounded-sm">03</div>
+<div class="hero-two p-4 min-h-[80vh] h-[100%] max-h-min">
+  <div class="max-contain mx-auto">
+    <!-- Image Section -->
+    <div class="relative flex justify-center min-h-[50vh] lg:min-h-[78vh]">
+      <div class="animated-border-box-glow rounded-md"></div>
+      <div class="animated-border-box rounded-md">
+        <!-- Masonary Layout -->
+        <div class="masonry h-full rounded-md">
+          <div class="grid grid-flow-col grid-rows-2 gap-1 h-full">
+            <div
+              class="row-span-1 md:row-span-2 col-span-2 bgrd-image rounded-sm"
+            >
+              <!-- Image -->
+            </div>
+            <div class="bg-slate-500 bgrd-image rounded-sm">
+              <!-- Image -->
+            </div>
+            <div class="bg-white bgrd-image rounded-sm">
+              <!-- Image -->
+            </div>
+          </div>
         </div>
       </div>
-      
-      <!-- <div class="hero-text flex justify-between items-end h-full p-4 text-4xl font-extralight">
-        <div class="inline-block bg-linear-to-r from-cyan-500 to-blue-500 w-full">
-          <p class="text-golden-300 p-4">Property Name</p>
+    </div>
+    <!-- Text Section -->
+    <div class="property-section mt-0 lg:mt-[-120px] relative z-2 h-full">
+      <div class="grid grid-flow-col grid-rows-8 gap-4 lg:gap-12 h-full">
+        <div
+          class="flex-col flex row-span-4 lg:row-span-5 w-full min-h-[300px] rounded-sm border-2 border-golden-300 bg-white"
+        >
+          <div class="property-info p-8 lg:p-12 content-between">
+            <div class="property-text h-full font-extralight text-golden-300">
+              <h2 class="text-4xl">Property Name</h2>
+              <p>6 Bedroom | 6 Bath</p>
+            </div>
+            <div class="property-link self-end">
+              <Button class="place-self-start" />
+            </div>
+          </div>
         </div>
-        <p>6 Bedroom | 6 Bath</p>
-      </div> -->
-    </div>
-    
-  </div>
-  <div class="hero-text container mx-auto mt-2 relative z-2 h-full">
-    <div class="grid grid-flow-col grid-rows-8 gap-12 h-full">
-      <div class="listing-info flex-col row-span-5 min-h-[300px] rounded-sm mb-10 text-golden-300 bg-white p-12 text-4xl font-extralight">
-        <h2 class="">Property Name</h2>
-        <p>6 Bedroom | 6 Bath</p>
-        <Button class="place-self-end"/>
+        <div
+          class="outro-section lg:row-start-4 row-span-4 lg:row-span-5 rounded-sm h-full bg-white"
+        >
+          <div class="outro-info p-8 lg:p-12">
+            <div class="outro-text font-extralight text-slate-950">
+              <h2 class="text-4xl">Property Name</h2>
+              <p>6 Bedroom | 6 Bath</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="lead-section row-start-4 row-span-5 rounded-sm h-full bg-white p-12 text-4xl font-extralight">
-        <h2 class="">Property Name</h2>
-        <p>6 Bedroom | 6 Bath</p>
-      </div>
-      
     </div>
-    
   </div>
+
   <!-- TODO Split image into 3 masonary layout
     x 3 images
     x lg: left col 2/3, right col stacked 2 rows
@@ -104,7 +120,7 @@ const { imageUrl } = Astro.props;
   .animated-border-box-glow:before {
     content: "";
     z-index: -2;
-    opacity: 0.6;
+    opacity: 0.8;
     /* filter: blur(40px); */
     text-align: center;
     top: 50%;

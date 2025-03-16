@@ -150,6 +150,7 @@ const { metaTags } = Astro.props;
 			white 60%
 		);
 		--max-content: 1280px !important;
+		--max-contain: 1920px !important;
 		--header-height: 78px;
 	}
 	.font-cg {
@@ -161,18 +162,21 @@ const { metaTags } = Astro.props;
 	.max-content {
 		max-width: var(--max-content);
 	}
+	.max-contain {
+		max-width: var(--max-contain);
+	}
 	.prose {
 		max-width: 85ch !important;
 	}
 	.content_offset {
 		padding-top: var(--header-height);
 	}
-	@media screen and (max-width: 768px) {
+	@media only screen and (max-width: 768px) {
 		.max-content-mobile {
 			max-width: 82vw;
 		}
 	}
-	@media screen and (max-width: 1024px) {
+	@media only screen and (min-width: 769px) and (max-width: 1024px) {
 		.max-content-mobile {
 			max-width: 88vw;
 		}

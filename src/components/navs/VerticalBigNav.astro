@@ -1,19 +1,17 @@
 ---
-import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
-import LogoImg from '../../assets/coris_development_group-logo.svg'
-import CompanyInfo from '@components/utils/CompanyInfo.astro'
-import { mainNav } from '@lib/api/settings'
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import LogoImg from "../../assets/coris_development_group-logo.svg";
+import CompanyInfo from "@components/utils/CompanyInfo.astro";
+import { mainNav } from "@lib/api/settings";
 
-const LogoImgAlt = 'Coris Development Group Logo'
+const LogoImgAlt = "Coris Development Group Logo";
 const { class: className } = Astro.props;
-
-// console.log(mainNav)
 ---
 <!-- Navbar -->
 <header id="header-nav" class:list={['fixed z-40 w-full backdrop-blur-md', className]}>
-  <div class="logo-area flex container justify-between p-2 lg:px-4 lg:mx-auto">
-    <a href="/" class="flex self-center">
+  <div class="logo-area flex max-contain justify-between p-2 lg:px-4 mx-auto">
+    <a href="/" class="flex self-center px-2 py-4">
       <Image 
         src={LogoImg}
         alt={LogoImgAlt}
@@ -144,7 +142,7 @@ const { class: className } = Astro.props;
     background-color: rgba(0, 0, 0, 0.7);
   }
   .logo-area {
-    max-width: 1280px !important;
+    /* max-width: 1280px !important; */
   }
   #header-nav > .logo-area > a > img {
     height: 42px;
