@@ -1,10 +1,42 @@
 ---
-import { storyblokEditable } from '@storyblok/astro'
-const { blok } = Astro.props
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+const { blok } = Astro.props;
+
+const renderText = () => {
+  if (typeof blok.text === "string") {
+    return `<p>${blok.text}</p>`;
+  }
+  return renderRichText(blok.text);
+};
+
+const richText = renderText();
 ---
+
 <section {...storyblokEditable(blok)} class="mx-auto text-center">
   <div class:list={["mx-auto max-w-screen-lg py-12 px-8", blok.css]}>
-    <h2 class:list={["mb-4 text-4xl tracking-tight font-extrabold", blok.heading_css]}>{blok?.heading}</h2>
-    <p class:list={["mb-8 font-light lg:mb-16 sm:text-xl", blok.text_css]}>{blok?.text}</p>
-  </div> 
+    <h2
+      class:list={[
+        "mb-4 text-4xl tracking-tight font-extrabold",
+        blok.heading_css,
+      ]}
+    >
+      {blok?.heading}
+    </h2>
+    <div class:list={["my-4 font-light lg:my-8 sm:text-xl text-black"]}>
+      {
+        richText && (
+          <div class:list={["prose mx-auto", blok.text_css]}>
+            <Fragment set:html={richText} />
+          </div>
+        )
+      }
+    </div>
+    {
+      blok.button &&
+        blok.button?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />;
+        })
+    }
+  </div>
 </section>

@@ -7,14 +7,18 @@ const { imageUrl } = Astro.props;
 <div class="hero-two p-4 min-h-[80vh] h-[100%] max-h-min">
   <div class="max-contain mx-auto">
     <!-- Image Section -->
-    <div class="relative flex justify-center min-h-[50vh] lg:min-h-[78vh]">
+    <div
+      class="relative flex justify-center min-h-[50vh] sm:min-h-[60vh] md:min-h-[54vh] lg:min-h-[68vh]"
+    >
       <div class="animated-border-box-glow rounded-md"></div>
       <div class="animated-border-box rounded-md">
         <!-- Masonary Layout -->
         <div class="masonry h-full rounded-md">
-          <div class="grid grid-flow-col grid-rows-2 gap-1 h-full">
+          <div
+            class="grid grid-flow-col grid-rows-3 md:grid-rows-2 gap-1 h-full"
+          >
             <div
-              class="row-span-1 md:row-span-2 col-span-2 bgrd-image rounded-sm"
+              class="row-span-2 md:row-span-2 col-span-2 bgrd-image rounded-sm"
             >
               <!-- Image -->
             </div>
@@ -29,22 +33,74 @@ const { imageUrl } = Astro.props;
       </div>
     </div>
     <!-- Text Section -->
-    <div class="property-section mt-0 lg:mt-[-120px] relative z-2 h-full">
-      <div class="grid grid-flow-col grid-rows-8 gap-4 lg:gap-12 h-full">
+    <div class="property-section px-4 md:px-4 lg:px-8 relative z-2 h-full">
+      <div class="grid md:grid-cols-3 gap-4 lg:gap-8 h-full">
+        <!-- Column 1 -->
         <div
-          class="flex-col flex row-span-4 lg:row-span-5 w-full min-h-[300px] rounded-sm border-2 border-golden-300 bg-white"
+          class="md:col-span-2 flex min-h-[100px] p-8 mt-4 mb-4 md:mt-[-30px] lg:mt-[-40px] rounded-sm border-2 border-golden-300 backdrop-blur-[6px] bg-white/65"
         >
-          <div class="property-info p-8 lg:p-12 content-between">
-            <div class="property-text h-full font-extralight text-golden-300">
-              <h2 class="text-4xl">Property Name</h2>
-              <p>6 Bedroom | 6 Bath</p>
+          <div
+            class="property-info p-2 content-between flex flex-col w-full 2xl:w-3/4 self-center"
+          >
+            <div class="property-text h-full text-black flex flex-col">
+              <div class="flex flex-col justify-between">
+                <!-- TODO: Title -->
+                <h2 class="text-2xl md:text-4xl lg:text-6xl font-semibold">
+                  123 Token Creek Dr.
+                </h2>
+                <!-- TODO: Price -->
+                <h3 class="text-lg md:text-2xl font-light pt-2">$1,200,000</h3>
+              </div>
+              <hr class="my-1 border-golden-500" />
+              <!-- TODO: Address -->
+              <div class="flex font-extralight text-md">
+                <p>123 Token Creek Dr, Sun Prarie, WI 54303</p>
+              </div>
+              <hr class="my-1 border-golden-500" />
+              <!-- TODO: Description -->
+              <div
+                class="property-description md:hidden font-light text-xl py-6 grid grid-cols-2"
+              >
+                <p>6 Bedroom</p>
+                <p>6 Bath</p>
+                <p>4,230 sqft</p>
+                <p>Amazing Wooded Views</p>
+              </div>
             </div>
-            <div class="property-link self-end">
-              <Button class="place-self-start" />
+            <!-- Description -->
+            <div class="property-description font-extralight py-4">
+              <hr class="border-golden-500 my-2 md:hidden" />
+              <p>
+                Fugiat aliquip exercitation id nisi veniam eu ex ea magna culpa
+                esse mollit nisi enim occaecat. Aliquip adipisicing sint et elit
+                mollit ullamco fugiat aute labore culpa. Lorem nostrud laborum
+                sit ad ad anim consequat veniam ex aliqua ex ut. Non ullamco
+                voluptate exercitation et laboris labore non ipsum proident sunt
+                culpa non nisi.
+              </p>
+            </div>
+            <!-- TODO: Link to property -->
+            <div class="property-link">
+              <Button class="md:place-self-start mb-0" />
             </div>
           </div>
         </div>
+        <!-- Column 2 Hidden < md -->
         <div
+          class="flex w-3/4 max-md:hidden mx-auto justify-center place-self-center text-golden-300"
+        >
+          <div
+            class="property-description text-center font-extralight text-2xl"
+          >
+            <h3 class="text-2xl md:text-3xl font-light">Features</h3>
+            <hr class="border-golden-300 my-2" />
+            <p>6 Bedroom</p>
+            <p>6 Bath</p>
+            <p>1,600 sqFT</p>
+            <p>Amazing Wooded Views</p>
+          </div>
+        </div>
+        <!-- <div
           class="outro-section lg:row-start-4 row-span-4 lg:row-span-5 rounded-sm h-full bg-white"
         >
           <div class="outro-info p-8 lg:p-12">
@@ -53,7 +109,7 @@ const { imageUrl } = Astro.props;
               <p>6 Bedroom | 6 Bath</p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
