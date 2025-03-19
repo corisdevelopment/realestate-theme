@@ -3,6 +3,8 @@ import Layout from "src/layouts/Layout.astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
+import FeaturedImage from "@components/sections/FeaturedImage.astro";
+
 export async function getStaticPaths() {
   const storyblokApi = useStoryblokApi();
 
@@ -28,7 +30,6 @@ const { listing } = Astro.params;
 const { data }: any = await sbApi.get(`cdn/stories/listings/${listing}`, {
   version: import.meta.env.DEV ? "draft" : "published",
 });
-console.log("🚀 ~ data:", data);
 const page = data.story;
 
 // Meta Title and Description
@@ -44,10 +45,19 @@ const meta = {
   description: page.content.metatags?.description,
 };
 
-// console.log("PAGE:", getStaticPaths)
+console.log("PAGE:", data.story.content);
 ---
 
 <Layout metaTags={meta}>
+  <!-- Featured Image: single image -->
+  <FeaturedImage blok={page.content.featured_media} />
+  <!-- Property Headline: page name -->
+  <!-- Price -->
+  <!-- Button: listing url -->
+  <!-- Description -->
+  <!-- Key Details: 2 column -->
+  <!-- Content Section -->
+  <!-- Image Gallery -->
   {
     page.content.body?.map((blok: any) => {
       if (blok.component === "heroBlok") {
@@ -56,4 +66,5 @@ const meta = {
       return <StoryblokComponent blok={blok} />;
     })
   }
+  {page.name}
 </Layout>

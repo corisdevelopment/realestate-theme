@@ -1,0 +1,21 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { Image } from "astro:assets";
+
+const { blok } = Astro.props;
+const imageAlt = blok.alt !== "" ? blok.alt : blok.image.alt;
+const imageLoad = blok.lazy_load ? "lazy" : "eager";
+---
+
+<div class="featured-image">
+  <div {...storyblokEditable(blok)} class={blok.css}>
+    <Image
+      src={blok.filename}
+      inferSize={true}
+      widths={[540, 720]}
+      sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
+      alt={imageAlt}
+      class:list={["flex", blok.image_css]}
+    />
+  </div>
+</div>
