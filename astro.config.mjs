@@ -6,7 +6,6 @@ import { loadEnv } from 'vite';
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
-import Listing from 'src/storyblok/listing/Listing.astro';
 
 let sbToken;
 sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
@@ -68,6 +67,10 @@ export default defineConfig({
         embededHTML: 'storyblok/content/EmbededHTML',
         imageCarousel: 'storyblok/content/ImageCarousel',
         listing: 'storyblok/listing/Listing',
+        allListings: 'storyblok/listing/AllListings',
+        featuredImage: 'storyblok/listing/FeaturedImage',
+        listingDetails: 'storyblok/listing/ListingDetails',
+        listingGallery: 'storyblok/listing/ListingGallery',
         
       },
       apiOptions: {

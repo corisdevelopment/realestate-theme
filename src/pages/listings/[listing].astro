@@ -2,8 +2,7 @@
 import Layout from "src/layouts/Layout.astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-
-import FeaturedImage from "@components/sections/FeaturedImage.astro";
+import { storyblokEditable } from "@storyblok/astro";
 
 export async function getStaticPaths() {
   const storyblokApi = useStoryblokApi();
@@ -30,6 +29,8 @@ const { listing } = Astro.params;
 const { data }: any = await sbApi.get(`cdn/stories/listings/${listing}`, {
   version: import.meta.env.DEV ? "draft" : "published",
 });
+
+//// page: variable
 const page = data.story;
 
 // Meta Title and Description
@@ -39,32 +40,149 @@ if (page.content.metatags !== "") {
   title = metaTitle !== "" ? metaTitle : page.name;
   page.content.metatags.title = `${title} | Coris Development Group`;
 }
-
 const meta = {
   title,
   description: page.content.metatags?.description,
 };
 
-console.log("PAGE:", data.story.content);
+//// item: variable
+const item = page.content;
+
+// Shift out of single array
+const details = [...item.details].shift();
+const listingUrl = [...item.listing_url].shift();
+const price = [...item.price].shift();
+// Build out details from item details
+
+const propertyAddress = (): {address: string, county: string} => {
+  let address: string = '';
+  let county: string = '';
+  item.property_address.map((item: any) => {
+    const line2 = item.line_2 !== "" ? ` ${item.line_2}` : item.line_2;
+    address = `${item.line_1}${line2}, ${item.city}, ${item.state}  ${item.zipcode}`;
+    county = item.county;
+  });
+  return {address, county};
+};
+const { address, county } = propertyAddress();
+
+const propertyHeaderDetails = () => {
+  const list = {
+      bedrooms: `${details.bedrooms} Bedroom`,
+      fullBaths:
+        details.full_baths !== "" ? ` | ${details.full_baths} Full Baths` : "",
+      halfBaths:
+        details.half_baths !== "" ? ` | ${details.half_baths} Half Baths` : "",
+      sqft: details.square_feet !== "" ? ` | ${details.square_feet} sqft` : "",
+    };
+    return Object.values(list);
+};
+
+const zoning = {
+  zone_type: item.zone_type,
+  zone_area: item.zone_area,
+};
 ---
 
 <Layout metaTags={meta}>
-  <!-- Featured Image: single image -->
-  <FeaturedImage blok={page.content.featured_media} />
-  <!-- Property Headline: page name -->
-  <!-- Price -->
-  <!-- Button: listing url -->
-  <!-- Description -->
-  <!-- Key Details: 2 column -->
-  <!-- Content Section -->
-  <!-- Image Gallery -->
-  {
-    page.content.body?.map((blok: any) => {
-      if (blok.component === "heroBlok") {
-        return <StoryblokComponent blok={blok} />;
+  <main>
+    <article {...storyblokEditable(page.content)}>
+      <!-- Featured Image: single image -->
+      {
+        page.content.featured_media?.map((blok: any) => {
+          return <StoryblokComponent blok={blok} />;
+        })
       }
-      return <StoryblokComponent blok={blok} />;
-    })
-  }
-  {page.name}
+      <div class="property-header p-8">
+        <div class="max-contain mx-auto text-golden-400 font-light">
+          <div class="header flex max-sm:flex-col justify-between">
+            <h1 class="text-4xl md:text-5xl capitalize font-normal max-sm:pb-2">
+              {page.name}
+            </h1>
+            <div class="md:mx-4 h-full sm:justify-items-end">
+              <button
+                class="flex rounded-sm sm:mx-1 px-4 py-1 mt-1 md:py-2 mb-2 text-xs md:text-sm border border-golden-400 h-full sm:w-full text-golden-400 capitalize"
+              >
+                <p {...storyblokEditable(details)}>{details.category} | </p><span class="text-green-500 pl-1"> {item.status} </span>
+              </button>
+            </div>
+          </div>
+          <p 
+            {...storyblokEditable(price)}  
+            class="text-2xl md:text-4xl pt-4 pb-2"
+          >
+            {price.text}
+          </p>
+          <p {...storyblokEditable(details)} class="text-xl md:text-3xl pb-4 max-sm:w-3/4">
+            {propertyHeaderDetails}
+          </p>
+          {
+            item.listing_url && (
+              <div
+                {...storyblokEditable(listingUrl)}
+                class="my-4 rounded-lg flex md:w-3/4 lg:w-1/3"
+              >
+                <a
+                  href={listingUrl.url.url}
+                  target="_blank"
+                  class="glow text-center w-full rounded-lg px-12 py-3 transition duration-300 ease-in-out border border-golden-500 hover:bg-golden-500 hover:text-white"
+                >
+                  {listingUrl.text}
+                </a>
+              </div>
+            )
+          }
+        </div>
+      </div>
+      
+      <div class="property-description bg-white p-8">
+        <div class="max-contain mx-auto">
+          <!-- Description -->
+          <div class="lg:w-3/4 font-light">
+            <h2 class="text-4xl uppercase font-semibold">
+              Property Description
+            </h2>
+            <hr class="my-2" />
+            {
+              page.content.property_description?.map((blok: any) => {
+                return <StoryblokComponent blok={blok} />;
+              })
+            }
+          </div>
+          <!-- Key Details: 2 column -->
+          {
+            page.content.details?.map((blok: any) => {
+              return (
+                <StoryblokComponent
+                  blok={blok}
+                  address={propertyAddress()}
+                  zoning={zoning}
+                />
+              );
+            })
+          }
+          <!-- Image Gallery -->
+          {
+            page.content.image_gallery?.map((blok: any) => {
+              return <StoryblokComponent blok={blok} />
+            })
+          }
+          <!-- Content Section -->
+          {
+            page.content.content_other?.map((blok: any) => {
+              return <StoryblokComponent blok={blok} />
+            })
+          }
+        </div>
+      </div>
+      
+    </article>
+  </main>
 </Layout>
+
+<style>
+  div.prose {
+    max-width: 100% !important;
+    color: white !important;
+  }
+</style>

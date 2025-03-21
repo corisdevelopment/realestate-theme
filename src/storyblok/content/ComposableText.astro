@@ -1,19 +1,19 @@
 ---
-import { storyblokEditable, renderRichText } from '@storyblok/astro'
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
 
-const {blok} = Astro.props
-const content = renderRichText(blok.content)
+const { blok } = Astro.props;
+const content = renderRichText(blok.content);
 ---
-<div {...storyblokEditable(blok)} class:list={["w-full prose  prose-p:text-inherit prose-headings:text-inherit", blok.css]}>
-  {
-    blok.title != '' &&
-    <h2 class={blok.title_css}>{blok.title}</h2>
-  }
-  <Fragment set:html={content} />
-</div>
 
+<div class="prose prose-headings:text-inherit prose-p:text-inherit">
+  <div {...storyblokEditable(blok)} class:list={["", blok.css]}>
+    {blok.title != "" && <h2 class={blok.title_css}>{blok.title}</h2>}
+    <Fragment set:html={content} />
+  </div>
+</div>
 <style>
   .prose {
     --tw-prose-body: unset;
+    max-width: unset !important;
   }
 </style>

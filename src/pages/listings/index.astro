@@ -23,7 +23,7 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 // }
 
 const sbApi = useStoryblokApi();
-const { data } = await sbApi.get(`cdn/stories/listings/`, {
+const { data } = await sbApi.get("cdn/stories/listings/", {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 const page = data.story;
