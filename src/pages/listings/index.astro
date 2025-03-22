@@ -3,24 +3,24 @@ import Layout from "src/layouts/Layout.astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-// export async function getStaticPaths() {
-//   const storyblokApi = useStoryblokApi();
+export async function getStaticPaths() {
+  const storyblokApi = useStoryblokApi();
 
-//   const { data } = await storyblokApi.get("cdn/stories/listings", {
-//     content_type: "page",
-//     version: import.meta.env.DEV ? "draft" : "published",
-//     resolve_links: "url",
-//   });
-//   const pages = data.stories;
+  const { data } = await storyblokApi.get("cdn/stories/listings", {
+    content_type: "page",
+    version: import.meta.env.DEV ? "draft" : "published",
+    resolve_links: "url",
+  });
+  const pages = data.stories;
 
-//   const paths = pages.map((page: { [key: string]: string }) => {
-//     return {
-//       params: { listings: page.slug },
-//       props: { page },
-//     };
-//   });
-//   return paths;
-// }
+  const paths = pages.map((page: { [key: string]: string }) => {
+    return {
+      params: { listings: page.slug },
+      props: { page },
+    };
+  });
+  return paths;
+}
 
 const sbApi = useStoryblokApi();
 const { data } = await sbApi.get("cdn/stories/listings/", {

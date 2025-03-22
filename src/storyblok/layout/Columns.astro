@@ -12,7 +12,7 @@ if (blok.column_number > 0) {
 const fullWidth = blok.full_width ? "w-full" : 'max-w-screen-xl'
 ---
 <section {...storyblokEditable(blok)} class:list={blok.css}>
-  <div class:list={["gap-8 py-8 px-4 mx-auto xl:gap-16 md:grid sm:py-16 lg:px-6", columnNum, blok.item_align, fullWidth]}>
+  <div class:list={["gap-8 py-8 lg:py-4 px-4 mx-auto xl:gap-12 md:grid sm:py-16 lg:px-6", columnNum, blok.item_align, fullWidth]}>
     {
       blok.columns?.map((blok: any) => {
         return <StoryblokComponent blok={blok} />
