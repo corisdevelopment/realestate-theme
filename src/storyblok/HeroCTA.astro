@@ -1,26 +1,14 @@
 ---
 import { storyblokEditable } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-// TODO Import all Hero Style (3)
-import HeroStyleOne from "./utils/heros/HeroStyleOne.astro";
-import HeroStyleTwo from "./utils/heros/HeroStyleTwo.astro";
 
 const { blok, class: className } = Astro.props;
-const bgrdImage = `url('${blok.image?.filename}')`;
-const style = false;
-
-// TODO if/else for 3 heros
-
-let Hero = HeroStyleOne;
-if (style) {
-	Hero = HeroStyleTwo;
-}
-
-// const Component = HeroStyleOne;
-console.log("🚀 ~ Component ~ Component:", Hero);
 ---
 
 <section {...storyblokEditable(blok)} class:list={["hero-section", className]}>
-  <!-- Component Lives Here -->
-  <Hero imageUrl={bgrdImage} blok={blok} />
+  {
+    blok.hero?.map((blok: any) => {
+      return <StoryblokComponent blok={blok} />
+    })
+  }
 </section>

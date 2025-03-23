@@ -87,7 +87,6 @@ const zoning = {
 <Layout metaTags={meta}>
   <main>
     <article {...storyblokEditable(page.content)}>
-      <!-- Featured Image: single image -->
       {
         page.content.featured_media?.map((blok: any) => {
           return <StoryblokComponent blok={blok} />;

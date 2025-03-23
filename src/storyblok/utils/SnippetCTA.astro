@@ -4,7 +4,7 @@ import Button from '@components/utils/Button.astro'
 const { blok } = Astro.props
 // console.log("SNIPPET: ", blok.button[0]?.url?.story.url)
 ---
-<div {...storyblokEditable(blok)} class="cta my-6 lg:my-16 lg:w-3/4">
-  <p class="text-golden-950 text-lg lg:text-3xl">{blok.description}</p>
+<div {...storyblokEditable(blok)} class="cta my-6 pl-4 lg:my-16 lg:w-3/4">
+  <p class="text-golden-950 font-light py-6 text-lg lg:text-3xl">{blok.description}</p>
   <Button outline text={blok.button[0].text} link={blok.button[0]?.url?.story?.url} class="mt-8 md:w-1/2 flex font-cg font-light text-2xl uppercase text-golden-400 bg-golden-950"/>
 </div>

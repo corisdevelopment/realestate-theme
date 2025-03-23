@@ -13,7 +13,8 @@ if (liveStory) {
 	const sbApi = useStoryblokApi();
 	const { data } = await sbApi.get('cdn/stories/home', {
 		version: 'draft',
-		resolve_links: 'url'
+		resolve_links: 'url',
+		resolve_relations: 'heroStyleTwo.listing',
 	});
 	story = data?.story;
 }

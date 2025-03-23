@@ -23,6 +23,7 @@ export default defineConfig({
     bridge: {
       preventClicks: true,
       resolveLinks: 'url',
+      resolveRelations: 'heroStyleTwo.listing',
     },
     livePreview: true,
     components: {
@@ -48,6 +49,8 @@ export default defineConfig({
       propertyCard: 'storyblok/utils/PropertyCard',
       imageBlokGallery: 'storyblok/utils/ImageBlokGallery',
       heroBlok: 'storyblok/utils/HeroBlok',
+      heroStyleOne: 'storyblok/utils/heros/HeroStyleOne',
+      heroStyleTwo: 'storyblok/utils/heros/HeroStyleTwo',
       
       // Layouts
       textWithHeading: 'storyblok/layout/TextWithHeading',
