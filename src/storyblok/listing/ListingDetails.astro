@@ -60,11 +60,10 @@ const [first, last] = splitArrayHalf(textFiltered);
   <hr class="my-2" />
   <div {...storyblokEditable(blok)} class="grid grid-cols-2 gap-4 capitalize font-light leading-8">
     {
-      [first, last].map((first, last) => (
+      [first, last].map((item) => (
         <ul>
           {
-
-          first.map(([key, value]) => {
+          item.map(([key, value]) => {
             return <li><strong>{key}:</strong> {value}</li>
           })
           }
