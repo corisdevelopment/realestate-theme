@@ -1,5 +1,4 @@
 import { useStoryblokApi } from "@storyblok/astro";
-import type { IndexType } from "typescript";
 
 // Get Storyblok Data
 const sbApi = useStoryblokApi();
