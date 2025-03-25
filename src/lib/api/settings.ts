@@ -1,11 +1,3 @@
-import { useStoryblokApi } from "@storyblok/astro";
-// Get Storyblok Data
-const sbApi = useStoryblokApi();
-const { data } = await sbApi.get("cdn/stories/settings", {
-	version: "draft",
-	resolve_links: "url",
-});
-
 /* 
 * TYPE DECLARATIONS
 */
