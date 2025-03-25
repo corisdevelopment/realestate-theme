@@ -79,6 +79,9 @@ const footerItems = story.content.footer;
 		<Footer data={footerItems} company={companyInfo} />
 		<script is:inline>
 			// @ts-nocheck
+  document.addEventListener("storyblok-live-preview-updated", () => {
+    console.log("Live preview: body updated");
+  });
 
 			gsap.registerPlugin(ScrollTrigger);
 			// ScrollTrigger.normalizeScroll(true);
