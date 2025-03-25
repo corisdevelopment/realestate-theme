@@ -4,6 +4,18 @@ import { Icon } from "astro-icon/components";
 import FooterMenu from '@components/utils/FooterMenu.astro';
 import SocialMedia from "./utils/SocialMedia.astro";
 import CompanyInfo from "./utils/CompanyInfo.astro";
+import { FooterNavItems, SocialMediaItems } from "@lib/api/settings";
+
+interface Props {
+  data: any,
+  company: object,
+}
+const { data, company } = Astro.props;
+const footerNav = FooterNavItems(data);
+const socialData = SocialMediaItems(data);
+const hideSocial = data?.map((item: any) => {
+  return item.hide_social;
+}).filter((el: unknown) => el != undefined).shift();
 ---
 
 <footer
@@ -11,7 +23,7 @@ import CompanyInfo from "./utils/CompanyInfo.astro";
   class="border-t border-dark-gold py-8 max-md:text-md"
 >
   <div
-    class="container mx-auto max-content max-content-mobile md:grid md:grid-cols-3 gap-4 text-white"
+    class="container py-8 mx-auto max-content max-content-mobile md:grid md:auto-cols-auto grid-flow-col gap-4 text-white"
   >
     <!-- Logo Group -->
     <div class="max-md:pb-8 md:pl-8">
@@ -26,22 +38,22 @@ import CompanyInfo from "./utils/CompanyInfo.astro";
           width="159"
         />
       </a>
-      <div class="phone_info mt-6 flex flex-shrink-0 text-white">
+      <div class="phone_info mt-6 flex flex-shrink-0 text-white opacity-60">
         <Icon
           name="ion:phone-portrait-outline"
           size={36}
           class="mt-1 max-md:hidden"
         />
         <div class="pt-0.5 max-md:text-center max-md:mx-auto">
-          <CompanyInfo />
+          <CompanyInfo data={company} />
         </div>
       </div>
     </div>
-    <FooterMenu />
-    <SocialMedia />
+    <FooterMenu data={footerNav} />
+    <SocialMedia socialHidden={hideSocial} socials={socialData} />
   </div>
-  <div class="border-t border-dark-gold mt-4 lg:mt-8 py-4 max-md:text-md w-full">
-    <p id="copyright" class="text-center text-white"></p>
+  <div class="border-t border-dark-gold mt-4 lg:mt-8 py-8 max-md:text-md w-full">
+    <p id="copyright" class="text-center text-gray-400"></p>
   </div>
 </footer>
 

@@ -1,6 +1,30 @@
 ---
 import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
 import Footer from '../components/Footer.astro';
+import { getLiveStory, useStoryblokApi } from '@storyblok/astro';
+
+// API CALL: get storyblok data
+let story = null;
+const liveStory = await getLiveStory(Astro);
+
+if (liveStory) {
+  story = liveStory;
+} else {
+  const sb_api = useStoryblokApi();
+  const { data } = await sb_api.get("cdn/stories/settings", {
+    version: "draft",
+    resolve_links: "url",
+  });
+  story = data?.story;
+}
+const navItems = story.content.header;
+const companyInfo = {
+	phoneNumber: story.content.company_phone,
+	phoneLink: story.content.company_phone.replace(/_/g, ""),
+	email: story.content.company_email,
+}
+const footerItems = story.content.footer;
+
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -10,12 +34,12 @@ import Footer from '../components/Footer.astro';
   <title>Site Settings</title>
 </head>
 <body>
-  <VerticalBigNav />
+  <VerticalBigNav navArray={navItems} company={companyInfo} />
 		<div class="content_offset">
 			<slot />
 		</div>
 		<!-- Footer -->
-		<Footer />
+		<Footer data={footerItems} company={companyInfo} />
 </body>
 </html>
 

@@ -1,11 +1,13 @@
 ---
-import {phoneNumber, phoneLink, email} from '../../lib/api/settings'
+// * Get Data from parent layout, passed down as prop.
+// * Layout -> ParentComponent -> CompanyInfo
+const { data } = Astro.props
 ---
 {
-  phoneNumber &&
-  <p class="phone_number"><a href={`tel:${phoneLink}`}>{phoneNumber}</a></p>
+  data?.phoneNumber &&
+  <p class="phone_number"><a href={`tel:${data?.phoneLink}`}>{data?.phoneNumber}</a></p>
 }
 {
-  email &&
-  <p class="email leading-[0.75]"><a href={`mailto: ${email}`}>{email}</a></p>
+  data?.email &&
+  <p class="email leading-[0.75]"><a href={`mailto: ${data?.email}`}>{data?.email}</a></p>
 }

@@ -12,6 +12,7 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import VerticalBigNav from "../components/navs/VerticalBigNav.astro";
 import Footer from "../components/Footer.astro";
+import { getLiveStory, useStoryblokApi } from "@storyblok/astro";
 interface Props {
 	metaTags?:
 		| {
@@ -22,6 +23,29 @@ interface Props {
 }
 
 const { metaTags } = Astro.props;
+
+// API CALL: get storyblok data
+let story = null;
+const liveStory = await getLiveStory(Astro);
+
+if (liveStory) {
+  story = liveStory;
+} else {
+  const sb_api = useStoryblokApi();
+  const { data } = await sb_api.get("cdn/stories/settings", {
+    version: "draft",
+    resolve_links: "url",
+  });
+  story = data?.story;
+}
+const navItems = story.content.header;
+const companyInfo = {
+	phoneNumber: story.content.company_phone,
+	phoneLink: story.content.company_phone?.replace(/_/g, ""),
+	email: story.content.company_email,
+}
+const footerItems = story.content.footer;
+// console.log("🚀 ~ LAYOUT ~ API DATA:", companyInfo)
 ---
 
 <!doctype html>
@@ -47,19 +71,14 @@ const { metaTags } = Astro.props;
 		></script>
 	</head>
 	<body>
-		<!-- Coming From stagging site Netlify Deploy staggin-- -->
-		<VerticalBigNav />
+		<VerticalBigNav navArray={navItems} company={companyInfo} />
 		<div class="content_offset">
 			<slot />
 		</div>
 		<!-- Footer -->
-		<Footer />
+		<Footer data={footerItems} company={companyInfo} />
 		<script is:inline>
 			// @ts-nocheck
-			// Storyblok Live Preview
-			document.addEventListener("storyblok-live-preview-updated", () => {
-				console.log("Live preview: body updated");
-			});
 
 			gsap.registerPlugin(ScrollTrigger);
 			// ScrollTrigger.normalizeScroll(true);
@@ -192,6 +211,9 @@ const { metaTags } = Astro.props;
 	}
 	.nav-open {
 		overflow: hidden;
+	}
+	.nav-open #header-nav {
+		background: #000;
 	}
 	html.lenis,
 	html.lenis body {
