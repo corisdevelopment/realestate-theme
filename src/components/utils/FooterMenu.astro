@@ -1,6 +1,9 @@
 ---
 // import { footerNav } from '@lib/menus/nav-main.json';
-import { footerNav } from '@lib/api/settings';
+// import { footerNav } from '@lib/api/settings';
+
+const { data } = Astro.props;
+const footerNav = data;
 
 // Split list items
 const itemCount = Math.round(footerNav.length / 2);
@@ -9,7 +12,7 @@ const split1 = newNavArray.splice(0, itemCount);
 const split2 = newNavArray;
 ---
 <!-- Mobile to md -->
-<div class="lg:hidden">
+<div class="lg:hidden text-white opacity-60">
   <ul class="mx-auto w-max max-md:text-center">
     {
         footerNav.map( (item: any) => 
@@ -21,18 +24,18 @@ const split2 = newNavArray;
   </ul>
 </div>
 <!-- Desktop (lg) -->
-<div class="max-lg:hidden grid grid-cols-2">
-  <ul class="mx-auto w-max">
+<div class="max-lg:hidden grid grid-cols-2 text-white opacity-60">
+  <ul class="w-full">
     {
       split1.map( (item: any) => (
-      <li><a href={item.link}>{item.title}</a></li>
+      <li class="pb-2"><a href={item.link}>{item.title}</a></li>
       ))
     }
   </ul>
-  <ul class="mx-auto w-max">
+  <ul class="justify-items-center">
     {
       split2.map( (item: any) => (
-      <li><a href={item.link}>{item.title}</a></li>
+      <li class="pb-2"><a href={item.link}>{item.title}</a></li>
       ))
     }
   </ul>

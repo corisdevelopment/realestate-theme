@@ -1,0 +1,76 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { Image } from "astro:assets";
+const { blok } = Astro.props;
+---
+<section
+  {...storyblokEditable(blok)}
+  class="hero border-b-8 border-golden-600 pb-24"
+>
+  <div class="md:px-8">
+    <div class="border-y-8 border-golden-600">
+      <Image
+        {...storyblokEditable(blok)} 
+        src={blok.image.filename}
+        inferSize={true}
+        widths={[540, 720]}
+        sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
+        alt={blok.image.alt}
+        class="flex max-h-[92vh] md:max-h-[72vh] w-full object-cover"
+      />
+    </div>
+
+    <div class="mt-[-16%] z-10 relative">
+      <div class="max-contain mx-auto px-8">
+        {
+          blok.content?.map((blok: any) => {
+            return <StoryblokComponent blok={blok} />;
+          })
+        }
+        <div
+          class="icon md:w-4/6 lg:max-w-xl flex justify-center my-8 text-golden-600"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="18"
+              d="m112 268l144 144l144-144M256 392V100"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .icon > svg {
+    height: 6em;
+    width: auto;
+  }
+  .hero {
+    max-height: max-content;
+    width: 100%;
+    position: relative;
+    background-color: #111;
+  }
+  .hero-content {
+    z-index: 1;
+    position: relative;
+  }
+  .hero-image {
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    height: calc(100% - 40vh);
+    width: 100%;
+  }
+</style>

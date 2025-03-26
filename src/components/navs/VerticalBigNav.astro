@@ -1,19 +1,28 @@
 ---
-import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
-import LogoImg from '../../assets/coris_development_group-logo.svg'
-import CompanyInfo from '@components/utils/CompanyInfo.astro'
-import { mainNav } from '@lib/api/settings'
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import LogoImg from "../../assets/coris_development_group-logo.svg";
+import CompanyInfo from "@components/utils/CompanyInfo.astro";
+import { MainNavItems } from "@lib/api/settings";
 
-const LogoImgAlt = 'Coris Development Group Logo'
-const { class: className } = Astro.props;
+const LogoImgAlt = "Coris Development Group Logo";
 
-// console.log(mainNav)
+interface Props {
+  navArray: [],
+  company: {},
+  class?: string,
+}
+
+const { class: className, navArray, company, } = Astro.props;
+
+// PARSE DATA: send data as param to settings.ts function
+const mainNav = MainNavItems(navArray);
+
 ---
 <!-- Navbar -->
 <header id="header-nav" class:list={['fixed z-40 w-full backdrop-blur-md', className]}>
-  <div class="logo-area flex container justify-between p-2 lg:px-4 lg:mx-auto">
-    <a href="/" class="flex self-center">
+  <div class="logo-area flex max-contain justify-between p-2 pt-3 lg:px-4 mx-auto">
+    <a href="/" class="flex self-center px-2">
       <Image 
         src={LogoImg}
         alt={LogoImgAlt}
@@ -24,7 +33,7 @@ const { class: className } = Astro.props;
     <div class="nav_info flex">
       <div class="phone_info mt-2 flex justify-end max-lg:hidden text-white border-r mr-4 pr-2">
         <div class="text-right pt-0.5">
-          <CompanyInfo />
+          <CompanyInfo data={company}/>
         </div>
         <Icon name="ion:phone-portrait-outline" size={36} class="mt-1"/>
       </div>
@@ -82,14 +91,21 @@ const { class: className } = Astro.props;
   const menuItems: HTMLElement | any = document.getElementById("menu-items");
   const subMenuButtons: any = document.querySelectorAll("button.submenu");
   const bgrdPattern: any = document.getElementById("menu-bgrd-pattern");
+  
 
   // Nav toggle listener
   menuButton?.addEventListener("click", toggleMenu);
   function toggleMenu() {
     // Slide open menu from right side
+
+    // Check scroll position height;
+    const distanceY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+    console.log("DISTANCE: ", distanceY);
+
     menu.classList.toggle("menu-open");
     menuItems.classList.toggle("fade-in");
     document.body.classList.toggle("nav-open");
+    
     // Change toggle icon
     changeToggleIcons();
   }
@@ -98,7 +114,7 @@ const { class: className } = Astro.props;
     button.addEventListener("click", (el: any) => {
       const removeList = document.querySelectorAll('.submenu-open');
       const submenu = el.target.nextElementSibling;
-      el.target.children[0].classList.toggle("dropdown-active");
+      el.target.children[0]?.classList.toggle("dropdown-active");
       submenu.classList.toggle("submenu-open");
       removeList.forEach((r) => {
         r.previousElementSibling?.children[0].classList.remove('dropdown-active');
@@ -111,8 +127,7 @@ const { class: className } = Astro.props;
     Array.from(menuButton.children)
     .forEach((icon: any) => {
       icon.classList.toggle("active");
-      const ariaHidden = icon.getAttribute("aria-hidden") === "true";
-      icon.setAttribute("aria-hidden", ariaHidden ? "false" : "true");
+      // const ariaHidden = icon.getAttribute("aria-hidden") === "true";
     });
   }
 
@@ -144,7 +159,7 @@ const { class: className } = Astro.props;
     background-color: rgba(0, 0, 0, 0.7);
   }
   .logo-area {
-    max-width: 1280px !important;
+    /* max-width: 1280px !important; */
   }
   #header-nav > .logo-area > a > img {
     height: 42px;
@@ -153,7 +168,8 @@ const { class: className } = Astro.props;
   #menu {
     width: 100%;
     height: 100%;
-    display: flex;
+    min-height: 100vh;
+    /* display: flex; */
     position: relative;
     left: 100%;
     opacity: 0.2;
@@ -208,13 +224,15 @@ const { class: className } = Astro.props;
   
 /* Menu Wrapper and Menu */
   .menu-overflow-wrapper {
-    
-    height: calc(100vh - var(--header-height));
+    /* height: calc(100vh - var(--header-height)); */
+    min-height: 100vh;
+    /* max-height: fit-content; */
     top: var(--header-height);
     /* width: 0; */
     overflow: hidden;
     position: absolute;
     pointer-events: none;
+    z-index: 90;
 
     transition: width 800ms ease;
   }

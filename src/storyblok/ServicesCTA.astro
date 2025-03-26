@@ -9,18 +9,18 @@ const { blok, image = blok.image } = Astro.props;
 <section>
   <div
     id="servicesCTA"
-    class="bg-golden-300 w-full flex justify-center text-golden-950"
+    class="bg-golden-300 w-full flex justify-center text-golden-950 "
   >
     <div class="absolute top-[10%] left-0 w-full max-lg:px-8">
       <h2 id="serviceHeadline" class="text-center text-6xl lg:text-8xl font-cg">
         {blok.headline}
       </h2>
     </div>
-    <div id="circleReveal" class="overlay py-16 lg:py-20">
+    <div id="circleReveal" class="overlay py-48">
       <div class="circles">
         <div
           {...storyblokEditable(blok)}
-          class="container mx-auto p-8 mb-8 mt-[3rem] md:mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-x-6"
+          class="container mx-auto p-8 mt-32 grid grid-cols-1 lg:grid-cols-2 gap-x-6"
         >
           <div class="flex-1 text-md lg:text-xl mb-8" aria-label="Text Content">
             {

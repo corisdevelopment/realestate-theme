@@ -2,7 +2,7 @@
 import { storyblokEditable } from '@storyblok/astro'
 const {blok} = Astro.props
 const Element = blok.type
-const divClass = `font-extrabold text-center mb-4 capitalize ${blok.css}`
+const divClass = `max-contain mx-auto font-extrabold text-center mb-4 capitalize ${blok.css}`
 ---
 <div {...storyblokEditable(blok)} class={divClass}>
   <Element class={blok.text_size}>{blok.title}</Element>

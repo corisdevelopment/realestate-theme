@@ -1,0 +1,74 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+
+const { blok, address, zoning } = Astro.props;
+
+// Convert numbers to proper strings with commas
+function toNumberString(input: string, tail?: string, nose?: string ) {
+  nose = !nose ? '' : nose;
+  tail = !tail ? '' : tail;
+  return nose + parseInt(input).toLocaleString() + tail
+}
+// Format the items that need it
+blok.lot_size = toNumberString(blok.lot_size, ' sqft')
+blok.square_feet = toNumberString(blok.square_feet, ' sqft');
+// Filter out unwanted items
+const filteredObject = Object.fromEntries(Object.entries(blok).filter(([key]) => !key.startsWith('_') && !key.startsWith('compo') && !key.startsWith('category') ));
+const mergedObj = {...filteredObject, ...address, ...zoning}
+const filteredArray: [string, any][] = Object.entries(mergedObj);
+
+const order = [
+  'address',
+  'county',
+  'property_type',
+  'sub_type',
+  'square_feet',
+  'bedrooms',
+  'full_baths',
+  'half_baths',
+  'style',
+  'purchase_type',
+  'category',
+  'zone_type',
+  'zone_area',
+  'subdivision',
+  'lot_size',
+  'year_built',
+  'acres',
+]
+
+const sortedArray = filteredArray.sort( ([keyA], [keyB]) => {
+  return order.indexOf(keyA) - order.indexOf(keyB);
+} )
+
+const textFiltered: [string, string][] = sortedArray.map( ([key, value]: [string, string]) => [
+  key.replace(/_/g, ' '),
+  value.replace(/_/g, ' '),
+] )
+
+function splitArrayHalf(arr: [string, unknown][]) {
+  const half = Math.ceil(arr.length / 2);
+  const first = arr.slice(0, half);
+  const last = arr.slice(half);
+  return [first, last];
+}
+
+const [first, last] = splitArrayHalf(textFiltered);
+---
+<div class="property-details mt-8">
+  <h2 class="text-4xl uppercase font-semibold">Key Details</h2>
+  <hr class="my-2" />
+  <div {...storyblokEditable(blok)} class="grid grid-cols-2 gap-4 capitalize font-light leading-8">
+    {
+      [first, last].map((item) => (
+        <ul>
+          {
+          item.map(([key, value]) => {
+            return <li><strong>{key}:</strong> {value}</li>
+          })
+          }
+        </ul>
+      ))
+    }
+  </div>
+</div>

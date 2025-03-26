@@ -1,41 +1,39 @@
 ---
 import Layout from "src/layouts/Layout.astro";
+import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-import ContactForm from "@components/utils/ContactForm.astro";
 import { GetStory } from "@lib/api/storyAPI";
 
 // export async function getStaticPaths() {
 //   const storyblokApi = useStoryblokApi();
 
 //   const { data } = await storyblokApi.get("cdn/stories", {
-//     level: 1,
-//     excluding_slugs: "home,config",
+//     content_type: "property",
 //     version: import.meta.env.DEV ? "draft" : "published",
 //     resolve_links: "url",
 //   });
-//   const stories = Object.values(data.stories);
+//   const pages = data.stories;
 
-//   const paths = stories.map((story: any) => {
+//   const paths = pages.map((page: { [key: string]: string }) => {
 //     return {
-//       params: { slug: story.slug },
+//       params: { portfolio: page.slug },
+//       props: { page },
 //     };
 //   });
 //   return paths;
 // }
 
-const { slug } = Astro.params;
-
 // Get Story Data
-const story = await GetStory(Astro, `/${slug}`);
-
+const { portfolio } = Astro.params;
+const story = await GetStory(Astro, `/portfolio/${portfolio}`);
 const page = story;
 
 // Meta Title and Description
-let title = page.name + " | Coris Development Group";
+let title = `${page.name} | Coris Development Group`;
 if (page.content.metatags !== "") {
   const metaTitle = page.content.metatags.title;
   title = metaTitle !== "" ? metaTitle : page.name;
-  page.content.metatags.title = title + " | Coris Development Group";
+  page.content.metatags.title = `${title} | Coris Development Group`;
 }
 
 const meta = {
@@ -52,13 +50,5 @@ const meta = {
       }
       return <StoryblokComponent blok={blok} />;
     })
-  }
-  {
-    // May need boolen or component to handle show form in Storyblok
-    page.slug === "contact-us" && (
-      <div class="mx-auto max-w-2xl pb-16">
-        <ContactForm />
-      </div>
-    )
   }
 </Layout>

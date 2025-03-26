@@ -1,0 +1,66 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { Image } from "astro:assets";
+const { blok } = Astro.props;
+---
+
+<div
+  {...storyblokEditable(blok)}
+  class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 h-full my-12 py-8"
+>
+  {
+    blok.images?.map((image: any) => (
+      <Image
+        src={image.filename}
+        inferSize={true}
+        widths={[540, 720]}
+        sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
+        alt={image.alt}
+        class="flex object-cover h-full"
+      />
+    ))
+  }
+</div>
+
+<div
+  id="modal"
+  class="hidden fixed top-0 left-0 z-70
+    w-screen h-screen flex
+    justify-center items-center"
+>
+  <div
+    class="absolute top-0 left-0
+    w-screen h-screen bg-black/70 flex justify-center items-center z-70"
+    onclick="closeModal()"
+  >
+  </div>
+  <div class="relative">
+    <a
+      class="absolute z-90 top-2 right-4
+    text-white text-5xl font-light"
+      href="javascript:void(0)"
+      onclick="closeModal()"
+    >
+      ×
+    </a>
+    <img id="modal-img" class="max-w-[800px] max-h-[600px] object-cover z-80" />
+  </div>
+</div>
+
+<script is:inline>
+  var images = document.querySelectorAll(".grid img");
+  images.forEach(function (img) {
+    img.addEventListener("click", function () {
+      showModal(img.src);
+    });
+  });
+  var modal = document.getElementById("modal");
+  var modalImg = document.getElementById("modal-img");
+  function showModal(src) {
+    modal.classList.remove("hidden");
+    modalImg.src = src;
+  }
+  function closeModal() {
+    modal.classList.add("hidden");
+  }
+</script>

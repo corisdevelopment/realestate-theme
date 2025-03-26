@@ -32,10 +32,9 @@ const { blok } = Astro.props
   // @ts-nocheck 
 
   // check if carousel exists and run
-  const carousel = document.getElementsByClassName("carousel")
+  const carousel = document.getElementsByClassName("carousel");
   if (carousel.length > 0) {
-    const carouselItems = gsap.utils.toArray(".carousel-item"),
-    loop = horizontalLoop(carouselItems, {paused: false, repeat: true})
+    const carouselItems = gsap.utils.toArray(".carousel-item"), loop = horizontalLoop(carouselItems, {paused: false, repeat: true})
   }
 
   function horizontalLoop(items, config) {

@@ -5,7 +5,7 @@ import Button from '@components/utils/Button.astro';
 const { blok } = Astro.props
 const url = blok.button[0].url.cached_url
 ---
-<div {...storyblokEditable(blok)} class="mb-8">
+<div {...storyblokEditable(blok)} class="mb-8 md:w-3/4 lg:w-full">
   <h2 class="py-2 text-2xl lg:text-4xl font-light">{blok.title}</h2>
   <p class="text-lg font-light">{blok.content}</p>
   <Button outline text={blok.button[0].text} link={url} class="mt-4 md:w-3/4 flex font-cg font-light text-xl uppercase text-golden-400"/>

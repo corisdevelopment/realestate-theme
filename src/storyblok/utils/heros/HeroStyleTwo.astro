@@ -1,0 +1,227 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { Image } from "astro:assets";
+
+const { blok } = Astro.props;
+
+const listing = blok.listing[0];
+const detailsObj = listing.content?.details[0];
+const featuredImage = listing.content.featured_media[0];
+const secondImage = listing.content.image_gallery[0].images[0];
+const thirdImage = listing.content.image_gallery[0].images[1];
+const pAddress = listing.content?.property_address[0];
+const line2 = pAddress?.line_2 !== "" ? ` ${pAddress?.line_2}` : pAddress?.line_2;
+const address = `${pAddress?.line_1}${line2}, ${pAddress?.city}, ${pAddress?.state}  ${pAddress?.zipcode}`;
+const squareFeet = Number(detailsObj?.square_feet).toLocaleString('en-US');
+
+---
+
+<div {...storyblokEditable(blok)} class="hero-two p-4 pb-24 mb-16 min-h-[80vh] h-[100%] max-h-min">
+  <div class="max-contain mx-auto">
+    <div
+      class="relative flex justify-center min-h-[450px] sm:min-h-[550px] lg:min-h-[650px]"
+    >
+      <div class="animated-border-box-glow rounded-md"></div>
+      <div class="animated-border-box rounded-md">
+        <!-- Masonary Layout -->
+        <div class="masonry h-full rounded-md">
+          <div
+            class="grid grid-flow-col grid-rows-3 md:grid-rows-2 gap-1 h-full"
+          >
+            <div
+              class="row-span-2 md:row-span-2 col-span-2 rounded-sm overflow-hidden h-full"
+            >
+              { featuredImage.image && 
+              <Image
+                src={featuredImage.image.filename}
+                inferSize={true}
+                widths={[540, 720]}
+                sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
+                alt={featuredImage.image.alt ? featuredImage.image.alt : "" }
+                class="flex h-full w-full object-cover"
+              />}
+            </div>
+            
+            <div class="rounded-sm h-full overflow-hidden">
+              { secondImage.id &&
+              <Image
+                src={secondImage.filename}
+                inferSize={true}
+                widths={[540, 720]}
+                sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
+                alt={secondImage.alt ? secondImage.alt : "" }
+                class="flex h-full w-full object-cover"
+              />}
+            </div>
+            
+            <div class="rounded-sm h-full overflow-hidden">
+              {thirdImage.id &&
+              <Image
+                src={thirdImage.filename}
+                inferSize={true}
+                widths={[540, 720]}
+                sizes={`(max-with: 720px) 540px, (max-width: 1024) 720px`}
+                alt={thirdImage.alt ? thirdImage.alt : "" }
+                class="flex h-full w-full object-cover"
+              />}
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Text Section -->
+    <div class="property-section px-4 md:px-4 lg:px-8 relative z-2 h-full">
+      <div class="grid md:grid-cols-3 gap-4 lg:gap-8 h-full">
+        <!-- Column 1 -->
+        <div
+          class="md:col-span-2 flex min-h-[100px] p-8 mt-4 mb-4 md:mt-[-30px] lg:mt-[-40px] rounded-sm border-2 border-golden-300 backdrop-blur-[6px] bg-white/65"
+        >
+          <div
+            class="property-info p-2 content-between flex flex-col w-full 2xl:w-3/4 self-center"
+          >
+            <div class="property-text h-full text-black flex flex-col">
+              <div class="flex flex-col justify-between">
+                <!-- Title -->
+                <h2 class="text-2xl md:text-4xl lg:text-6xl font-semibold">
+                  {listing?.name}
+                </h2>
+                <!-- Price -->
+                <h3 class="text-lg md:text-2xl font-light pt-2">
+                  {listing.content?.price[0].text}
+                </h3>
+              </div>
+              <hr class="my-1 border-golden-500" />
+              <!-- Address -->
+              <div class="flex font-extralight text-md">
+                <p>{address}</p>
+              </div>
+              <hr class="my-1 border-golden-500" />
+              <!-- Features: Mobile -->
+              <div
+                class="property-features md:hidden font-light text-xl py-6 grid grid-cols-2"
+              >
+                <p>{detailsObj?.bedrooms} Bedroom</p>
+                <p>{detailsObj?.full_baths} Full Baths</p>
+                <p>{squareFeet} sqft</p>
+                <p>{detailsObj?.style}</p>
+              </div>
+            </div>
+            <!-- Description -->
+            <div class="property-description font-extralight py-4">
+              <hr class="border-golden-500 my-2 md:hidden" />
+              <p>
+                {blok?.description}
+              </p>
+            </div>
+            <div class="property-link">
+              <button
+                class="my-4 rounded-lg"
+              >
+                <a
+                  href={listing.full_slug}
+                  class="bg-golden-500 text-white text-xl uppercase font-cg text-center w-full rounded-lg px-12 py-4 transition duration-300 ease-in-out border border-golden-500 hover:bg-golden-400 hover:text-black"
+                >
+                  See Listing
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex w-3/4 max-md:hidden mx-auto justify-center place-self-center text-golden-300"
+        >
+          <div
+            class="property-features text-center font-extralight text-2xl"
+          >
+            <h3 class="text-2xl md:text-3xl font-light">Features</h3>
+            <hr class="border-golden-300 my-2" />
+            <p>{detailsObj?.bedrooms} Bedroom</p>
+            <p>{detailsObj?.full_baths} Full Baths</p>
+            <p>{squareFeet} sqft</p>
+            <p>{detailsObj?.style}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-two {
+    background-color: #111;
+  }
+  .masonry {
+    width: calc(100% - 4px);
+    height: calc(100% - 2px);
+    margin-left: 2px;
+    margin-top: 1px;
+    padding-bottom: 1px;
+    overflow: hidden;
+  }
+
+  /* Animated Border Box Glow */
+  .animated-border-box,
+  .animated-border-box-glow {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .animated-border-box-glow {
+    overflow: hidden;
+    /* Glow Blur */
+    filter: blur(40px);
+  }
+
+  .animated-border-box:before,
+  .animated-border-box-glow:before {
+    content: "";
+    z-index: -2;
+    opacity: 0.8;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-130deg);
+    position: absolute;
+    width: 99999px;
+    height: 99999px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    /*border color, change middle color*/
+    background-image: conic-gradient(
+      rgba(0, 0, 0, 0),
+      rgba(201, 177, 123, 0.8),
+      rgba(0, 0, 0, 0) 45%
+    );
+    /* change speed here */
+    animation: rotate 5s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+  }
+
+  .animated-border-box:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    opacity: 0.5;
+    /* border width */
+    left: 2px;
+    top: 1px;
+    /* double the px from the border width left */
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    /*bg color*/
+    background: #292a2e;
+    /*box border radius*/
+    /* border-radius: 2px; */
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: translate(-50%, -50%) rotate(0.65turn);
+    }
+  }
+
+  /*// Border Animation END//*/
+</style>

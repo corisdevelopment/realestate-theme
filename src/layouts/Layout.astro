@@ -12,14 +12,24 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import VerticalBigNav from "../components/navs/VerticalBigNav.astro";
 import Footer from "../components/Footer.astro";
+import { GetStory } from "@lib/api/storyAPI";
 interface Props {
 	metaTags?: {
-		title?: string;
-		description?: string;
-	};
+				title?: string;
+				description?: string;
+	} | undefined;
 }
 
 const { metaTags } = Astro.props;
+
+const story = await GetStory(Astro, "/settings", {version: "draft"});
+const navItems = story.content.header;
+const companyInfo = {
+	phoneNumber: story.content.company_phone,
+	phoneLink: story.content.company_phone?.replace(/_/g, ""),
+	email: story.content.company_email,
+}
+const footerItems = story.content.footer;
 ---
 
 <!doctype html>
@@ -45,19 +55,14 @@ const { metaTags } = Astro.props;
 		></script>
 	</head>
 	<body>
-		<!-- Coming From stagging site Netlify Deploy staggin-- -->
-		<VerticalBigNav />
+		<VerticalBigNav navArray={navItems} company={companyInfo} />
 		<div class="content_offset">
 			<slot />
 		</div>
 		<!-- Footer -->
-		<Footer />
+		<Footer data={footerItems} company={companyInfo} />
 		<script is:inline>
 			// @ts-nocheck
-			// Storyblok Live Preview
-			document.addEventListener("storyblok-live-preview-updated", () => {
-				// console.log("Live preview: body updated");
-			});
 
 			gsap.registerPlugin(ScrollTrigger);
 			// ScrollTrigger.normalizeScroll(true);
@@ -115,7 +120,7 @@ const { metaTags } = Astro.props;
 				let ss = gsap.timeline({
 					scrollTrigger: {
 						trigger: "#servicesCTA",
-						start: "top bottom-=20%",
+						start: "top bottom-=30%",
 						end: "center bottom",
 						scrub: 1,
 						// pin: true,
@@ -148,7 +153,8 @@ const { metaTags } = Astro.props;
 			white 60%
 		);
 		--max-content: 1280px !important;
-		--header-height: 78px;
+		--max-contain: 1440px !important;
+		--header-height: 86px;
 	}
 	.font-cg {
 		font-family: "Cormorant Garamond", serif;
@@ -159,18 +165,21 @@ const { metaTags } = Astro.props;
 	.max-content {
 		max-width: var(--max-content);
 	}
+	.max-contain {
+		max-width: var(--max-contain);
+	}
 	.prose {
 		max-width: 85ch !important;
 	}
 	.content_offset {
 		padding-top: var(--header-height);
 	}
-	@media screen and (max-width: 768px) {
+	@media only screen and (max-width: 768px) {
 		.max-content-mobile {
 			max-width: 82vw;
 		}
 	}
-	@media screen and (max-width: 1024px) {
+	@media only screen and (min-width: 769px) and (max-width: 1024px) {
 		.max-content-mobile {
 			max-width: 88vw;
 		}
@@ -186,6 +195,9 @@ const { metaTags } = Astro.props;
 	}
 	.nav-open {
 		overflow: hidden;
+	}
+	.nav-open #header-nav {
+		background: #000;
 	}
 	html.lenis,
 	html.lenis body {

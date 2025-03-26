@@ -1,0 +1,38 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ListingFilter from '@components/ListingsFilter';
+import { GetStories } from "@lib/api/storyAPI";
+
+const { blok } = Astro.props;
+
+// Get Story Data
+const stories = await GetStories(Astro, {
+  starts_with: "listings/",
+  is_startpage: false, 
+});
+
+// Set Variables for filter listings
+const listings = stories;
+
+const residentialListings = listings.filter(
+  (listing: any) => listing.content.details[0].category === "residential",
+);
+
+const commercialListings = listings.filter(
+  (listing: any) => listing.content.details[0].category === "commercial",
+);
+---
+
+<section class="bg-gray-100 lg:py-4 lg:px-4">
+  <div
+    class="max-contain mx-auto lg:rounded-md border border-golden-400 bg-gray-100 min-h-[80vh]"
+    {...storyblokEditable(blok)}
+  >
+    <ListingFilter
+      client:load
+      listings={listings}
+      residentialListings={residentialListings}
+      commercialListings={commercialListings}
+    />
+  </div>
+</section>

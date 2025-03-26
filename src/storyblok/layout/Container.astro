@@ -4,13 +4,13 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 const {blok} = Astro.props
 const sizeClass = blok.fullWidth ? 'w-full' : 'max-content'
-const classNames = blok.css
+const classNames = `wrapper w-full pt-12 pb-12 bg-no-repeat bg-center ${blok.css}`;
 let imageUrl = 'none'
 if (blok.image && blok.image.id) {
   imageUrl = `url('${blok.image.filename}')`
 }
 ---
-<div {...storyblokEditable(blok)} class:list={["wrapper w-full pt-12 pb-12 bg-no-repeat bg-center", classNames]}>
+<div {...storyblokEditable(blok)} class={classNames}>
   <div class:list={["mx-auto", sizeClass]}>
   {
     blok.container_bloks?.map((blok: any) => {

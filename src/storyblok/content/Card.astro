@@ -3,18 +3,24 @@ import Button from "@components/utils/Button.astro";
 import { storyblokEditable } from '@storyblok/astro'
 const { blok } = Astro.props;
 blok.background = blok.background != undefined ? blok.background : 'bg-white'
+// handle different URL object data
+const urlObj = blok.button[0]?.url
+const cachedUrl =urlObj?.cached_url;
+// const storyUrl = blok.button[0].url?.story ? urlObj.story : false;
+// const buttonUrl = storyUrl ? storyUrl : cachedUrl;
+const buttonUrl = cachedUrl;
 ---
 <div {...storyblokEditable(blok)} 
 class:list={['hero-card flex py-8 lg:py-16 rounded lg:rounded-lg shadow-xl lg:container h-full', blok.css, blok.background]}
 >
-  <div class="card-inner pr-8 xl:pr-16">
+  <div class="card-inner pr-8 max-lg:mx-auto lg md:w-3/4 lg:w-full xl:pr-16">
     <h2 class="headline capitalize pl-8 xl:pl-16 pb-3 text-2xl lg:text-4xl font-bold">{blok.title}</h2>
     <hr class="divider my-4 border-4 border-dark-gold">
     <p class="content pl-8 xl:pl-16 py-3 lg:text-lg">{blok.content}</p>
-    <div class="footer w-full">
+    <div class="footer mx-auto px-2 flex">
       {
         blok.button[0] &&
-        <Button gradientAnimated text={blok.button[0].text} link={blok.button[0].url.story.url} background="white" innerClassNames="border border-golden-400" class="text-golden-400 mx-auto md:flex font-cg font-light text-lg md:text-2xl uppercase md:w-3/4"/>
+        <Button gradientAnimated text={blok.button[0].text} link={buttonUrl} background="white" innerClassNames="border border-golden-400" class="text-golden-400 mx-auto md:flex font-cg font-light text-lg md:text-2xl uppercase md:w-3/4"/>
       }
     </div>
   </div>
