@@ -1,22 +1,10 @@
 ---
 import VerticalBigNav from '../components/navs/VerticalBigNav.astro'
 import Footer from '../components/Footer.astro';
-import { getLiveStory, useStoryblokApi } from '@storyblok/astro';
+import { GetStory } from '@lib/api/storyAPI';
 
 // API CALL: get storyblok data
-let story = null;
-const liveStory = await getLiveStory(Astro);
-
-if (liveStory) {
-  story = liveStory;
-} else {
-  const sb_api = useStoryblokApi();
-  const { data } = await sb_api.get("cdn/stories/settings", {
-    version: "draft",
-    resolve_links: "url",
-  });
-  story = data?.story;
-}
+const story = await GetStory(Astro, "/settings", {version: "draft"});
 const navItems = story.content.header;
 const companyInfo = {
 	phoneNumber: story.content.company_phone,

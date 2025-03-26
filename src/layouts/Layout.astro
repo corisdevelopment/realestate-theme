@@ -12,32 +12,17 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import VerticalBigNav from "../components/navs/VerticalBigNav.astro";
 import Footer from "../components/Footer.astro";
-import { getLiveStory, useStoryblokApi } from "@storyblok/astro";
+import { GetStory } from "@lib/api/storyAPI";
 interface Props {
-	metaTags?:
-		| {
+	metaTags?: {
 				title?: string;
 				description?: string;
-		  }
-		| undefined;
+	} | undefined;
 }
 
 const { metaTags } = Astro.props;
 
-// API CALL: get storyblok data
-let story = null;
-const liveStory = await getLiveStory(Astro);
-
-if (liveStory) {
-  story = liveStory;
-} else {
-  const sb_api = useStoryblokApi();
-  const { data } = await sb_api.get("cdn/stories/settings", {
-    version: "draft",
-    resolve_links: "url",
-  });
-  story = data?.story;
-}
+const story = await GetStory(Astro, "/settings", {version: "draft"});
 const navItems = story.content.header;
 const companyInfo = {
 	phoneNumber: story.content.company_phone,
@@ -45,7 +30,6 @@ const companyInfo = {
 	email: story.content.company_email,
 }
 const footerItems = story.content.footer;
-// console.log("🚀 ~ LAYOUT ~ API DATA:", companyInfo)
 ---
 
 <!doctype html>
@@ -79,10 +63,6 @@ const footerItems = story.content.footer;
 		<Footer data={footerItems} company={companyInfo} />
 		<script is:inline>
 			// @ts-nocheck
-  document.addEventListener("storyblok-live-preview-updated", () => {
-    console.log("Live preview: body updated");
-  });
-	console.log("hello");
 
 			gsap.registerPlugin(ScrollTrigger);
 			// ScrollTrigger.normalizeScroll(true);

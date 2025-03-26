@@ -1,33 +1,31 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-import { useStoryblokApi } from '@storyblok/astro'
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { GetStory } from "@lib/api/storyAPI";
 
-export async function getStaticPaths() {
-  const sbApi = useStoryblokApi()
+// export async function getStaticPaths() {
+//   const sbApi = useStoryblokApi()
 
-  const { data } = await sbApi.get("cdn/stories", {
-    starts_with: "services",
-    version: import.meta.env.DEV ? "draft" : "published"
-  })
+//   const { data } = await sbApi.get("cdn/stories", {
+//     starts_with: "services",
+//     version: import.meta.env.DEV ? "draft" : "published"
+//   })
 
-  const stories = Object.values(data.stories)
+//   const stories = Object.values(data.stories)
 
-  const paths = stories.map((story: any) => {
-    return {
-      params: { service: story.slug }
-    }
-  })
-  return paths
-}
+//   const paths = stories.map((story: any) => {
+//     return {
+//       params: { service: story.slug }
+//     }
+//   })
+//   return paths
+// }
 
-const sbApi = useStoryblokApi();
-const { service } = Astro.params
-const { data } = await sbApi.get(`cdn/stories/services/${service}`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-})
+const { service } = Astro.params;
 
-const page = data.story
+// Get Story Data
+const story = await GetStory(Astro, `/services/${service}`);
+const page = story;
 
 // Meta Title and Description
 let title = page.name + ' | Coris Development Group'

@@ -1,18 +1,18 @@
 ---
-import { storyblokEditable, useStoryblokApi } from "@storyblok/astro";
+import { storyblokEditable } from "@storyblok/astro";
 import ListingFilter from '@components/ListingsFilter';
+import { GetStories } from "@lib/api/storyAPI";
 
 const { blok } = Astro.props;
 
-const storyblokApi = useStoryblokApi();
-const { data } = await storyblokApi.get(`cdn/stories`, {
-  version: import.meta.env.DEV ? "draft" : "published",
+// Get Story Data
+const stories = await GetStories(Astro, {
   starts_with: "listings/",
-  is_startpage: false,
+  is_startpage: false, 
 });
 
 // Set Variables for filter listings
-const listings = data.stories;
+const listings = stories;
 
 const residentialListings = listings.filter(
   (listing: any) => listing.content.details[0].category === "residential",

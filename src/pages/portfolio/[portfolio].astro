@@ -2,34 +2,31 @@
 import Layout from "src/layouts/Layout.astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { GetStory } from "@lib/api/storyAPI";
 
-export async function getStaticPaths() {
-  const storyblokApi = useStoryblokApi();
+// export async function getStaticPaths() {
+//   const storyblokApi = useStoryblokApi();
 
-  const { data } = await storyblokApi.get("cdn/stories", {
-    content_type: "property",
-    version: import.meta.env.DEV ? "draft" : "published",
-    resolve_links: "url",
-  });
-  const pages = data.stories;
+//   const { data } = await storyblokApi.get("cdn/stories", {
+//     content_type: "property",
+//     version: import.meta.env.DEV ? "draft" : "published",
+//     resolve_links: "url",
+//   });
+//   const pages = data.stories;
 
-  const paths = pages.map((page: { [key: string]: string }) => {
-    return {
-      params: { property: page.slug },
-      props: { page },
-    };
-  });
-  return paths;
-}
+//   const paths = pages.map((page: { [key: string]: string }) => {
+//     return {
+//       params: { portfolio: page.slug },
+//       props: { page },
+//     };
+//   });
+//   return paths;
+// }
 
-const sbApi = useStoryblokApi();
+// Get Story Data
 const { portfolio } = Astro.params;
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const { data }: any = await sbApi.get(`cdn/stories/portfolio/${portfolio}`, {
-  version: import.meta.env.DEV ? "draft" : "draft",
-});
-
-const page = data.story;
+const story = await GetStory(Astro, `/portfolio/${portfolio}`);
+const page = story;
 
 // Meta Title and Description
 let title = `${page.name} | Coris Development Group`;

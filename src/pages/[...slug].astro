@@ -1,44 +1,33 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-import { useStoryblokApi, getLiveStory } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import ContactForm from "@components/utils/ContactForm.astro";
+import { GetStory } from "@lib/api/storyAPI";
 
-// Replace useStoryblok with getLiveStory
-// let story = null;
+// export async function getStaticPaths() {
+//   const storyblokApi = useStoryblokApi();
 
-// const liveStory = await getLiveStory(Astro);
-// if (liveStory) {
-//   story = liveStory;
-// } else {
-//   const sbApi = useStoryblokApi();
+//   const { data } = await storyblokApi.get("cdn/stories", {
+//     level: 1,
+//     excluding_slugs: "home,config",
+//     version: import.meta.env.DEV ? "draft" : "published",
+//     resolve_links: "url",
+//   });
+//   const stories = Object.values(data.stories);
+
+//   const paths = stories.map((story: any) => {
+//     return {
+//       params: { slug: story.slug },
+//     };
+//   });
+//   return paths;
 // }
 
-export async function getStaticPaths() {
-  const storyblokApi = useStoryblokApi();
-
-  const { data } = await storyblokApi.get("cdn/stories", {
-    level: 1,
-    excluding_slugs: "home,config",
-    version: import.meta.env.DEV ? "draft" : "published",
-    resolve_links: "url",
-  });
-  const stories = Object.values(data.stories);
-
-  const paths = stories.map((story: any) => {
-    return {
-      params: { slug: story.slug },
-    };
-  });
-  return paths;
-}
-
-const sbApi = useStoryblokApi();
 const { slug } = Astro.params;
-const { data } = await sbApi.get(`cdn/stories/${slug}`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
-const page = data.story;
+
+// Get Story Data
+const story = await GetStory(Astro, `/${slug}`);
+const page = story;
 
 // Meta Title and Description
 let title = page.name + " | Coris Development Group";
