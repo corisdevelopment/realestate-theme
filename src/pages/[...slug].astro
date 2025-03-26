@@ -37,7 +37,7 @@ let story = null;
     story = liveStory;
   } else {
     const storyAPI = useStoryblokApi();
-    const { data } = await storyAPI.get(`cdn/stories/${slug}` );
+    const { data } = await storyAPI.get(`cdn/stories/${slug}`, {version: 'draft'} );
     story = data?.story;
   }
 const page = story;
