@@ -27,7 +27,7 @@ import { getLiveStory } from "@storyblok/astro";
 const { slug } = Astro.params;
 
 // Get Story Data
-const story = await GetStory(Astro, `/${slug}`);
+const story = await GetStory(Astro, `/${slug}`, {version: "draft"});
 const page = story;
 
 // Meta Title and Description

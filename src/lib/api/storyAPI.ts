@@ -38,7 +38,7 @@ export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, 
     story = data?.story;
   }
   
-  return await story;
+  return story;
 }
 
 /**
