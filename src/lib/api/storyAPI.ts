@@ -1,6 +1,6 @@
 import { getLiveStory, useStoryblokApi, type ISbStoriesParams } from "@storyblok/astro";
 import type { AstroGlobal } from "astro";
-console.log("🚀 ~ META ENV:", import.meta.env.STORYBLOK_IS_PREVIEW)
+console.log("🚀 ~ META ENV:", process.env.NETLIFY)
 
 export type TSOptions = {
   version?: 'draft' | 'published';
@@ -20,7 +20,11 @@ export type TSOptions = {
  *   as needed. Revise or overide storyOptions type if needed.
  * @returns story
  */
-const isPreview = import.meta.env.STORYBLOK_IS_PREVIEW;
+let isPreview: any = 'no';
+if (process.env.NETLIFY) {
+  isPreview = process.env.STORYBLOK_IS_PREVIEW;
+}
+// const isPreview = import.meta.env.STORYBLOK_IS_PREVIEW;
 export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, storyOptions?: ISbStoriesParams) {
   let story = null;
   const liveStory = await getLiveStory(Astro);
