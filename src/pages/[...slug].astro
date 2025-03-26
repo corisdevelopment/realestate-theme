@@ -3,7 +3,7 @@ import Layout from "src/layouts/Layout.astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import ContactForm from "@components/utils/ContactForm.astro";
 import { GetStory } from "@lib/api/storyAPI";
-import { getLiveStory } from "@storyblok/astro";
+import { getLiveStory, useStoryblokApi } from "@storyblok/astro";
 
 // export async function getStaticPaths() {
 //   const storyblokApi = useStoryblokApi();
@@ -27,7 +27,19 @@ import { getLiveStory } from "@storyblok/astro";
 const { slug } = Astro.params;
 
 // Get Story Data
-const story = await GetStory(Astro, `/${slug}`);
+// const story = await GetStory(Astro, `/${slug}`);
+let story = null;
+  const liveStory = await getLiveStory(Astro);
+  console.log("🚀 ~ GetStory ~ liveStory:", liveStory)
+  const defaultVersion = import.meta.env.DEV ? "draft" : "published";
+
+  if (liveStory) {
+    story = liveStory;
+  } else {
+    const storyAPI = useStoryblokApi();
+    const { data } = await storyAPI.get(`cdn/stories${slug}` );
+    story = data?.story;
+  }
 const page = story;
 
 // Meta Title and Description
