@@ -27,19 +27,19 @@ import { getLiveStory, useStoryblokApi } from "@storyblok/astro";
 const { slug } = Astro.params;
 
 // Get Story Data
-// const story = await GetStory(Astro, `/${slug}`);
-let story = null;
-  const liveStory = await getLiveStory(Astro);
-  console.log("🚀 ~ GetStory ~ liveStory:", liveStory)
-  const defaultVersion = import.meta.env.DEV ? "draft" : "published";
+const story = await GetStory(Astro, `/${slug}`);
+// let story = null;
+//   const liveStory = await getLiveStory(Astro);
+//   console.log("🚀 ~ GetStory ~ liveStory:", liveStory)
+//   const defaultVersion = import.meta.env.DEV ? "draft" : "published";
 
-  if (liveStory) {
-    story = liveStory;
-  } else {
-    const storyAPI = useStoryblokApi();
-    const { data } = await storyAPI.get(`cdn/stories/${slug}`, {version: 'draft'} );
-    story = data?.story;
-  }
+//   if (liveStory) {
+//     story = liveStory;
+//   } else {
+//     const storyAPI = useStoryblokApi();
+//     const { data } = await storyAPI.get(`cdn/stories/${slug}`, {version: 'draft'} );
+//     story = data?.story;
+//   }
 const page = story;
 
 // Meta Title and Description
