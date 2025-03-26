@@ -22,6 +22,7 @@ export type TSOptions = {
 export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, storyOptions?: ISbStoriesParams) {
   let story = null;
   const liveStory = await getLiveStory(Astro);
+  console.log("🚀 ~ GetStory ~ liveStory:", liveStory)
   const defaultVersion = import.meta.env.DEV ? "draft" : "published";
 
   const options: ISbStoriesParams = {
@@ -37,7 +38,7 @@ export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, 
     story = data?.story;
   }
   
-  return story;
+  return await story;
 }
 
 /**
