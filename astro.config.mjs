@@ -12,7 +12,7 @@ import react from '@astrojs/react';
 let sbToken;
 sbToken = loadEnv("", process.cwd(), 'STORYBLOK_TOKEN');
 sbToken = sbToken.STORYBLOK_TOKEN;
-console.log(" ~ NETLIFY ENV VARIABLE: ", process.env.NETLIFY);
+console.log(" ~ NETLIFY ENV VARIABLE: ", process.env.STORYBLOK_IS_PREVIEW);
 if (process.env.NETLIFY === true) {
   sbToken = process.env.STORYBLOK_TOKEN;
 }
