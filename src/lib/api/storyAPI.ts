@@ -1,5 +1,6 @@
 import { getLiveStory, useStoryblokApi, type ISbStoriesParams } from "@storyblok/astro";
 import type { AstroGlobal } from "astro";
+console.log("🚀 ~ META ENV:", import.meta.env.STORYBLOK_IS_PREVIEW)
 
 export type TSOptions = {
   version?: 'draft' | 'published';
@@ -19,20 +20,22 @@ export type TSOptions = {
  *   as needed. Revise or overide storyOptions type if needed.
  * @returns story
  */
+const isPreview = import.meta.env.STORYBLOK_IS_PREVIEW;
 export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, storyOptions?: ISbStoriesParams) {
   let story = null;
   const liveStory = await getLiveStory(Astro);
-  console.log("🚀 ~ GetStory ~ liveStory:", liveStory)
+  // console.log("🚀 ~ GetStory ~ liveStory:", liveStory)
   const defaultVersion = import.meta.env.DEV ? "draft" : "published";
 
   const options: ISbStoriesParams = {
-    version: defaultVersion,
+    version: isPreview === 'yes' ? 'draft' : defaultVersion,
     resolve_links: 'url',
     ...storyOptions,
   }
+  console.log("🚀 ~ GetStory ~ options:", options)
   if (liveStory) {
     story = liveStory;
-    options.version= 'draft';
+    // options.version= 'draft';
   } else {
     const storyAPI = useStoryblokApi();
     const { data } = await storyAPI.get(`cdn/stories${storySlug}`, options );
