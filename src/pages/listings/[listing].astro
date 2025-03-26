@@ -1,37 +1,47 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-import { useStoryblokApi } from "@storyblok/astro";
+import { useStoryblokApi, getLiveStory } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { storyblokEditable } from "@storyblok/astro";
+import { GetStory, type TSOptions } from "@lib/api/storyAPI";
 
-export async function getStaticPaths() {
-  const storyblokApi = useStoryblokApi();
+// export async function getStaticPaths() {
+//   const storyblokApi = useStoryblokApi();
 
-  const { data } = await storyblokApi.get("cdn/stories", {
-    content_type: "listing",
-    version: import.meta.env.DEV ? "draft" : "published",
-    resolve_links: "url",
-  });
-  const pages = data.stories;
+//   const { data } = await storyblokApi.get("cdn/stories", {
+//     content_type: "listing",
+//     version: import.meta.env.DEV ? "draft" : "published",
+//     resolve_links: "url",
+//   });
+//   const pages = data.stories;
 
-  const paths = pages.map((page: { [key: string]: string }) => {
-    return {
-      params: { listing: page.slug },
-      props: { page },
-    };
-  });
-  return paths;
+//   const paths = pages.map((page: { [key: string]: string }) => {
+//     return {
+//       params: { listing: page.slug },
+//       props: { page },
+//     };
+//   });
+//   return paths;
+// }
+
+const { listing } = Astro.params;
+const optionsAdded: TSOptions = {
+  resolve_links: 'url',
 }
 
-const sbApi = useStoryblokApi();
-const { listing } = Astro.params;
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const { data }: any = await sbApi.get(`cdn/stories/listings/${listing}`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
+
+// const sbApi = useStoryblokApi();
+// const { listing } = Astro.params;
+// // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// const { data }: any = await sbApi.get(`cdn/stories/listings/${listing}`, {
+//   version: import.meta.env.DEV ? "draft" : "published",
+// });
+
+const story = await GetStory(Astro, `listings/${listing}`, optionsAdded);
+console.log("🚀 ~ testStory:", story.id)
 
 //// page: variable
-const page = data.story;
+const page = story;
 
 // Meta Title and Description
 let title = `${page.name} | Coris Development Group`;
