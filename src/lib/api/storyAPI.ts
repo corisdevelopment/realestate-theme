@@ -32,6 +32,7 @@ export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, 
   }
   if (liveStory) {
     story = liveStory;
+    options.version= 'draft';
   } else {
     const storyAPI = useStoryblokApi();
     const { data } = await storyAPI.get(`cdn/stories${storySlug}`, options );
