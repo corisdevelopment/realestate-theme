@@ -20,6 +20,7 @@ export type TSOptions = {
  * @returns story
  */
 let isPreview: any = 'no';
+console.log(" ~ NETLIFY ENV VARIABLE: ", process.env.NETLIFY);
 if (process.env.NETLIFY) {
   isPreview = process.env.STORYBLOK_IS_PREVIEW;
 }
