@@ -18,20 +18,22 @@ export type TSOptions = {
  *   just not as many options. storyOptions should be able to overide and add
  *   as needed. Revise or overide storyOptions type if needed.
  * @returns story
+ * - getLiveStory only works when the version in storyAPI.get(_, options)
+ *   is "draft". This means that for the master branch in production liveStory 
+ *   should be disabled by env variable STORYBLOK_IS_PREVIEW. When on the
+ *   stagging branch liveStory should be enabled be getting the "draft"
+ *   version of the story. The version should always default to "production"
+ *   when no value is available.
+ * - // console.log(" ~ ENV VARIABLE: ", process.env.NETLIFY);
  */
-
-// console.log(" ~ ENV VARIABLE: ", process.env.NETLIFY);
 
 export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, storyOptions?: ISbStoriesParams) {
   let story = null;
   const liveStory = await getLiveStory(Astro);
-  // const dev = import.meta.env.DEV ? "draft" : "published";
-  // const defaultVersion = isPreview === 'yes' ? 'draft' : dev;
 
-  let defaultV = null;
+  let defaultV: any = null;
   if (process.env.STORYBLOK_IS_PREVIEW === 'yes') {
     defaultV = "draft";
-    // console.log("SB PREVIEW: ")
   } else {
     defaultV = "published";
   }
@@ -41,10 +43,8 @@ export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, 
     resolve_links: 'url',
     ...storyOptions,
   }
-  // console.log("OPT: ", options.version, storySlug);
   if (liveStory) {
     story = liveStory;
-    // options.version= 'draft';
   } else {
     const storyAPI = useStoryblokApi();
     const { data } = await storyAPI.get(`cdn/stories${storySlug}`, options );
@@ -66,10 +66,16 @@ export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, 
 export async function GetStories(Astro: Readonly<AstroGlobal>, storyOptions?: TSOptions) {
   let stories = null;
   const liveStory = await getLiveStory(Astro);
-  const defaultVersion = import.meta.env.DEV ? "draft" : "published";
+  
+  let defaultV: any = null;
+  if (process.env.STORYBLOK_IS_PREVIEW === 'yes') {
+    defaultV = "draft";
+  } else {
+    defaultV = "published";
+  }
 
   const options: ISbStoriesParams = {
-    version: defaultVersion,
+    version: defaultV,
     resolve_links: 'url',
     ...storyOptions,
   }
