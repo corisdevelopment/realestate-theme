@@ -19,22 +19,29 @@ export type TSOptions = {
  *   as needed. Revise or overide storyOptions type if needed.
  * @returns story
  */
-let isPreview: any = 'no';
-console.log(" ~ NETLIFY ENV VARIABLE: ", process.env.NETLIFY);
-if (process.env.NETLIFY) {
-  isPreview = process.env.STORYBLOK_IS_PREVIEW;
-}
-// const isPreview = import.meta.env.STORYBLOK_IS_PREVIEW;
+
+// console.log(" ~ ENV VARIABLE: ", process.env.NETLIFY);
+
 export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, storyOptions?: ISbStoriesParams) {
   let story = null;
   const liveStory = await getLiveStory(Astro);
-  const defaultVersion = import.meta.env.DEV ? "draft" : "published";
+  // const dev = import.meta.env.DEV ? "draft" : "published";
+  // const defaultVersion = isPreview === 'yes' ? 'draft' : dev;
+
+  let defaultV = null;
+  if (process.env.STORYBLOK_IS_PREVIEW === 'yes') {
+    defaultV = "draft";
+    // console.log("SB PREVIEW: ")
+  } else {
+    defaultV = "published";
+  }
 
   const options: ISbStoriesParams = {
-    version: isPreview === 'yes' ? 'draft' : defaultVersion,
+    version: defaultV,
     resolve_links: 'url',
     ...storyOptions,
   }
+  // console.log("OPT: ", options.version, storySlug);
   if (liveStory) {
     story = liveStory;
     // options.version= 'draft';
