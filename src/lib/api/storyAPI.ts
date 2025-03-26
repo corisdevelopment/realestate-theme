@@ -1,6 +1,5 @@
 import { getLiveStory, useStoryblokApi, type ISbStoriesParams } from "@storyblok/astro";
 import type { AstroGlobal } from "astro";
-console.log("🚀 ~ META ENV:", process.env.NETLIFY)
 
 export type TSOptions = {
   version?: 'draft' | 'published';
@@ -28,7 +27,6 @@ if (process.env.NETLIFY) {
 export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, storyOptions?: ISbStoriesParams) {
   let story = null;
   const liveStory = await getLiveStory(Astro);
-  // console.log("🚀 ~ GetStory ~ liveStory:", liveStory)
   const defaultVersion = import.meta.env.DEV ? "draft" : "published";
 
   const options: ISbStoriesParams = {
@@ -36,7 +34,6 @@ export async function GetStory(Astro: Readonly<AstroGlobal>, storySlug: string, 
     resolve_links: 'url',
     ...storyOptions,
   }
-  console.log("🚀 ~ GetStory ~ options:", options)
   if (liveStory) {
     story = liveStory;
     // options.version= 'draft';
