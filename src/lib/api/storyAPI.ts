@@ -74,7 +74,7 @@ export async function GetStories(Astro: Readonly<AstroGlobal>, storyOptions?: TS
     defaultV = "published";
   }
 
-  const options: ISbStoriesParams = {
+  const options: TSOptions = {
     version: defaultV,
     resolve_links: 'url',
     ...storyOptions,
@@ -84,6 +84,7 @@ export async function GetStories(Astro: Readonly<AstroGlobal>, storyOptions?: TS
   } else {
     const storyAPI = useStoryblokApi();
     const { data } = await storyAPI.get(`cdn/stories`, options );
+
     stories = data?.stories;
   }
   

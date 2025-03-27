@@ -8,6 +8,7 @@ const { blok } = Astro.props;
 // Get Story Data
 const stories = await GetStories(Astro, {
   starts_with: "listings/",
+  version: "published",
   is_startpage: false, 
 });
 
