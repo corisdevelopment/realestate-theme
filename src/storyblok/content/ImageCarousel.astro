@@ -8,7 +8,7 @@ const { blok } = Astro.props
       {
         blok.images.map((image: any) => (
         <div class="carousel-item rounded-lg">
-            <img src={image.filename} alt={image.alt} class="px-4 max-h-[240px] md:max-h-[320px] lg:max-h-full max-w-[320px] md:max-w-[720px] h-full object-cover" />
+            <img src={image.filename} alt={image.alt} class="carousel-image px-4 max-h-[240px] md:max-h-[320px] lg:max-h-full max-w-[320px] md:max-w-[720px] h-full object-cover" />
         </div>
         ))
       }
@@ -28,14 +28,15 @@ const { blok } = Astro.props
   }
 </style>
 
-<script is:inline>
+<script>
   // @ts-nocheck 
 
   // check if carousel exists and run
-  const carousel = document.getElementsByClassName("carousel");
-  if (carousel.length > 0) {
-    const carouselItems = gsap.utils.toArray(".carousel-item"), loop = horizontalLoop(carouselItems, {paused: false, repeat: true})
-  }
+  let carouselItems = gsap.utils.toArray(".carousel-item");
+
+  window.onload = () => {
+    horizontalLoop(carouselItems, {paused: false, repeat: true});
+  };
 
   function horizontalLoop(items, config) {
     items = gsap.utils.toArray(items);
